@@ -1,10 +1,12 @@
 <?php
-
 namespace Database;
+
 use PDO;
 use PDOException;
+use Dotenv\Dotenv;
 
-class Connection {
+class Connection
+{
 
     /**
      * Connect to the database
@@ -12,12 +14,16 @@ class Connection {
      * @param array $config
      * @return PDO
      */
-    public static function connect($config): PDO {
+    public static function connect(): PDO
+    {
         try {
+            $dotenv = Dotenv::createImmutable(__DIR__ . '/../..');
+            $dotenv->load();
+        
             return new PDO(
-                $config['connection'].':host='.$config['host'].';port='.$config['port'].';dbname='.$config['name'].";",
-                $config['username'],
-                $config['password'],
+                $_ENV['DB_CONNECTION'] . ':host=' . $_ENV['DB_HOST'] . ';port=' . $_ENV['DB_PORT'] . ';dbname=' . $_ENV['DB_DATABASE'] . ";",
+                $_ENV['DB_USERNAME'],
+                $_ENV['DB_PASSWORD'],
                 [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ]
             );
         } catch (PDOException $e) {

@@ -1,27 +1,42 @@
 <?php
 $routes = [
     'GET' => [
-        '/' => [
+        '/names/teste' => [
             'class' => 'UserController',
-            'action' => 'index'
+            'action' => 'handle',
+            'middlewares' => ['VerifyTokenJWT']
         ],
     ],
     'POST' => [
-        '/names' => [
-            'class' => 'User',
-            'action' => 'index'
-        ]
+        '/users' => [
+            'class' => 'UserCreateController',
+            'action' => 'handle',
+            'middlewares' => ['']
+        ],
+        '/session' => [
+            'class' => 'SessionCreateController',
+            'action' => 'handle',
+            'middlewares' => ['']
+        ],
     ],
     'PUT' => [
         '/names' => [
             'class' => 'User',
             'action' => 'index'
-        ]
+        ],
+        '/' => [
+            'class' => 'UserController',
+            'action' => 'handle'
+        ],
     ],
     'DELETE' => [
         '/names' => [
             'class' => 'User',
             'action' => 'index'
-        ]
+        ],
+        '/' => [
+            'class' => 'UserController',
+            'action' => 'handle'
+        ],
     ]
 ];
