@@ -6,6 +6,12 @@ use PDOException;
 
 class Connection {
 
+    /**
+     * Connect to the database
+     * 
+     * @param array $config
+     * @return PDO
+     */
     public static function connect($config): PDO {
         try {
             return new PDO(
