@@ -4,29 +4,12 @@ namespace Entities;
 
 class ProductCategory
 {
-    private $name;
-    private $email;
-    private $password;
+    public $name;
+    public $tax_id;
 
-    public function __construct( string $name, string $email, string $password = null)
+    public function __construct( string $name, string $tax_id)
     {
         $this->name = $name;
-        $this->email = $email;
-        $this->password = $password;
-    }
-
-    /**
-     * @var array
-     */
-    public function create()
-    {
-        $user = ['name' => $this->name, 'email' => $this->email, 'password' => $this->password];
-        return $user;
-    }
-
-    public function get()
-    {
-        $user = ['name' => $this->name, 'email' => $this->email];
-        return $user;
+        $this->tax_id = $tax_id;
     }
 }
