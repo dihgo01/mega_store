@@ -1,17 +1,17 @@
 <?php
 
-namespace Controllers;
+namespace Modules\Session\CreateSession;
 
 use Exception;
-use UseCases\CreateSession;
+use Modules\Session\CreateSession\CreateSessionCase;
 
 class SessionCreateController
 {
     private $createSession;
 
-    public function __construct()
+    public function __construct(CreateSessionCase $createSession)
     {
-        $this->createSession = new CreateSession();
+        $this->createSession = $createSession;
     }
 
     public function handle($request)

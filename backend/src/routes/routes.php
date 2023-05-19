@@ -1,32 +1,29 @@
 <?php
 $routes = [
     'GET' => [
-        '/names/teste' => [
-            'class' => 'UserController',
+        '/user' => [
+            'class' => 'User\\GetUser\\GetUserfactory',
             'action' => 'handle',
             'middlewares' => ['VerifyTokenJWT']
         ],
     ],
     'POST' => [
         '/users' => [
-            'class' => 'UserCreateController',
+            'class' => 'User\\CreateUser\\CreateUserfactory',
             'action' => 'handle',
             'middlewares' => ['']
         ],
         '/session' => [
-            'class' => 'SessionCreateController',
+            'class' => 'Session\\CreateSession\\CreateSessionFactory',
             'action' => 'handle',
             'middlewares' => ['']
         ],
     ],
     'PUT' => [
-        '/names' => [
-            'class' => 'User',
-            'action' => 'index'
-        ],
-        '/' => [
-            'class' => 'UserController',
-            'action' => 'handle'
+        '/user-update' => [
+            'class' => 'User\\UpdateUser\\UpdateUserFactory',
+            'action' => 'handle',
+            'middlewares' => ['VerifyTokenJWT']
         ],
     ],
     'DELETE' => [

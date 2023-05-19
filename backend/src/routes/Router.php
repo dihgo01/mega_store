@@ -4,6 +4,8 @@ namespace Router;
 
 use Exception;
 
+use Factory\CreateSessionFactory;
+
 class Router
 {
     protected $routes = [];
@@ -23,11 +25,11 @@ class Router
      * 
      * @param string $action
      * @param string $class
-     * @return Controller
+     * @return modules\Factory
      */
     protected function load($class, $action, $request)
     {
-        $classNameSpace = 'Controllers\\' . $class;
+        $classNameSpace = 'Modules\\' . $class;
 
         if (!class_exists($classNameSpace)) {
             return throw new Exception("Namespace {$classNameSpace} not found.");

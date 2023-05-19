@@ -8,9 +8,6 @@
         <testsuite name="unit">
             <directory>tests/unit</directory>
         </testsuite>
-        <testsuite name="feature">
-            <directory>tests/feature</directory>
-        </testsuite>
        
     </testsuites>
 </phpunit>

@@ -1,23 +1,23 @@
 <?php
 
-namespace Controllers;
+namespace Modules\User\UpdateUser;
 
 use Exception;
-use UseCases\CreateUser;
+use Modules\User\UpdateUser\UpdateUserCase;
 
-class UserCreateController
+class UserUpdateController
 {
-    private $createUser;
+    private $updateUser;
 
-    public function __construct()
+    public function __construct(UpdateUserCase $updateUser)
     {
-        $this->createUser = new CreateUser();
+        $this->updateUser = $updateUser;
     }
 
-    public function handle($request)
+    public function handle(array $request)
     {
         try {
-            $user = $this->createUser->execute($request['body']);
+            $user = $this->updateUser->execute($request['body'], $request['user_id']);
 
             http_response_code(201);
             $response = [

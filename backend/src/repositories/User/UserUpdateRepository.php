@@ -1,11 +1,11 @@
 <?php
 
-namespace Repositories;
+namespace Repositories\User;
 
 use Database\Connection;
 use Exception;
 
-class UserCreateRepository
+class UserUpdateRepository
 {
     private $connection;
 
@@ -14,10 +14,10 @@ class UserCreateRepository
         $this->connection = Connection::connect();
     }
 
-    /**
+     /**
      * @var string
      */
-    public function findByEmail($email)
+    public function findByEmail(string $email)
     {
         $sql = "SELECT * FROM users WHERE email = '{$email}'";
         $result = $this->connection->query($sql);
@@ -25,30 +25,38 @@ class UserCreateRepository
         return $result->fetch();
     }
 
+
     /**
-     * @var array
+     * @var string
      */
-    public function create($user)
+    public function findByUser(string $id)
+    {
+        $sql = "SELECT * FROM users WHERE id = '{$id}'";
+        $result = $this->connection->query($sql);
+
+        return $result->fetch();
+    }
+
+    
+    public function update($user, string $id)
     {
         try {
-
-            $password = password_hash($user['password'], PASSWORD_DEFAULT);
+            $password = $user['password'];
             $date = date('Y-m-d H:i:s');
 
             $data = [
-                'id' => md5(uniqid(rand(), true)),
+                'id' => $id,
                 'name' => $user['name'],
                 'email' => $user['email'],
                 'password' => $password,
-                'created_at' => $date,
                 'updated_at' => $date
             ];
 
-            $sql = "INSERT INTO users (id, name, email, password, created_at, updated_at) 
-        VALUES (:id, :name, :email, :password, :created_at, :updated_at);";
+            $sql = "UPDATE users SET name=:name, email=:email, password=:password, updated_at=:updated_at WHERE id=:id"; 
 
             $result = $this->connection->prepare($sql);
             $reponse_query = $result->execute($data);
+            unset($data['id']);
             unset($data['password']);
             
             return $reponse_query === true ? $data : false;

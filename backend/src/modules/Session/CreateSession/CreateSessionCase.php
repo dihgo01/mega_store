@@ -1,18 +1,17 @@
 <?php
+namespace Modules\Session\CreateSession;
 
-namespace UseCases;
 use Exception;
-use Repositories\SessionCreateRepository;
 use Firebase\JWT\JWT;
 use Dotenv\Dotenv;
 
-class CreateSession
+class CreateSessionCase
 {
     private $sessionRepository;
     
-    public function __construct()
+    public function __construct($sessionRepository)
     {
-       $this->sessionRepository = new SessionCreateRepository(); 
+       $this->sessionRepository = $sessionRepository; 
     }
 
     /**
@@ -20,11 +19,11 @@ class CreateSession
      */
     public function execute($data)
     {
-        $dotenv = Dotenv::createImmutable(__DIR__ . '/../..');
+        $dotenv = Dotenv::createImmutable(__DIR__ . '/../../../..');
         $dotenv->load();
 
         $user = $this->sessionRepository->getUserLogin($data['email']);
-
+    
         if (!$user) {
             throw new Exception('The email or password entered is incorrect.');
         }
@@ -40,7 +39,7 @@ class CreateSession
         ];
 
         $encoded = JWT::encode($payload, $_ENV['SECRET_KEY'], 'HS256');
-
+     
         return $encoded;
     }
 }

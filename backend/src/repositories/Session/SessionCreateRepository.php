@@ -1,9 +1,8 @@
 <?php
 
-namespace Repositories;
+namespace Repositories\Session;
 
 use Database\Connection;
-use Exception;
 
 class SessionCreateRepository
 {
