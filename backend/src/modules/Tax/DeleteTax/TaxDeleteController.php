@@ -1,28 +1,28 @@
 <?php
 
-namespace Modules\User\UpdateUser;
+namespace Modules\Tax\DeleteTax;
 
 use Exception;
-use Modules\User\UpdateUser\UpdateUserCase;
+use Modules\Tax\DeleteTax\DeleteTaxCase;
 
-class UserUpdateController
+class TaxDeleteController
 {
-    private $updateUser;
+    private $deleteTax;
 
-    public function __construct(UpdateUserCase $updateUser)
+    public function __construct(DeleteTaxCase $deleteTax)
     {
-        $this->updateUser = $updateUser;
+        $this->deleteTax = $deleteTax;
     }
 
     public function handle(array $request)
     {
         try {
-            $user = $this->updateUser->execute($request['body'], $request['user_id']);
+            $tax = $this->deleteTax->execute($request['params']['id']);
 
             http_response_code(201);
             $response = [
-                'message' => 'Successfully updated user!',
-                'data' => $user
+                'message' => 'Successfully deleted tax!',
+                'data' => $tax
             ];
 
             echo json_encode($response);

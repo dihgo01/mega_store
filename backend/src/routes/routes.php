@@ -1,8 +1,8 @@
 <?php
 $routes = [
     'GET' => [
-        '/user' => [
-            'class' => 'User\\GetUser\\GetUserfactory',
+        '/taxs' => [
+            'class' => 'Tax\\GetTax\\GetTaxfactory',
             'action' => 'handle',
             'middlewares' => ['VerifyTokenJWT']
         ],
@@ -18,6 +18,11 @@ $routes = [
             'action' => 'handle',
             'middlewares' => ['']
         ],
+        '/tax' => [
+            'class' => 'Tax\\CreateTax\\CreateTaxfactory',
+            'action' => 'handle',
+            'middlewares' => ['VerifyTokenJWT']
+        ],
     ],
     'PUT' => [
         '/user-update' => [
@@ -25,15 +30,17 @@ $routes = [
             'action' => 'handle',
             'middlewares' => ['VerifyTokenJWT']
         ],
+        '/tax-update' => [
+            'class' => 'Tax\\UpdateTax\\UpdateTaxfactory',
+            'action' => 'handle',
+            'middlewares' => ['VerifyTokenJWT']
+        ],
     ],
     'DELETE' => [
-        '/names' => [
-            'class' => 'User',
-            'action' => 'index'
-        ],
-        '/' => [
-            'class' => 'UserController',
-            'action' => 'handle'
+        '/tax-delete' => [
+            'class' => 'Tax\\DeleteTax\\DeleteTaxfactory',
+            'action' => 'handle',
+            'middlewares' => ['VerifyTokenJWT']
         ],
     ]
 ];

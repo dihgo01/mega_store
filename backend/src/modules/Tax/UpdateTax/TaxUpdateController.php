@@ -1,28 +1,28 @@
 <?php
 
-namespace Modules\User\UpdateUser;
+namespace Modules\Tax\UpdateTax;
 
 use Exception;
-use Modules\User\UpdateUser\UpdateUserCase;
+use Modules\Tax\UpdateTax\UpdateTaxCase;
 
-class UserUpdateController
+class TaxUpdateController
 {
-    private $updateUser;
+    private $updateTax;
 
-    public function __construct(UpdateUserCase $updateUser)
+    public function __construct(UpdateTaxCase $updateTax)
     {
-        $this->updateUser = $updateUser;
+        $this->updateTax = $updateTax;
     }
 
     public function handle(array $request)
     {
         try {
-            $user = $this->updateUser->execute($request['body'], $request['user_id']);
+            $tax = $this->updateTax->execute($request['body'], $request['params']['id']);
 
             http_response_code(201);
             $response = [
-                'message' => 'Successfully updated user!',
-                'data' => $user
+                'message' => 'Successfully updated tax!',
+                'data' => $tax
             ];
 
             echo json_encode($response);
