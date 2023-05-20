@@ -11,6 +11,11 @@ $routes = [
             'action' => 'handle',
             'middlewares' => ['VerifyTokenJWT']
         ],
+        '/products' => [
+            'class' => 'Product\\GetProduct\\GetProductFactory',
+            'action' => 'handle',
+            'middlewares' => ['VerifyTokenJWT']
+        ],
     ],
     'POST' => [
         '/users' => [
@@ -33,6 +38,11 @@ $routes = [
             'action' => 'handle',
             'middlewares' => ['VerifyTokenJWT']
         ],
+        '/product' => [
+            'class' => 'Product\\CreateProduct\\CreateProductFactory',
+            'action' => 'handle',
+            'middlewares' => ['VerifyTokenJWT']
+        ],
     ],
     'PUT' => [
         '/user-update' => [
@@ -50,6 +60,11 @@ $routes = [
             'action' => 'handle',
             'middlewares' => ['VerifyTokenJWT']
         ],
+        '/product-update' => [
+            'class' => 'Product\\UpdateProduct\\UpdateProductFactory',
+            'action' => 'handle',
+            'middlewares' => ['VerifyTokenJWT']
+        ],
     ],
     'DELETE' => [
         '/tax-delete' => [
@@ -59,6 +74,11 @@ $routes = [
         ],
         '/product-category-delete' => [
             'class' => 'ProductCategory\\DeleteProductCategory\\DeleteProductCategoryFactory',
+            'action' => 'handle',
+            'middlewares' => ['VerifyTokenJWT']
+        ],
+        '/product-delete' => [
+            'class' => 'Product\\DeleteProduct\\DeleteProductFactory',
             'action' => 'handle',
             'middlewares' => ['VerifyTokenJWT']
         ],

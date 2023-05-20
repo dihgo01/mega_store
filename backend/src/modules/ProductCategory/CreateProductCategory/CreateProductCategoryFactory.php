@@ -9,9 +9,9 @@ use Repositories\ProductCategory\ProductCategoryCreateRepository;
 class CreateProductCategoryFactory {
 
     public function handle ($request) {
-        $ProductCategoryRepository = new ProductCategoryCreateRepository();
-        $createProductCategory = new CreateProductCategoryCase($ProductCategoryRepository);
-        $ProductCategoryCreateController = new ProductCategoryCreateController($createProductCategory);
-        return $ProductCategoryCreateController->handle($request);
+        $productCategoryRepository = new ProductCategoryCreateRepository();
+        $createProductCategory = new CreateProductCategoryCase($productCategoryRepository);
+        $productCategoryCreateController = new ProductCategoryCreateController($createProductCategory);
+        return $productCategoryCreateController->handle($request);
     }
 }

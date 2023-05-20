@@ -17,12 +17,12 @@ class ProductCategoryCreateController
     public function handle($request)
     {
         try {
-            $user = $this->createProductCategory->execute($request['body']);
+            $category = $this->createProductCategory->execute($request['body']);
 
             http_response_code(201);
             $response = [
                 'message' => 'Successfully registered category!',
-                'data' => $user
+                'data' => $category
             ];
 
             echo json_encode($response);
