@@ -283,8 +283,21 @@ table tr.row-vertical-align td, table tr.row-vertical-align th {
 .embed-responsive-1by1::before {
     padding-top: 100%;
 }
+
 /*** EMBED YOUTUBE VIDEOS ***/
 
+.head-table {
+    background-color: #101924;
+    color: #fff;
+}
+
+.head-table > tr > th {
+    color: rgb(236, 236, 236) !important;
+}
+
+#DataTables_Table_0_paginate {
+    float: right;
+}
 
 /***********************************************/
 /******************** PLUGINS ******************/

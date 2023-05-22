@@ -9,11 +9,7 @@ var qv_list = function() {
 	return {
 		init: function() {
 
-			// POST FORM - ZERA CLEAR STATE DATATABLES
-			$('body').on('click', 'button.btfiltrarProdutos', function (e) {
-				table.state.clear();
-			});
-
+	
 			// Responsive Datatable
 			var table = $('#responsive-datatable').DataTable({
 				"dom": 'rt<"bottom px-2 mb-1 mt-2 clearfix"<"row"<"col-6"i><"col-6"p>>>',
@@ -22,14 +18,15 @@ var qv_list = function() {
 					{ orderable: false, "targets": "_all", "visible": true }
 				],
 				"columns": [
-					{ className: "nk-tb-col" },
-					{ className: "nk-tb-col text-center" },
-					{ className: "nk-tb-col text-center" },
-					{ className: "nk-tb-col" },
-					{ className: "nk-tb-col text-center" },
-					{ className: "nk-tb-col text-center" },
-					{ className: "nk-tb-col text-center" },
-					{ className: "nk-tb-col text-center nk-tb-col-tools" }
+					{ 
+						className: "nk-tb-col",
+						data: "category",
+					},
+					{ 
+						className: "nk-tb-col text-center",
+						data: "tax" 
+					},
+					
 				],
 				"createdRow": function( row, data, dataIndex ) {
 					$(row).addClass('nk-tb-item');
@@ -37,15 +34,14 @@ var qv_list = function() {
 				"order": [[ 0, "desc" ]],
 				"responsive": false,
 				"processing": true,
-				"serverSide": true,
 				"stateSave": false,
 				"ajax": {
-					"url": "/app/models/"+qv_modulo_slug+"/"+qv_submodulo_slug+"/DT_list.php",
+					"url": "http://localhost:8000/product-categorys",
+					"type": "GET",
+					"headers": { 
+						'authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2ODQ3MzU4MzEsImlhdCI6MTY4NDcyNTgzMSwiaWQiOiJjMWE0MWYwNzllMGQzN2U4MjgyOGEyYmE2YzdjNTUwMSJ9.tiNJ4kH9HNtTrmXVJoKNcsZAuvNMpSeRXAgwt1AKRHg'
+					},
 					"data": function (d) {
-						d.status    = $('#status option:selected').val();
-						d.notaFiscal= $('#notaFiscal option:selected').val();
-						d.dataDe    = $('#dataDe').val();
-						d.dataAte   = $('#dataAte').val();
 					}
 				},
 				"language": {
@@ -57,29 +53,7 @@ var qv_list = function() {
 				"drawCallback": function( settings ) {
 					$("#responsive-datatable_paginate .pagination").addClass('float-end');
 				}				
-			});
-
-			// CAMPO DE BUSCA
-			$('body').on('keyup search', '#DT_buscador', function (e) {
-				var tamanho = $(this).val().length;
-				if(tamanho >= 4 || e.type == "search") {
-					table.search($(this).val()).draw();
-				}
-			});
-
-			// BOTAO DE FILTROS
-			$('body').on('click', '#btFiltrarVendas', function (e) {
-				
-				// RELOAD NA TABELA
-				table.draw();
-
-				// POPULA CAMPOS DA MODAL DE XML
-				var dataDe    = $('#dataDe').val();
-				var dataAte   = $('#dataAte').val();
-				$("#formXML #dataDe").val(dataDe);
-				$("#formXML #dataAte").val(dataAte);
-
-			});			
+			});	
 
 			// APAGAR VENDA (CANCELAR EH OUTRA CHAMADA)
 			$('body').on('click', 'a.btDelete', function() {

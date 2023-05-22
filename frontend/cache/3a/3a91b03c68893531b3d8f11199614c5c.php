@@ -78,49 +78,26 @@ class __TwigTemplate_9d87e5cef36e8fdb51f4ff68146bd03a extends Template
                         </a>
                         <ul class=\"nk-menu-sub\">
                             <li class=\"nk-menu-item\">
-                                <a href=\"/franquia/vendas/create\" class=\"nk-menu-link\"><span class=\"nk-menu-text\">Nova Venda</span></a>
+                                <a href=\"/pedidos/vendas/create\" class=\"nk-menu-link\"><span class=\"nk-menu-text\">Nova Venda</span></a>
                             </li>
                             <li class=\"nk-menu-item\">
-                                <a href=\"/franquia/vendas/list\" class=\"nk-menu-link\"><span class=\"nk-menu-text\">Consulta</span></a>
-                            </li>
-                            ";
-        // line 44
-        if ((twig_get_attribute($this->env, $this->source, (($__internal_compile_0 = twig_get_attribute($this->env, $this->source, ($context["authentication"] ?? null), "franquias", [], "any", false, false, false, 44)) && is_array($__internal_compile_0) || $__internal_compile_0 instanceof ArrayAccess ? ($__internal_compile_0[twig_get_attribute($this->env, $this->source, ($context["authentication"] ?? null), "franquiaActive", [], "any", false, false, false, 44)] ?? null) : null), "tipo_franquia", [], "any", false, false, false, 44) == "Loja")) {
-            // line 45
-            echo "                            <li class=\"nk-menu-item\">
-                                <a href=\"/franquia/vendas/caixa\" class=\"nk-menu-link\"><span class=\"nk-menu-text\">Caixa</span></a>
-                            </li>
-                            <li class=\"nk-menu-item\">
-                                <a href=\"/franquia/vendas/vendedores\" class=\"nk-menu-link\"><span class=\"nk-menu-text\">Vendedores</span></a>
+                                <a href=\"/pedidos/vendas/list\" class=\"nk-menu-link\"><span class=\"nk-menu-text\">Consulta</span></a>
                             </li> 
-                            ";
-        }
-        // line 51
-        echo "                                                       
-                            <li class=\"nk-menu-item\">
-                                <a href=\"/franquia/vendas/link_afiliado\" class=\"nk-menu-link\"><span class=\"nk-menu-text\">Link de Afiliado</span></a>
-                            </li>
-                            <li class=\"nk-menu-item\">
-                                <a href=\"/franquia/vendas/reports\" class=\"nk-menu-link\"><span class=\"nk-menu-text\">Relatórios</span></a>
-                            </li>
                         </ul><!-- .nk-menu-sub -->
                     </li><!-- .nk-menu-item -->
 
                     <li class=\"nk-menu-item has-sub\">
                         <a href=\"#\" class=\"nk-menu-link nk-menu-toggle\">
                             <span class=\"nk-menu-icon\"><em class=\"icon ni ni-users\"></em></span>
-                            <span class=\"nk-menu-text\">Clientes</span>
+                            <span class=\"nk-menu-text\">Categoria</span>
                         </a>
                         <ul class=\"nk-menu-sub\">
                             <li class=\"nk-menu-item\">
-                                <a href=\"/franquia/clientes/create\" class=\"nk-menu-link\"><span class=\"nk-menu-text\">Novo Cliente</span></a>
+                                <a href=\"/produtos/categoria/create\" class=\"nk-menu-link\"><span class=\"nk-menu-text\">Nova Categoria</span></a>
                             </li>
                             <li class=\"nk-menu-item\">
-                                <a href=\"/franquia/clientes/list\" class=\"nk-menu-link\"><span class=\"nk-menu-text\">Consultar</span></a>
+                                <a href=\"/produtos/categoria/list\" class=\"nk-menu-link\"><span class=\"nk-menu-text\">Consultar</span></a>
                             </li>
-                            <li class=\"nk-menu-item\">
-                                <a href=\"/franquia/clientes/aniversariantes\" class=\"nk-menu-link\"><span class=\"nk-menu-text\">Aniversariantes</span></a>
-                            </li>        
                         </ul><!-- .nk-menu-sub -->
                     </li>
 
@@ -144,11 +121,11 @@ class __TwigTemplate_9d87e5cef36e8fdb51f4ff68146bd03a extends Template
 
     public function getDebugInfo()
     {
-        return array (  99 => 51,  90 => 45,  88 => 44,  61 => 20,  47 => 9,  37 => 1,);
+        return array (  61 => 20,  47 => 9,  37 => 1,);
     }
 
     public function getSourceContext()
     {
-        return new Source("", "sidebar.twig", "C:\\Users\\Diego\\Desktop\\prog\\SoftExpert\\qv-vitrine\\_V2\\app\\views\\sidebar.twig");
+        return new Source("", "sidebar.twig", "C:\\Users\\Diego\\Desktop\\prog\\SoftExpert\\frontend\\app\\views\\sidebar.twig");
     }
 }

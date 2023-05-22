@@ -44,6 +44,57 @@ var INIT_QV_CUSTOM = function () {
                 }
             });
 
+            // DATATABLES
+            if ($(".general-datatable").length > 0) {
+                $(".general-datatable").each(function () {
+        
+                    $(this).DataTable({
+                        dom: 'rt<"bottom px-2 mb-1 mt-2 clearfix"<"row"<"col-6"i><"col-6"p>>>',
+                        columnDefs: [
+                            { orderable: false, "targets": "_all", "visible": true }
+                        ],
+                        paging: true,
+                        order: [[0, "desc"]],
+                        fixedColumns: {
+                            left: 2,
+                        },
+                        responsive: true,
+                        language: {
+                            processing: "Processando...",
+                            search: "Pesquisar: ",
+                            lengthMenu: "_MENU_",
+                            info: "Mostrando  _START_  até  _END_  de  _TOTAL_  registros",
+                            infoEmpty: "Mostrando 0 até 0 de 0 registros",
+                            infoFiltered: "(filtrado de _MAX_ registros no total)",
+                            infoPostFix: "",
+                            loadingRecords: "Processando...",
+                            zeroRecords: "Nenhum dado encontrado",
+                            emptyTable: "Nenhum registro cadastrado",
+                            paginate: {
+                                first: "Primeira Página",
+                                previous: "Anterior",
+                                next: "Próximo",
+                                last: "Última Página",
+                            },
+                            aria: {
+                                sortAscending: ": ative para classificar a coluna em ordem crescente",
+                                sortDescending: ": ative para classificar a coluna em ordem decrescente",
+                            },
+                        },
+                    });
+        
+                    $(this).on('show.bs.dropdown', function () {
+                        $(this).css("overflow", "inherit");
+                    });
+        
+                    $(this).on('hide.bs.dropdown', function () {
+                        $(this).css("overflow", "auto");
+                    })
+        
+                });
+        
+            }
+
             // MASKMONEY
             $("input.maskMoney").maskMoney({
                 "prefix": 'R$ ',

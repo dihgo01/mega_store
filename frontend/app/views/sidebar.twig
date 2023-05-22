@@ -36,43 +36,26 @@
                         </a>
                         <ul class="nk-menu-sub">
                             <li class="nk-menu-item">
-                                <a href="/franquia/vendas/create" class="nk-menu-link"><span class="nk-menu-text">Nova Venda</span></a>
+                                <a href="/pedidos/vendas/create" class="nk-menu-link"><span class="nk-menu-text">Nova Venda</span></a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="/franquia/vendas/list" class="nk-menu-link"><span class="nk-menu-text">Consulta</span></a>
-                            </li>
-                            {% if authentication.franquias[authentication.franquiaActive].tipo_franquia == 'Loja' %}
-                            <li class="nk-menu-item">
-                                <a href="/franquia/vendas/caixa" class="nk-menu-link"><span class="nk-menu-text">Caixa</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="/franquia/vendas/vendedores" class="nk-menu-link"><span class="nk-menu-text">Vendedores</span></a>
+                                <a href="/pedidos/vendas/list" class="nk-menu-link"><span class="nk-menu-text">Consulta</span></a>
                             </li> 
-                            {% endif %}                                                       
-                            <li class="nk-menu-item">
-                                <a href="/franquia/vendas/link_afiliado" class="nk-menu-link"><span class="nk-menu-text">Link de Afiliado</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="/franquia/vendas/reports" class="nk-menu-link"><span class="nk-menu-text">Relatórios</span></a>
-                            </li>
                         </ul><!-- .nk-menu-sub -->
                     </li><!-- .nk-menu-item -->
 
                     <li class="nk-menu-item has-sub">
                         <a href="#" class="nk-menu-link nk-menu-toggle">
                             <span class="nk-menu-icon"><em class="icon ni ni-users"></em></span>
-                            <span class="nk-menu-text">Clientes</span>
+                            <span class="nk-menu-text">Categoria</span>
                         </a>
                         <ul class="nk-menu-sub">
                             <li class="nk-menu-item">
-                                <a href="/franquia/clientes/create" class="nk-menu-link"><span class="nk-menu-text">Novo Cliente</span></a>
+                                <a href="/produtos/categoria/create" class="nk-menu-link"><span class="nk-menu-text">Nova Categoria</span></a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="/franquia/clientes/list" class="nk-menu-link"><span class="nk-menu-text">Consultar</span></a>
+                                <a href="/produtos/categoria/list" class="nk-menu-link"><span class="nk-menu-text">Consultar</span></a>
                             </li>
-                            <li class="nk-menu-item">
-                                <a href="/franquia/clientes/aniversariantes" class="nk-menu-link"><span class="nk-menu-text">Aniversariantes</span></a>
-                            </li>        
                         </ul><!-- .nk-menu-sub -->
                     </li>
 

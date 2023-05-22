@@ -52,19 +52,13 @@ class __TwigTemplate_3d898d9d2a20e11a527b18c182188c1b extends Template
             <div class=\"nk-header-tools\">
                 <ul class=\"nk-quick-nav\">
                     
-                    ";
-        // line 19
-        if (((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["url"] ?? null), "parametros", [], "any", false, false, false, 19), "var1", [], "any", false, false, false, 19) == "franquia") && (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["url"] ?? null), "parametros", [], "any", false, false, false, 19), "var2", [], "any", false, false, false, 19) == "vendas"))) {
-            // line 20
-            echo "                    <li class=\"d-none d-sm-block me-n1\">
+                   
+                    <li class=\"d-none d-sm-block me-n1\">
                         <a href=\"#\" class=\"nk-quick-nav-icon toggle\" data-bs-tooltip=\"tooltip\" data-bs-placement=\"bottom\" title=\"Ver Carrinho\"  data-target=\"userAside\">
                             <em class=\"icon ni ni-cart\"></em>
                         </a>
                     </li>
-                    ";
-        }
-        // line 25
-        echo "  
+        
                     
                     <li class=\"dropdown user-dropdown\">
                         <a href=\"#\" class=\"dropdown-toggle\" data-bs-toggle=\"dropdown\">
@@ -88,10 +82,7 @@ class __TwigTemplate_3d898d9d2a20e11a527b18c182188c1b extends Template
                             <div class=\"dropdown-inner user-card-wrap bg-lighter d-none d-md-block\">
                                 <div class=\"user-card\">
                                     <div class=\"user-avatar\">
-                                        <span>";
-        // line 43
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["authentication"] ?? null), "iniciais", [], "any", false, false, false, 43), "html", null, true);
-        echo "</span>
+                                        <em class=\"icon ni ni-user-alt\"></em>
                                     </div>
                                     <div class=\"user-info\">
                                         <span class=\"lead-text\">";
@@ -156,11 +147,11 @@ class __TwigTemplate_3d898d9d2a20e11a527b18c182188c1b extends Template
 
     public function getDebugInfo()
     {
-        return array (  132 => 61,  124 => 56,  120 => 55,  116 => 54,  112 => 53,  103 => 47,  99 => 46,  93 => 43,  82 => 35,  78 => 34,  67 => 25,  59 => 20,  57 => 19,  37 => 1,);
+        return array (  123 => 61,  115 => 56,  111 => 55,  107 => 54,  103 => 53,  94 => 47,  90 => 46,  76 => 35,  72 => 34,  37 => 1,);
     }
 
     public function getSourceContext()
     {
-        return new Source("", "topo.twig", "C:\\Users\\Diego\\Desktop\\prog\\SoftExpert\\qv-vitrine\\_V2\\app\\views\\topo.twig");
+        return new Source("", "topo.twig", "C:\\Users\\Diego\\Desktop\\prog\\SoftExpert\\frontend\\app\\views\\topo.twig");
     }
 }

@@ -86,8 +86,6 @@ function url_friendly($capturaURL, $URI) {
 		$_QV['URL']['parametros']['var6'] = $capturaURL[6];
 	} else { $_QV['URL']['parametros']['var6'] = false; }	
 	
-	// LISTA DE PAGINAS INDIVIDUAIS
-	$listaPaginasIndividuais = array('login','novidades');
 
 	// DEFININDO PAGINA PADRAO
 	if(empty($_QV['URL']['PG'])) {
@@ -95,12 +93,6 @@ function url_friendly($capturaURL, $URI) {
 	} else {
 
 		$_QV['URL']['PG'] = $capturaURL[1].".twig";
-		
-		/*if(in_array($_QV['URL']['parametros']['var1'],$listaPaginasIndividuais)) {
-			$_QV['URL']['PG'] = $capturaURL[1].".twig";
-		} else {
-			$_QV['URL']['PG'] = $capturaURL[1]."/".$capturaURL[1].".twig";
-		}*/
 		
 	}
 
@@ -125,7 +117,7 @@ function carregarMVC($url_received,$target = false) {
 
 	// CHECANDO URL RECEBIDA
 	if($url_received['PG'] == "home.twig") {
-		$url_base .= "home/home.php";
+		$url_base .= "vendas/vendas.php";
 	} else {
 		foreach($url_received['parametros'] AS $key => $value) {		
 
@@ -277,270 +269,10 @@ function nomeMes($mes) {
 
 }
 
-/////////////////////////////////////////////////////
-/***  FUNCAO EXTRAIR DATA ***/
-/////////////////////////////////////////////////////
-function extrairData($dataRecebida) {	
-	$s 		= $dataRecebida;
-	$dt 	= new DateTime($s);
 
-	$date 	= $dt->format('Y-m-d');
-	$time 	= $dt->format('H:i:s');
 
-	//$date = $dt->format('m/d/Y');
-	//echo $date, ' | ', $time;
 
-	return $date;
-}
 
-/////////////////////////////////////////////////////
-/*** FUNCAO PARA LOG DEBUG ***/
-/////////////////////////////////////////////////////
-function logDebug($descricao) {
-	$conexaoDB = bancoDados("conectar","intranet");
-	mysqli_query($conexaoDB, "INSERT INTO logsDebug (descricao, ip, dataInsert) VALUES ('".$descricao."', '".$_SERVER['REMOTE_ADDR']."', NOW())");
-}
-
-/////////////////////////////////////////////////////
-/*** FUNCAO PARA LOGs FOCUS NFe / NFCe ***/
-/////////////////////////////////////////////////////
-function logsDebugFocus($idUnidade,$idVenda,$request,$response) {
-	$conexaoDB = bancoDados("conectar","intranet");
-	mysqli_query($conexaoDB, "INSERT INTO logsDebugFocus (idUnidade, idVenda, request, descricao, ip, dataInsert) VALUES ('".$idUnidade."', '".$idVenda."', '".$request."', '".$response."', '".$_SERVER['REMOTE_ADDR']."', NOW())");
-
-	// htmlspecialchars 
-}
-
-/////////////////////////////////////////////////////
-/*** FUNCAO PARA LOG HISTORICO DAS VENDAS ***/
-// ID DA VENDA + POST DOS INPUTS NO UPDATE DAS VENDA
-// ACAO = preparar ou efetivar ou apagar
-/////////////////////////////////////////////////////
-function logVendas($acao,$idVenda,$idUsuario = false, $campos = false) {
-	
-	// BANCO DADOS
-	$conexao = bancoDados("conectar","intranet");
-
-	// ACAO - PREPARAR 
-	if($acao == 'preparar') {
-
-		//********** CONSULTA DA VENDA
-		$consultaVenda = mysqli_query($conexao, "SELECT * FROM PDV_vendas WHERE idVenda = '".$idVenda."' ");
-		$resVendas = mysqli_fetch_array($consultaVenda);
-
-		//********** CHECANDO - VENDEDOR
-		if($resVendas['idUsuario'] != $campos['vendedor']) {
-
-			$descricao = 'Vendedor foi alterado de <b>'.$resVendas['idUsuario'].'</b> para <b>'.$campos['vendedor'].'</b>.';
-
-			$logVendedor = mysqli_query($conexao, "INSERT INTO PDV_vendasLogs (idVenda, idUsuario, descricao, ip, dataInsert) VALUES ('".$idVenda."', '".$idUsuario."', '".$descricao."', '".$_SERVER['REMOTE_ADDR']."', NOW())");
-
-		}
-
-		//********** CHECANDO - CLIENTE
-		if($resVendas['idCliente'] != $campos['idCliente']) {
-
-			$descricao = 'Cliente foi alterado de <b>'.$resVendas['idCliente'].'</b> para <b>'.$campos['idCliente'].'</b>.';
-
-			$logCliente = mysqli_query($conexao, "INSERT INTO PDV_vendasLogs (idVenda, idUsuario, descricao, ip, dataInsert) VALUES ('".$idVenda."', '".$idUsuario."', '".$descricao."', '".$_SERVER['REMOTE_ADDR']."', NOW())");
-
-		}	
-		
-		//********** CHECANDO - PRODUTOS
-		/* MONTA ARRAY DOS NOVOS PRODUTOS */
-		$listaProdutosUpdate = array();
-		for($U=0; $U<COUNT($campos['prodID']); $U++) {
-			$listaProdutosUpdate[] = array(
-				'id' 			=> $campos['prodID'][$U],
-				'sku' 			=> $campos['prodSKU'][$U],
-				'cor' 			=> $campos['prodCOR'][$U],
-				'tamanho' 		=> $campos['prodTAMANHO'][$U],
-				'quantidade'	=> $campos['prodQTD'][$U],
-				'preco' 		=> $campos['prodPRECO'][$U]
-			);
-		}
-
-		
-
-		/* PERCORRE PRODUTOS ATUAIS PARA CHECAR SE EXISTEM NO NOVO ARRAY E ASSIM CONSIDERADAR QUE FORAM REMOVIDOS */
-		$consultaProdutos = mysqli_query($conexao, "
-			SELECT VP.idProduto AS PROD_ID, P.nome_comercial AS PROD_NOME, VP.cor AS PROD_COR, VP.tamanho AS PROD_TAMANHO, VP.quantidade AS PROD_QTD 
-			FROM PDV_vendasProdutos VP
-			INNER JOIN qv_produtos P ON  P.id = VP.idProduto
-			WHERE VP.idVenda = '".$idVenda."' AND VP.status = 'Ativo' ");
-		WHILE($resProdutos = mysqli_fetch_array($consultaProdutos)) {
-
-			//$found_key = array_search($resProdutos['PROD_ID'], array_column($listaProdutosUpdate, 'id'));
-
-			// BUSCA NO ARRAY NOVO SE O PRODUTO AINDA EXISTE
-			$found_key = multi_array_search($listaProdutosUpdate, array('id' => $resProdutos['PROD_ID'], 'tamanho' => $resProdutos['PROD_TAMANHO']));
-
-			// PERCORRE RESULTADO DA BUSCA SE EXISTIREM
-			if(COUNT($found_key) > 0) {
-
-				for($i=0; $i<COUNT($found_key); $i++) {
-
-					// SE AS QUANTIDADES FOREM DIFERENTES, GERA O LOG E REMOVE DO ARRAY NOVO
-					if($listaProdutosUpdate[$found_key[$i]]['quantidade'] != $resProdutos['PROD_QTD']) {
-
-						$descricao = 'A quantidade do produto <b>'.$resProdutos['PROD_NOME'].' ('.$resProdutos['PROD_TAMANHO'].')</b> foi alterada de <b>'.$resProdutos['PROD_QTD'].'</b> para <b>'.$listaProdutosUpdate[$found_key[$i]]['quantidade'].' unidade(s)</b>.';
-
-						$logProduto = mysqli_query($conexao, "INSERT INTO PDV_vendasLogs (idVenda, idUsuario, descricao, ip, dataInsert) VALUES ('".$idVenda."', '".$idUsuario."', '".$descricao."', '".$_SERVER['REMOTE_ADDR']."', NOW())");
-
-					}
-
-					//unset($listaProdutosUpdate[$found_key[$i]]);
-					array_splice($listaProdutosUpdate,$found_key[$i],1);
-
-				}
-
-			// CASO NAO ENCONTRE NO NOVO ARRAY, ENTENDE QUE O PRODUTO COM RESPECTIVO TAMANHO FOI REMOVIDO
-			} else {
-
-				$descricao = 'Produto <b>'.$resProdutos['PROD_NOME'].' ('.$resProdutos['PROD_TAMANHO'].')</b> foi removido desta venda.';
-
-				$logProduto = mysqli_query($conexao, "INSERT INTO PDV_vendasLogs (idVenda, idUsuario, descricao, ip, dataInsert) VALUES ('".$idVenda."', '".$idUsuario."', '".$descricao."', '".$_SERVER['REMOTE_ADDR']."', NOW())");
-
-			}
-
-		}		
-
-		// PERCORRE FAZENDO AS ADICOES
-		for($Q=0; $Q<COUNT($listaProdutosUpdate); $Q++) {	
-			
-			// CONSULTA DADOS DO PRODUTO
-			$conProd = mysqli_query($conexao,"SELECT id, nome_comercial, cor_id, preco_custo, preco_sellout, preco_sellin FROM qv_produtos WHERE id = '".$listaProdutosUpdate[$Q]['id']."' ");
-			$resProd = mysqli_fetch_array($conProd);			
-
-			$descricao = 'O Produto <b>'.$resProd['nome_comercial'].' ('.$listaProdutosUpdate[$Q]['tamanho'].')</b> com <b>'.$listaProdutosUpdate[$Q]['quantidade'].' unidade(s)</b> foi adicionado nesta venda.';
-
-			$logProduto = mysqli_query($conexao, "INSERT INTO PDV_vendasLogs (idVenda, idUsuario, descricao, ip, dataInsert) VALUES ('".$idVenda."', '".$idUsuario."', '".$descricao."', '".$_SERVER['REMOTE_ADDR']."', NOW())");
-
-		}			
-
-	} elseif($acao == 'efetivar') {
-
-		$atualizar = mysqli_query($conexao, "UPDATE PDV_vendasLogs SET status = 'Ativo' WHERE idVenda = ".$idVenda." AND status = 'Pendente' ");
-
-	} else {
-
-		$apagar = mysqli_query($conexao, "DELETE FROM PDV_vendasLogs WHERE idVenda = ".$idVenda." AND status = 'Pendente' ");		
-
-	}
-
-}
-
-/////////////////////////////////////////////////////
-// COMPARAR ARRAYS
-/////////////////////////////////////////////////////
-function compararArray($array1,$array2) {
-	if((is_array($array1) && is_array($array2) && array_diff($array1, $array2) === array_diff($array2, $array1))) {
-		return true; // IGUAIS
-	} else {
-		return false; // DIFERENTE
-	}
-}
-
-/////////////////////////////////////////////////////
-// BUSCAR EM UM ARRAY MULTIDIMENSIONAL EM MULTIPLAS COLUNAS
-/////////////////////////////////////////////////////
-function multi_array_search($array, $search) {
-	
-	// Create the result array
-	$result = array();
-	
-	// Iterate over each array element
-	foreach ($array as $key => $value) {
-	
-		// Iterate over each search condition
-		foreach ($search as $k => $v){
-	
-			// If the array element does not meet the search condition then continue to the next element
-			if(!isset($value[$k]) || $value[$k] != $v){
-				continue 2;
-			}
-
-		}
-
-		// Add the array element's key to the result array
-		$result[] = $key;
-	
-	}
-
-	// Return the result array
-	return $result;
-}
-
-/////////////////////////////////////////////////////
-/*** FUNCAO PARA FORMATAR NUMERO DECIMAL ***/
-/////////////////////////////////////////////////////
-function numeroDecimal($numero,$casas) {
-	if(empty($casas)) { $casas = 2; }
-	return number_format($numero,$casas,",",".");
-}
-
-/////////////////////////////////////////////////////
-/* FUNCAO PARA CONVERTER PONTUACOES e REMOVER CIFRAO */
-/////////////////////////////////////////////////////
-function converterPontuacoes($string,$atual,$substituto,$centenas = false) {
-
-	if($centenas) { $nova_string = str_replace($centenas,'',$string); } else { $nova_string = $string; }
-	$nova_string = str_replace('R$','',$nova_string);
-	$nova_string = str_replace('kg','',$nova_string);
-	$nova_string = str_replace('cm','',$nova_string);
-	$nova_string = str_replace(' ','',$nova_string);
-	$nova_string = str_replace($atual,$substituto,$nova_string);
-
-	//$nova_string = str_replace($atual,$substituto,str_replace(' ','',str_replace('R$','',str_replace($centenas,'',$string))));
-
-	return $nova_string;
-
-}
-
-/////////////////////////////////////////////////////
-/***  FUNCAO PARA GERAR O ANO AUTOMATICAMENTE ***/
-/////////////////////////////////////////////////////
-function ano() {
-	$gerarAno = date("Y", mktime(gmdate("H")-3, gmdate("i"), gmdate("s"), gmdate("m"), gmdate("d"), gmdate("Y")));
-	echo $gerarAno;
-}
-
-/////////////////////////////////////////////////////
-/***  FUNCAO PARA PREENCHER CAMPOS SELECT ***/
-/////////////////////////////////////////////////////
-function preencherSelect($primeiroValor, $segundoValor) {
-	if($primeiroValor == $segundoValor) {
-		$selecionar = ' selected="selected" ';
-	} else {
-		$selecionar = '';
-	}
-	return $selecionar;
-}
-
-/////////////////////////////////////////////////////
-/***  FUNCAO PARA ENCURTAR TEXTOS LONGOS ***/
-/////////////////////////////////////////////////////
-function encurtarTexto($textoEnviado, $tamanhoLimite) {
-	return (strlen(strip_tags($textoEnviado)) > $tamanhoLimite) ? substr(strip_tags($textoEnviado), 0, $tamanhoLimite).'...' : $textoEnviado;
-}
-
-/////////////////////////////////////////////////////
-/***  FUNCAO PARA COMPRIMIR IMAGENS COM BASE NO PHP GD ***/
-/////////////////////////////////////////////////////
-function comprimirImagem($pastaOrigem, $pastaDestino, $qualidade) {
-
-	$info = getimagesize($pastaOrigem);
-
-	if ($info['mime'] 		== 'image/jpeg') $image 	= imagecreatefromjpeg($pastaOrigem);
-	elseif ($info['mime'] 	== 'image/gif') $image 		= imagecreatefromgif($pastaOrigem);
-	elseif ($info['mime'] 	== 'image/png') $image 		= imagecreatefrompng($pastaOrigem);
-
-	//save it
-	imagejpeg($image, $pastaDestino, $qualidade);
-
-	//return destination file url
-	//return $destination_url;
-}
 
 /////////////////////////////////////////////////////
 /***  FUNCAO PARA REMOVER ACENTOS ***/
@@ -592,129 +324,14 @@ function limpar($limparStringRecebida) {
 	return $limparStringRecebida;
 }
 
-/////////////////////////////////////////////////////
-// FUNCAO MASCARA - MASK PHP
-/////////////////////////////////////////////////////
-function maskPHP($val, $mask) {
-	$maskared = '';
-	$k = 0;
-	for($i = 0; $i<=strlen($mask)-1; $i++) {
-		if($mask[$i] == '#') {
-			if(isset($val[$k])) {
-				$maskared .= $val[$k++];
-			}
-		} else {
-			if(isset($mask[$i])) {
-				$maskared .= $mask[$i];
-			}
-		}
-	}
-	return $maskared;
 
-	/*
-	$cnpj = "11222333000199";
-	$cpf = "00100200300";
-	$cep = "08665110";
-	$data = "10102010";
-	
-	echo mask($cnpj,'##.###.###/####-##');
-	echo mask($cpf,'###.###.###-##');
-	echo mask($cep,'#####-###');
-	echo mask($data,'##/##/####'); */	
-}
 
-/////////////////////////////////////////////////////
-// FUNCAO PARA FOCAR CACHE ARQUIVOS
-/////////////////////////////////////////////////////
-function versaoArquivo() {
-	$ts = '?ts='.date('Y-m-d-H-i-s');	
- 	return $ts;	
-}
 
-/////////////////////////////////////////////////////
-// FUNCAO CHECK VAZIO OU NULL
-/////////////////////////////////////////////////////
-function checkVazio($valor) {
-	if(empty($valor) || is_null($valor)) {
-		return 0;
-	} else {
-		return $valor;
-	}
-}
 
-/////////////////////////////////////////////////////
-// FUNCAO LOGS ERRO MYSQL
-/////////////////////////////////////////////////////
-function bd_log_error($conexao) {
 
-	// CAPTURA DADOS
-	$codigoErro 	= mysqli_errno($conexao);
-	$mensagemErro 	= mysqli_error($conexao);
 
-	if($codigoErro != 0 || !empty($codigoErro)) {
-		$erro = $codigoErro.": ".$mensagemErro;
-		array_push($_SESSION['BD_ERROS'],$erro);
-	}
-	
-	return $_SESSION['BD_ERROS'];
-}
 
-/////////////////////////////////////////////////////////////////
-/***  FUNCAO GERAR IMAGENS DE PRODUTOS A PARTIR DA INTRANET ***/
-////////////////////////////////////////////////////////////////
-function qvImagens_Intranet($idProduto, $dimensoes = false, $modo = false) {
 
-	// CONECTA COM BANCO
-	$conexaoIntranet = bancoDados("conectar","intranet");
-
-	// ARRAY IMAGENS
-	$lista_imagens = array();
-	
-	// URL QUE GERA IMAGEM DA INTRANET ANTIGA
-	$url_requisitada = "https://franquia.quintavalentina.com.br/products/thumb";	
-
-	// MODO IMAGENS - fit, fill, resize e crop
-	if(!$modo) {
-		$modo = "fill";
-	}
-
-	// DIMENSOES
-	if(!$dimensoes) {
-		$dimensoes = "800/800";	
-	}
-	$dimensoesAlt = explode("/",$dimensoes);
-
-	// CONSULTA IMAGENS
-	$consultaImagem = mysqli_query($conexaoIntranet, "SELECT GROUP_CONCAT(nome) AS ARQUIVO FROM qv_produtos_imagens WHERE produto_id = '".$idProduto."' ");
-	$resImagem = mysqli_fetch_array($consultaImagem);
-	$imagens_produtos = explode(",",$resImagem['ARQUIVO']);	
-
-	// CONSULTA DADOS PRODUTO
-	$consultaProduto = mysqli_query($conexaoIntranet, "SELECT id AS ID_PRODUTO, slug AS SLUG FROM qv_produtos WHERE id = '".$idProduto."' ");
-	$resProd = mysqli_fetch_array($consultaProduto);
-
-	// PERCORRE EXPLODE POPULANDO NOVO ARRAY
-	if(!empty($imagens_produtos[0])) {
-		for($i=0; COUNT($imagens_produtos) > $i; $i++) {
-
-			// MONTA URL
-			$url_final = $url_requisitada.'/'.$idProduto.'/'.$dimensoes.'/'.$modo.'/'.$imagens_produtos[$i];
-
-			// ADD NO ARRAY
-			array_push($lista_imagens,$url_final);
-
-		}			
-
-	}	
-
-	// ANALISA SE OCORREU TUDO CERTO
-	if(empty($lista_imagens)) {
-		$lista_imagens = array('/assets/images/sem_foto.jpg','/assets/images/sem_foto.jpg');
-	}
-
-	return $lista_imagens;
-
-}
 
 
 /////////////////////////////////////////////////////////////////
@@ -740,140 +357,7 @@ function qvProdutosInfo_Intranet($idProduto) {
 
 }
 
-/////////////////////////////////////////////////////
-// FUNCAO CONSULTA ESTOQUE x GRADE - INTRANET
-/////////////////////////////////////////////////////
-function intranetEstoqueGrade($produto_id,$grade = false) {
 
-    // BANCO DADOS
-    $conexaoIntranetAntiga  = bancoDados("conectar","intranet"); 
-
-	// RESULTADO GRADES
-	$resGrades = array();
-	$saldoTotal = 0;
-
-	// QUERY COM GRADE
-	if($grade) {
-		$queryGrade = " AND G.codigo = '".$grade."' ";
-	} else {
-		$queryGrade = "";
-	}	
-	
-	// CONSULTA
-	$consulta = mysqli_query($conexaoIntranetAntiga, "SELECT PE.produto_id AS ID_PRODUTO, 
-	(COALESCE(sum(CASE WHEN ( PE.tipo = 'entrada' ) THEN PE.quantidade ELSE 0 END),0) - COALESCE(sum(CASE WHEN ( PE.tipo = 'saida' ) THEN PE.quantidade ELSE 0 END),0)) AS SALDO_ATUAL,
-	G.codigo AS GRADE, PE.preco_ecommerce AS PRECO 
-	FROM qv_produtos_estoques PE
-	INNER JOIN qv_produtos_grades PG ON PG.id = PE.produto_grade_id
-	INNER JOIN qv_grades G ON G.id = PG.grade_id
-	INNER JOIN qv_produtos P ON P.id = PE.produto_id
-	WHERE PE.loja_id IN(1,137) AND PE.ativado = 1 AND PE.deleted_at IS NULL AND P.ativado = 1 AND P.ecommerce = 1 AND PE.produto_id = ".$produto_id." ".$queryGrade." GROUP BY GRADE ORDER BY GRADE ASC");
-	$resGrades['RESULTADOS'] = mysqli_num_rows($consulta);
-	if(mysqli_num_rows($consulta) > 0) {
-		WHILE($resultado = mysqli_fetch_array($consulta)) {
-			$resGrades['ITENS'][] = array('GRADE'=> $resultado['GRADE'], 'SALDO'=> $resultado['SALDO_ATUAL']);
-			$saldoTotal += $resultado['SALDO_ATUAL'];
-		}
-		$resGrades['SALDO_GERAL'] = $saldoTotal;
-	}
-
-	return $resGrades;
-
-}
-
-/////////////////////////////////////////////////////
-// FUNCAO CONSULTA ESTOQUE x GRADE - VITRINE
-/////////////////////////////////////////////////////
-function vitrineEstoqueGrade($produto_id,$unidade_id,$grade = false) {
-
-    // BANCO DADOS
-    $conexaoIntranetAntiga  = bancoDados("conectar","intranet"); 
-
-	// RESULTADO GRADES
-	$resGrades = array();
-	$saldoTotal = 0;
-
-	// QUERY COM GRADE
-	if($grade) {
-		$queryGrade = " AND E.tamanho = '".$grade."' ";
-	} else {
-		$queryGrade = "";
-	}
-	
-	// CONSULTA
-	$consulta = mysqli_query($conexaoIntranetAntiga, "SELECT E.idProduto AS ID_PRODUTO, 
-	COALESCE(sum(E.quantidade),0) AS SALDO_ATUAL, E.tamanho AS GRADE 
-	FROM PDV_estoque E
-	WHERE E.idProduto = ".$produto_id." AND E.idUnidade = ".$unidade_id." ".$queryGrade." GROUP BY GRADE ORDER BY GRADE ASC");
-	$resGrades['RESULTADOS'] = mysqli_num_rows($consulta);
-	if(mysqli_num_rows($consulta) > 0) {
-		WHILE($resultado = mysqli_fetch_array($consulta)) {
-
-			$sku = geradorSKU($resultado['ID_PRODUTO'], $resultado['GRADE']);
-
-			$resGrades['ITENS'][] = array('GRADE'=> $resultado['GRADE'], 'SALDO'=> $resultado['SALDO_ATUAL'], 'SKU' => $sku);
-			$saldoTotal += $resultado['SALDO_ATUAL'];
-			
-		}
-		$resGrades['SALDO_GERAL'] = $saldoTotal;
-	}
-
-	return $resGrades;
-
-}
-
-/////////////////////////////////////////////////////
-// FUNCAO CONSULTA ESTOQUE x GRADE
-/////////////////////////////////////////////////////
-function protheusEstoqueGrade($produto_id, $grade = false) {
-
-	// URL PARA DISPARO
-	$urlRequisitada = "177.93.109.202:8079/rest/SALDOSB2";  
-
-	// VALIDANDO REQUISITOS PARA EXECUTAR
-	if(empty($urlRequisitada) || empty($produto_id)) {
-
-		return false;
-
-	} else {
-
-		// FILTROS
-		$protheusFiltros = array(
-			'cFil' 		=> '026801',
-			'cCod' 		=> $produto_id,
-			'cGrade' 	=> (!empty($grade) ? $grade : ''),
-			'cArmazem' 	=> '01'
-		);		
-
-		$ch = curl_init();
-
-		curl_setopt($ch, CURLOPT_URL, $urlRequisitada."?".http_build_query($protheusFiltros));
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-		curl_setopt($ch, CURLOPT_HEADER, FALSE);
-
-		// CURL CALL
-		$res 	  		= curl_exec($ch);
-		$httpcode 		= curl_getinfo($ch, CURLINFO_HTTP_CODE); 
-		$contentType 	= curl_getinfo($ch, CURLINFO_CONTENT_TYPE);	
-		
-		// Close the cURL handle.
-		curl_close($ch);    
-
-		// TRANSFORMANDO RETORNO
-		$resposta = json_decode($res, true);
-
-		$retorno = array('HTTP_CODE'=>$httpcode,'CONTEUDO'=>$resposta);
-
-		// EM CASO DE SUCESSO
-		if($retorno['HTTP_CODE'] == 200 && COUNT($retorno['CONTEUDO']) > 0) {
-			return $retorno['CONTEUDO'];
-		} else {
-			return false;
-		}
-
-	}
-
-}
 
 /////////////////////////////////////////////////////
 // GERADOR SKU
@@ -1060,12 +544,7 @@ function protegePagina($paginaAtual) {
 
 	if($paginaAtual != 'login') {
 
-		if(!isset($_SESSION['Authentication']['id_usuario']) && empty($_SESSION['Authentication']['id_usuario'])) {
-
-			// Não há usuário logado, manda pra página de login
-			expulsaVisitante();
-			
-		} elseif(!isset($_SESSION['Authentication']['id_usuario']) OR !isset($_SESSION['Authentication']['nome'])) {
+		if(!isset($_SESSION['Authentication']['id_usuario']) OR !isset($_SESSION['Authentication']['nome'])) {
 	
 			// Há usuário logado, verifica se precisa validar o login novamente
 			if ($_SESSION['Authentication']['validaSempre'] == true) {
