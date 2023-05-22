@@ -22,10 +22,10 @@ if(file_exists($model)) {
      elseif($_QV['URL']['parametros']['var2'] == 'vendas' && $_QV['URL']['parametros']['var3'] == 'list') {
 
         // Instância Class
-        $classe = new QV_Produtos();
+        $classe = new QV_Vendas();
 
         // Chama Funcao de Consulta de Categorias
-        $_QV['controller'] = $classe->consulta();
+        $_QV['controller'] = $classe->consultaVenda();
 
     }
     //******* VISUALIZAR PRODUTO

@@ -52,7 +52,7 @@ class __TwigTemplate_2e521ab46a9e2c7c24774199a246c9f9 extends Template
 <!-- META TAGS -->
 
 <!-- TITULO, KEYWORDS E DESCRIPTION -->
-<title>Vitrine QV - Login</title>
+<title>Login</title>
 
 <!-- FAVICON -->
 <link rel=\"apple-touch-icon\" sizes=\"57x57\" href=\"/assets/images/favicon/apple-icon-57x57.png\">
@@ -275,6 +275,6 @@ class __TwigTemplate_2e521ab46a9e2c7c24774199a246c9f9 extends Template
 
     public function getSourceContext()
     {
-        return new Source("", "login.twig", "C:\\Users\\Diego\\Desktop\\prog\\SoftExpert\\qv-vitrine\\_V2\\app\\views\\login.twig");
+        return new Source("", "login.twig", "C:\\Users\\Diego\\Desktop\\prog\\SoftExpert\\frontend\\app\\views\\login.twig");
     }
 }

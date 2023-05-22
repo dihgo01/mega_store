@@ -547,15 +547,7 @@ function protegePagina($paginaAtual) {
 		if(!isset($_SESSION['Authentication']['id_usuario']) OR !isset($_SESSION['Authentication']['nome'])) {
 	
 			// Há usuário logado, verifica se precisa validar o login novamente
-			if ($_SESSION['Authentication']['validaSempre'] == true) {
-	
-				// Verifica se os dados salvos na sessão batem com os dados do banco de dados
-				/*if (!validaUsuario($_SESSION['usuarioLogin'], $_SESSION['usuarioSenha'])) {
-					// Os dados não batem, manda pra tela de login
-					expulsaVisitante();
-				}*/
-	
-			}
+			
 	
 		}		
 

@@ -68,22 +68,9 @@ class __TwigTemplate_0683b653e0ed6316e2841dd7d3c99d9c extends Template
 <!-- CACHE -->
 
 <!-- FAVICON -->
-<link rel=\"apple-touch-icon\" sizes=\"57x57\" href=\"/assets/images/favicon/apple-icon-57x57.png\">
-<link rel=\"apple-touch-icon\" sizes=\"60x60\" href=\"/assets/images/favicon/apple-icon-60x60.png\">
-<link rel=\"apple-touch-icon\" sizes=\"72x72\" href=\"/assets/images/favicon/apple-icon-72x72.png\">
-<link rel=\"apple-touch-icon\" sizes=\"76x76\" href=\"/assets/images/favicon/apple-icon-76x76.png\">
-<link rel=\"apple-touch-icon\" sizes=\"114x114\" href=\"/assets/images/favicon/apple-icon-114x114.png\">
-<link rel=\"apple-touch-icon\" sizes=\"120x120\" href=\"/assets/images/favicon/apple-icon-120x120.png\">
-<link rel=\"apple-touch-icon\" sizes=\"144x144\" href=\"/assets/images/favicon/apple-icon-144x144.png\">
-<link rel=\"apple-touch-icon\" sizes=\"152x152\" href=\"/assets/images/favicon/apple-icon-152x152.png\">
-<link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/assets/images/favicon/apple-icon-180x180.png\">
-<link rel=\"icon\" type=\"image/png\" sizes=\"192x192\"  href=\"/assets/images/favicon/android-icon-192x192.png\">
-<link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/assets/images/favicon/favicon-32x32.png\">
-<link rel=\"icon\" type=\"image/png\" sizes=\"96x96\" href=\"/assets/images/favicon/favicon-96x96.png\">
-<link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/assets/images/favicon/favicon-16x16.png\">
+<link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/assets/images/favicon/favicon.png\">
 <link rel=\"manifest\" href=\"/assets/images/favicon/manifest.json\">
 <meta name=\"msapplication-TileColor\" content=\"#ffffff\">
-<meta name=\"msapplication-TileImage\" content=\"/assets/images/favicon/ms-icon-144x144.png\">
 <meta name=\"theme-color\" content=\"#ffffff\">
 <!-- FAVICON -->
 
@@ -101,19 +88,19 @@ class __TwigTemplate_0683b653e0ed6316e2841dd7d3c99d9c extends Template
     <div class=\"nk-app-root\">
         <div class=\"nk-main \"> 
             ";
-        // line 62
+        // line 49
         echo twig_include($this->env, $context, "sidebar.twig");
         echo "
             <div class=\"nk-wrap\">
                 ";
-        // line 64
+        // line 51
         echo twig_include($this->env, $context, "topo.twig");
         echo "
                 <div class=\"nk-content \">
                 ";
-        // line 66
+        // line 53
         $this->displayBlock('content', $context, $blocks);
-        // line 67
+        // line 54
         echo "                </div> <!-- content @s -->     
             </div> <!-- wrap @s -->
         </div> <!-- main @e -->
@@ -128,7 +115,7 @@ class __TwigTemplate_0683b653e0ed6316e2841dd7d3c99d9c extends Template
         $macros = $this->macros;
     }
 
-    // line 66
+    // line 53
     public function block_content($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -146,11 +133,11 @@ class __TwigTemplate_0683b653e0ed6316e2841dd7d3c99d9c extends Template
 
     public function getDebugInfo()
     {
-        return array (  132 => 66,  126 => 18,  117 => 67,  115 => 66,  110 => 64,  105 => 62,  58 => 18,  39 => 1,);
+        return array (  119 => 53,  113 => 18,  104 => 54,  102 => 53,  97 => 51,  92 => 49,  58 => 18,  39 => 1,);
     }
 
     public function getSourceContext()
     {
-        return new Source("", "templates/main.twig", "C:\\Users\\Diego\\Desktop\\prog\\SoftExpert\\qv-vitrine\\_V2\\app\\views\\templates\\main.twig");
+        return new Source("", "templates/main.twig", "C:\\Users\\Diego\\Desktop\\prog\\SoftExpert\\frontend\\app\\views\\templates\\main.twig");
     }
 }

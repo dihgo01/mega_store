@@ -74,7 +74,7 @@ class __TwigTemplate_046c6beac312e36c3d7621c39fd01cbd extends Template
                                             <div class=\"form-group\">
                                                 <label class=\"form-label\" for=\"nome\">Nome</label>
                                                 <div class=\"form-control-wrap\">
-                                                    <input type=\"text\" class=\"form-control\" name=\"name\" placeholder=\"Nome completo da categoria...\" autocomplete=\"off\" required>
+                                                    <input type=\"text\" class=\"form-control input_name\" name=\"name\" placeholder=\"Nome completo da categoria...\" autocomplete=\"off\" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -113,7 +113,7 @@ class __TwigTemplate_046c6beac312e36c3d7621c39fd01cbd extends Template
                                     <div class=\"row gy-4\">
                                         <div class=\"col-12\">
                                             <div class=\"form-group text-end\">
-                                                <button type=\"submit\" class=\"btn btn-lg btn-primary w-xs-100 d-inline\">Cadastrar</button>
+                                                <button type=\"button\" class=\"btn btn-lg btn-primary w-xs-100 d-inline submit_register\">Cadastrar</button>
                                             </div>
                                         </div>                                        
                                     </div>
@@ -145,7 +145,7 @@ class __TwigTemplate_046c6beac312e36c3d7621c39fd01cbd extends Template
 <script>
 \$(function(){
 \tqv_create.init(\"#formCreate\");
-});
+}); 
 </script>";
     }
 

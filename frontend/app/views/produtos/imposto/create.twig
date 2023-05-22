@@ -4,9 +4,9 @@
             <div class="nk-block-head nk-block-head-sm">
                 <div class="nk-block-between">
                     <div class="nk-block-head-content">
-                        <h3 class="nk-block-title page-title">Produtos / Categorias / <strong class="text-primary small">Nova</strong></h3>
+                        <h3 class="nk-block-title page-title">Produtos / Imposto / <strong class="text-primary small">Nova</strong></h3>
                         <div class="nk-block-des text-soft">
-                            <p>Tela para cadastrar novas categorias de produtos.</p>
+                            <p>Tela para cadastrar novas impostos de produtos.</p>
                         </div>
                     </div><!-- .nk-block-head-content -->
                     <div class="nk-block-head-content">
@@ -39,15 +39,10 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label class="form-label" for="codigo">Imposto</label>
+                                                <label class="form-label" for="codigo">Percentual</label>
                                                 <div class="form-control-wrap">
                                                    <div class="form-control-wrap ">
-                                                        <select name="tax_id" id="tax_id" class="form-control qvSelect2" data-search="on" required>
-                                                            <option></option>
-                                                            {% for imposto in controller.conteudo %}
-                                                                <option value="{{ imposto.id|e }}">{{ imposto.name|e }}</option>
-                                                            {% endfor %}
-                                                        </select>
+                                                         <input type="text" class="form-control" name="percentage" placeholder="Percentual..." autocomplete="off" required>
                                                     </div>
                                                 </div>
                                             </div>

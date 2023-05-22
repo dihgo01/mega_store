@@ -44,16 +44,24 @@
                                 <table class="table-hover nowrap nk-tb-list w-100 general-datatable" data-auto-responsive="false" >
                                     <thead class="head-table">
                                         <tr class="nk-tb-item nk-tb-head">
+                                            <th class="nk-tb-col text-center">DATA DE CADASTRO</th>
                                             <th class="nk-tb-col text-center">TOTAL</th>
                                             <th class="nk-tb-col text-center">STATUS</th>
                                             <th class="nk-tb-col nk-tb-col-tools text-right">OPÇÕES</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {% if authentication.loginStatus is empty %}
+                                            <tr>
+                                                <td colspan="4" class="text-center pt-3 pb-3">Por favor realize o login.</td>
+                                            </tr>
+                                        {% endif %}
+                                        {% if authentication.loginStatus == true %}
                                         {% for pedido in controller.conteudo %}
                                             <tr>
-                                                <td class="text-center">{{ pedido.category|e}}</td>
-                                                <td class="text-center">{{ pedido.tax|e }}</td>
+                                                <td class="text-center">{{ pedido.created_at|e}}</td>
+                                                <td class="text-center">{{ pedido.price|e}}</td>
+                                                <td class="text-center">{{ pedido.status|e }}</td>
                                                 <td class="tb-odr-action">
                                                     <div class="dropdown">
                                                         <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown" data-offset="-8,0"><em class="icon ni ni-more-h"></em></a>
@@ -69,6 +77,7 @@
                                                 </td>
                                             </tr>                                       
                                         {% endfor %} 
+                                        {% endif %}
                                     </tbody>
                                 </table>
                             </div> <!-- RESPONSIVE TABLE -->

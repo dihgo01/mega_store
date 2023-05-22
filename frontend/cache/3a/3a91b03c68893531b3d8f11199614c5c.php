@@ -63,13 +63,7 @@ class __TwigTemplate_9d87e5cef36e8fdb51f4ff68146bd03a extends Template
                             <span class=\"nk-menu-icon\"><em class=\"icon ni ni-home\"></em></span>
                             <span class=\"nk-menu-text\">Início</span>
                         </a>
-                    </li><!-- .nk-menu-item -->
-                    <li class=\"nk-menu-item\">
-                        <a href=\"/novidades\" class=\"nk-menu-link\">
-                            <span class=\"nk-menu-icon\"><em class=\"icon ni ni-hot\"></em></span>
-                            <span class=\"nk-menu-text\">Novidades</span>
-                        </a>
-                    </li><!-- .nk-menu-item -->                    
+                    </li><!-- .nk-menu-item -->    
                     
                     <li class=\"nk-menu-item has-sub\">
                         <a href=\"#\" class=\"nk-menu-link nk-menu-toggle\">
@@ -97,6 +91,21 @@ class __TwigTemplate_9d87e5cef36e8fdb51f4ff68146bd03a extends Template
                             </li>
                             <li class=\"nk-menu-item\">
                                 <a href=\"/produtos/categoria/list\" class=\"nk-menu-link\"><span class=\"nk-menu-text\">Consultar</span></a>
+                            </li>
+                        </ul><!-- .nk-menu-sub -->
+                    </li>
+
+                    <li class=\"nk-menu-item has-sub\">
+                        <a href=\"#\" class=\"nk-menu-link nk-menu-toggle\">
+                            <span class=\"nk-menu-icon\"><em class=\"icon ni ni-coins\"></em></span>
+                            <span class=\"nk-menu-text\">Imposto</span>
+                        </a>
+                        <ul class=\"nk-menu-sub\">
+                            <li class=\"nk-menu-item\">
+                                <a href=\"/produtos/imposto/create\" class=\"nk-menu-link\"><span class=\"nk-menu-text\">Novo Imposto</span></a>
+                            </li>
+                            <li class=\"nk-menu-item\">
+                                <a href=\"/produtos/imposto/list\" class=\"nk-menu-link\"><span class=\"nk-menu-text\">Consultar</span></a>
                             </li>
                         </ul><!-- .nk-menu-sub -->
                     </li>

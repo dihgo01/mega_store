@@ -85,6 +85,7 @@ class __TwigTemplate_1c4b98ede6859687e39bb3ab02c20d7e extends Template
                                 <table class=\"table-hover nowrap nk-tb-list w-100 general-datatable\" data-auto-responsive=\"false\" >
                                     <thead class=\"head-table\">
                                         <tr class=\"nk-tb-item nk-tb-head\">
+                                            <th class=\"nk-tb-col text-center\">DATA DE CADASTRO</th>
                                             <th class=\"nk-tb-col text-center\">TOTAL</th>
                                             <th class=\"nk-tb-col text-center\">STATUS</th>
                                             <th class=\"nk-tb-col nk-tb-col-tools text-right\">OPÇÕES</th>
@@ -92,29 +93,45 @@ class __TwigTemplate_1c4b98ede6859687e39bb3ab02c20d7e extends Template
                                     </thead>
                                     <tbody>
                                         ";
-        // line 53
-        $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, ($context["controller"] ?? null), "conteudo", [], "any", false, false, false, 53));
-        foreach ($context['_seq'] as $context["_key"] => $context["pedido"]) {
-            // line 54
-            echo "                                            <tr>
-                                                <td class=\"text-center\">";
+        // line 54
+        if (twig_test_empty(twig_get_attribute($this->env, $this->source, ($context["authentication"] ?? null), "loginStatus", [], "any", false, false, false, 54))) {
             // line 55
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["pedido"], "category", [], "any", false, false, false, 55));
-            echo "</td>
+            echo "                                            <tr>
+                                                <td colspan=\"4\" class=\"text-center pt-3 pb-3\">Por favor realize o login.</td>
+                                            </tr>
+                                        ";
+        }
+        // line 59
+        echo "                                        ";
+        if ((twig_get_attribute($this->env, $this->source, ($context["authentication"] ?? null), "loginStatus", [], "any", false, false, false, 59) == true)) {
+            // line 60
+            echo "                                        ";
+            $context['_parent'] = $context;
+            $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, ($context["controller"] ?? null), "conteudo", [], "any", false, false, false, 60));
+            foreach ($context['_seq'] as $context["_key"] => $context["pedido"]) {
+                // line 61
+                echo "                                            <tr>
                                                 <td class=\"text-center\">";
-            // line 56
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["pedido"], "tax", [], "any", false, false, false, 56));
-            echo "</td>
+                // line 62
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["pedido"], "created_at", [], "any", false, false, false, 62));
+                echo "</td>
+                                                <td class=\"text-center\">";
+                // line 63
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["pedido"], "price", [], "any", false, false, false, 63));
+                echo "</td>
+                                                <td class=\"text-center\">";
+                // line 64
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["pedido"], "status", [], "any", false, false, false, 64));
+                echo "</td>
                                                 <td class=\"tb-odr-action\">
                                                     <div class=\"dropdown\">
                                                         <a class=\"text-soft dropdown-toggle btn btn-icon btn-trigger\" data-bs-toggle=\"dropdown\" data-offset=\"-8,0\"><em class=\"icon ni ni-more-h\"></em></a>
                                                         <div class=\"dropdown-menu dropdown-menu-xs\">
                                                                 <ul class=\"link-list-plain\">
                                                                     <li><a href=\"/pms/product/collor/";
-            // line 62
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["pedido"], "id", [], "any", false, false, false, 62));
-            echo "/edit\" class=\"text-primary\">Editar</a></li>
+                // line 70
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["pedido"], "id", [], "any", false, false, false, 70));
+                echo "/edit\" class=\"text-primary\">Editar</a></li>
                                                                         <form method=\"POST\" action=\"\">
                                                                             <li><a href=\"#\" class=\"text-danger btnDeleteItem\" data-deletedMessage=\"Tem certeza que deseja excluir esta cor?\">Excluir</a></li>
                                                                         </form>
@@ -124,13 +141,16 @@ class __TwigTemplate_1c4b98ede6859687e39bb3ab02c20d7e extends Template
                                                 </td>
                                             </tr>                                       
                                         ";
+            }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['pedido'], $context['_parent'], $context['loop']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 79
+            echo " 
+                                        ";
         }
-        $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['pedido'], $context['_parent'], $context['loop']);
-        $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 71
-        echo " 
-                                    </tbody>
+        // line 81
+        echo "                                    </tbody>
                                 </table>
                             </div> <!-- RESPONSIVE TABLE -->
                         </div><!-- .card-inner -->
@@ -254,16 +274,16 @@ class __TwigTemplate_1c4b98ede6859687e39bb3ab02c20d7e extends Template
                             <div class=\"form-group text-end\">
                                 <input type=\"hidden\" name=\"formAcao\" id=\"formAcao\" value=\"documentoFiscal_ExportarXML\" />
                                 <input type=\"hidden\" name=\"dataDe\" id=\"dataDe\" value=\"";
-        // line 195
+        // line 204
         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_date_modify_filter($this->env, "now", "-30 day"), "d/m/Y"), "html", null, true);
         echo "\" />
                                 <input type=\"hidden\" name=\"dataAte\" id=\"dataAte\" value=\"";
-        // line 196
+        // line 205
         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, "now", "d/m/Y"), "html", null, true);
         echo "\" />
                                 <input type=\"hidden\" name=\"qv_url_path\" id=\"qv_url_path\" value=\"";
-        // line 197
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["url"] ?? null), "uri", [], "any", false, false, false, 197), "html", null, true);
+        // line 206
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["url"] ?? null), "uri", [], "any", false, false, false, 206), "html", null, true);
         echo "\" />
                                 <button type=\"submit\" class=\"btn btn-primary w-xs-100 d-inline\">Enviar</button>
                             </div>
@@ -277,12 +297,12 @@ class __TwigTemplate_1c4b98ede6859687e39bb3ab02c20d7e extends Template
 
 <!-- LOAD EXTRA FILES -->
 ";
-        // line 209
+        // line 218
         echo twig_include($this->env, $context, "scripts.twig");
         echo "
 <script src=\"/assets/js/views/franquia/vendas/vendas.js\"></script>
 <script src=\"/assets/js/views/franquia/vendas/shopcart.js?ts=";
-        // line 211
+        // line 220
         echo twig_escape_filter($this->env, twig_random($this->env, 100000, 999999), "html", null, true);
         echo "\"></script>
 <script>
@@ -310,7 +330,7 @@ class __TwigTemplate_1c4b98ede6859687e39bb3ab02c20d7e extends Template
 
     public function getDebugInfo()
     {
-        return array (  286 => 211,  281 => 209,  266 => 197,  262 => 196,  258 => 195,  132 => 71,  116 => 62,  107 => 56,  103 => 55,  100 => 54,  96 => 53,  57 => 19,  37 => 1,);
+        return array (  306 => 220,  301 => 218,  286 => 206,  282 => 205,  278 => 204,  153 => 81,  149 => 79,  133 => 70,  124 => 64,  120 => 63,  116 => 62,  113 => 61,  108 => 60,  105 => 59,  99 => 55,  97 => 54,  57 => 19,  37 => 1,);
     }
 
     public function getSourceContext()
