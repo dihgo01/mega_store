@@ -1,0 +1,313 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 15.3
+-- Dumped by pg_dump version 15.3
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+ALTER TABLE ONLY public.sales DROP CONSTRAINT user_foreign_key;
+ALTER TABLE ONLY public.product_category DROP CONSTRAINT tax_foreign_key;
+ALTER TABLE ONLY public.sales_product DROP CONSTRAINT sales_foreign_key;
+ALTER TABLE ONLY public.sales_product DROP CONSTRAINT product_foreign_key;
+ALTER TABLE ONLY public.products DROP CONSTRAINT category_foreign_key;
+ALTER TABLE ONLY public.users DROP CONSTRAINT users_pkey;
+ALTER TABLE ONLY public.taxs DROP CONSTRAINT taxs_pkey;
+ALTER TABLE ONLY public.sales_product DROP CONSTRAINT sales_product_pkey;
+ALTER TABLE ONLY public.sales DROP CONSTRAINT sales_pkey;
+ALTER TABLE ONLY public.products DROP CONSTRAINT product_pkey;
+ALTER TABLE ONLY public.product_category DROP CONSTRAINT product_category_pkey;
+DROP TABLE public.users;
+DROP TABLE public.taxs;
+DROP TABLE public.sales_product;
+DROP TABLE public.sales;
+DROP TABLE public.products;
+DROP TABLE public.product_category;
+DROP TYPE public.status_sales;
+--
+-- Name: status_sales; Type: TYPE; Schema: public; Owner: postgres
+--
+
+CREATE TYPE public.status_sales AS ENUM (
+    'Pendente',
+    'Pago',
+    'Cancelado'
+);
+
+
+ALTER TYPE public.status_sales OWNER TO postgres;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: product_category; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.product_category (
+    id character varying(255) NOT NULL,
+    name character varying(60) NOT NULL,
+    tax_id character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone,
+    deleted_at timestamp without time zone
+);
+
+
+ALTER TABLE public.product_category OWNER TO postgres;
+
+--
+-- Name: products; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.products (
+    id character varying(255) NOT NULL,
+    name_product character varying(60) NOT NULL,
+    price money NOT NULL,
+    category_id character varying(255) NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone,
+    deleted_at timestamp without time zone
+);
+
+
+ALTER TABLE public.products OWNER TO postgres;
+
+--
+-- Name: sales; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.sales (
+    id character varying(255) NOT NULL,
+    user_id character varying(255) NOT NULL,
+    price money NOT NULL,
+    status public.status_sales NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone,
+    deleted_at timestamp without time zone
+);
+
+
+ALTER TABLE public.sales OWNER TO postgres;
+
+--
+-- Name: sales_product; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.sales_product (
+    id character varying(255) NOT NULL,
+    sales_id character varying(255) NOT NULL,
+    product_id character varying(255) NOT NULL,
+    amount integer NOT NULL,
+    price money NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone,
+    deleted_at timestamp without time zone
+);
+
+
+ALTER TABLE public.sales_product OWNER TO postgres;
+
+--
+-- Name: taxs; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.taxs (
+    id character varying(255) NOT NULL,
+    name character varying(60) NOT NULL,
+    percentage integer NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    deleted_at timestamp without time zone
+);
+
+
+ALTER TABLE public.taxs OWNER TO postgres;
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.users (
+    id character varying(255) NOT NULL,
+    name character varying(60) NOT NULL,
+    email character varying(60) NOT NULL,
+    password character varying(255) NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone,
+    deleted_at timestamp without time zone
+);
+
+
+ALTER TABLE public.users OWNER TO postgres;
+
+--
+-- Data for Name: product_category; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.product_category VALUES ('18eb8e06fde35acad10a81106d6a4b10', 'Tenis 2', '911dd3d9238004cebf4af6df1a777a5b', '2023-05-19 23:13:19', '2023-05-19 23:13:19', NULL);
+INSERT INTO public.product_category VALUES ('a64b4df5afadfffe8705d803b82b9731', 'Tenis Test', '62d77d49d529e2d0f346a9d44431078f', '2023-05-19 23:10:49', '2023-05-19 23:54:09', NULL);
+
+
+--
+-- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.products VALUES ('75c27c663da9cd9e3c427b4bb1f2beb5', 'Tenis 1', 'R$ 150,00', 'a64b4df5afadfffe8705d803b82b9731', '2023-05-20 01:19:57', '2023-05-20 01:19:57', NULL);
+INSERT INTO public.products VALUES ('eef0fa83607bc95c364f25345b6368d8', 'Tenis', 'R$ 100,00', 'a64b4df5afadfffe8705d803b82b9731', '2023-05-20 00:52:57', '2023-05-20 01:25:36', NULL);
+
+
+--
+-- Data for Name: sales; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.sales VALUES ('b8481eba845d8e55392c35201fe0025b', 'c1a41f079e0d37e82828a2ba6c7c5501', 'R$ 200,00', 'Pendente', '2023-05-20 12:00:55', '2023-05-20 12:00:55', NULL);
+INSERT INTO public.sales VALUES ('9cfc15516e5ea24cd57cdda66cf8d4c3', 'c1a41f079e0d37e82828a2ba6c7c5501', 'R$ 200,00', 'Pendente', '2023-05-20 12:15:13', '2023-05-20 12:15:13', NULL);
+INSERT INTO public.sales VALUES ('b2e638d707e4b0da071d9e24c558c6ea', 'c1a41f079e0d37e82828a2ba6c7c5501', 'R$ 200,00', 'Pendente', '2023-05-20 12:17:59', '2023-05-20 12:17:59', NULL);
+INSERT INTO public.sales VALUES ('f7579ad1c3d9e5dffbdf7188bf09e1ce', 'c1a41f079e0d37e82828a2ba6c7c5501', 'R$ 200,00', 'Pendente', '2023-05-20 12:18:51', '2023-05-20 12:18:51', NULL);
+INSERT INTO public.sales VALUES ('cb305e0dbcb99efe64dc745d74566e52', 'c1a41f079e0d37e82828a2ba6c7c5501', 'R$ 350,00', 'Pendente', '2023-05-20 12:21:27', '2023-05-20 12:21:27', NULL);
+INSERT INTO public.sales VALUES ('6486cbb665cdf90ca54b4081312018c1', 'c1a41f079e0d37e82828a2ba6c7c5501', 'R$ 350,00', 'Pendente', '2023-05-20 12:35:02', '2023-05-20 12:35:02', NULL);
+INSERT INTO public.sales VALUES ('14cd99b476e0f69bce49876e94ad448e', 'c1a41f079e0d37e82828a2ba6c7c5501', 'R$ 350,00', 'Pendente', '2023-05-20 12:54:52', '2023-05-20 12:54:52', NULL);
+INSERT INTO public.sales VALUES ('9997b256b8956a9943c1d8c635b28734', 'c1a41f079e0d37e82828a2ba6c7c5501', 'R$ 300,00', 'Cancelado', '2023-05-20 12:10:43', '2023-05-20 13:44:24', '2023-05-20 13:54:54');
+
+
+--
+-- Data for Name: sales_product; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.sales_product VALUES ('184262ce09f1513c6d233efc48bef6f7', '9997b256b8956a9943c1d8c635b28734', 'eef0fa83607bc95c364f25345b6368d8', 100, 'R$ 2,00', '2023-05-20 12:10:43', '2023-05-20 12:10:43', NULL);
+INSERT INTO public.sales_product VALUES ('a8d1a34381256ea71b079711053b922f', '9cfc15516e5ea24cd57cdda66cf8d4c3', 'eef0fa83607bc95c364f25345b6368d8', 2, 'R$ 100,00', '2023-05-20 12:15:13', '2023-05-20 12:15:13', NULL);
+INSERT INTO public.sales_product VALUES ('bd654711796bf95e51f563702a5d0f02', 'cb305e0dbcb99efe64dc745d74566e52', 'eef0fa83607bc95c364f25345b6368d8', 2, 'R$ 100,00', '2023-05-20 12:21:27', '2023-05-20 12:21:27', NULL);
+INSERT INTO public.sales_product VALUES ('611fa95068d7930e7ed16eae4ef7a556', 'cb305e0dbcb99efe64dc745d74566e52', '75c27c663da9cd9e3c427b4bb1f2beb5', 1, 'R$ 150,00', '2023-05-20 12:21:27', '2023-05-20 12:21:27', NULL);
+INSERT INTO public.sales_product VALUES ('3f032079188479a35f6371fa12cf6f0c', '6486cbb665cdf90ca54b4081312018c1', 'eef0fa83607bc95c364f25345b6368d8', 2, 'R$ 100,00', '2023-05-20 12:35:02', '2023-05-20 12:35:02', NULL);
+INSERT INTO public.sales_product VALUES ('0b86f7cf0fa89ccf05eaf56c23c03102', '6486cbb665cdf90ca54b4081312018c1', '75c27c663da9cd9e3c427b4bb1f2beb5', 1, 'R$ 150,00', '2023-05-20 12:35:02', '2023-05-20 12:35:02', NULL);
+INSERT INTO public.sales_product VALUES ('04a30dc3a0048e90e54f73a3976d3f5c', '14cd99b476e0f69bce49876e94ad448e', 'eef0fa83607bc95c364f25345b6368d8', 2, 'R$ 100,00', '2023-05-20 12:54:52', '2023-05-20 12:54:52', NULL);
+INSERT INTO public.sales_product VALUES ('3e4648f829f20a36d9f1ef7d5ec911f6', '14cd99b476e0f69bce49876e94ad448e', '75c27c663da9cd9e3c427b4bb1f2beb5', 1, 'R$ 150,00', '2023-05-20 12:54:52', '2023-05-20 12:54:52', NULL);
+
+
+--
+-- Data for Name: taxs; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.taxs VALUES ('62d77d49d529e2d0f346a9d44431078f', 'IRR', 20, '2023-05-19 21:48:09', '2023-05-19 21:48:09', NULL);
+INSERT INTO public.taxs VALUES ('911dd3d9238004cebf4af6df1a777a5b', 'IPTU', 10, '2023-05-19 21:47:50', '2023-05-19 21:53:11', NULL);
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.users VALUES ('3ef1a4dfee18225748398074fbdf87de', 'Diego', 'diego12@gmail.com', '$2y$10$EfsDfFqoIcGfNB1zKjAvKufmQpDSSlCFFbPuFW8IOlR795v4I3/XC', '2023-05-18 23:00:52', '2023-05-18 23:00:52', NULL);
+INSERT INTO public.users VALUES ('d9bfc9793b840b89d6fa8e8ae978dd7d', 'Diego', 'diego124@gmail.com', '$2y$10$17Bj3RiVm4t/XIjFm3hpL.LSRyNexK4LiEGC3BCenJbYa4mszgscu', '2023-05-18 23:01:42', '2023-05-18 23:01:42', NULL);
+INSERT INTO public.users VALUES ('d1b024af9a7837a7ce1d9a27db350a5d', 'Diego', 'diego4@gmail.com', '$2y$10$QIZGS6A9bA1ecWHW6qFdMuf2DzQyDCsc3LW/i1.b8hlcxotPlUv8e', '2023-05-18 23:06:11', '2023-05-18 23:06:11', NULL);
+INSERT INTO public.users VALUES ('0186b3303dd3ea951ad252562b86c9cd', 'Diego Test', 'diego4785@gmail.com', '$2y$10$4My4vajxXMPsNO/9ESOIIub2yY3CswAEO.PjFbLfric4SoSgcBAKC', '2023-05-19 01:23:01', '2023-05-19 01:23:01', NULL);
+INSERT INTO public.users VALUES ('2f697a867fc646a33ed49a36f7968e45', 'Diego Test', 'diego47845@gmail.com', '$2y$10$goKEUGB6gNQgGAH/1EHMAu9yyHRcu/vjapsRhBpDCEjGmgjXZzJbG', '2023-05-19 04:34:24', '2023-05-19 04:34:24', NULL);
+INSERT INTO public.users VALUES ('afb9be5d48a8ff651681cc97063adf8f', 'Diego Test 2', 'diego445@gmail.com', '$2y$10$TRibtc7mOLKiPLqMmkCV5OlN7sNJw9A0Ua3VWMcw6HI0VMakqoVhK', '2023-05-19 13:28:48', '2023-05-19 13:28:48', NULL);
+INSERT INTO public.users VALUES ('dd69d1762b67f87cbb554bcde8921ece', 'Diego Test 2', 'diego845@gmail.com', '$2y$10$QkKoT8CY2gPfKDTeO.QYkecocCjvz0ojik0ukzs8Hj8n2eFW8FG1y', '2023-05-19 14:36:28', '2023-05-19 14:36:28', NULL);
+INSERT INTO public.users VALUES ('0833ec28b7cb6d19f9c924e66cf03123', 'Diego Test 2', 'diego84785@gmail.com', '$2y$10$e3Ol5P7IWIay4s3Ma.V4OOAfnraeODZJ/.bVgM6F84GkQ.BB7/8x6', '2023-05-19 14:48:29', '2023-05-19 14:48:29', NULL);
+INSERT INTO public.users VALUES ('c1a41f079e0d37e82828a2ba6c7c5501', 'Diego Atualizado Dinovo', 'lucas@gmail.com', '$2y$10$MvaOoLletrTvwn5c7cYVt.h3RYV/v7YLNI8KF/n/eqeXyj/nlpfEm', '2023-05-18 22:49:20', '2023-05-19 16:49:10', NULL);
+
+
+--
+-- Name: product_category product_category_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.product_category
+    ADD CONSTRAINT product_category_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: products product_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products
+    ADD CONSTRAINT product_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sales sales_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.sales
+    ADD CONSTRAINT sales_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sales_product sales_product_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.sales_product
+    ADD CONSTRAINT sales_product_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: taxs taxs_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.taxs
+    ADD CONSTRAINT taxs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: products category_foreign_key; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products
+    ADD CONSTRAINT category_foreign_key FOREIGN KEY (category_id) REFERENCES public.product_category(id);
+
+
+--
+-- Name: sales_product product_foreign_key; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.sales_product
+    ADD CONSTRAINT product_foreign_key FOREIGN KEY (product_id) REFERENCES public.products(id) ON DELETE CASCADE;
+
+
+--
+-- Name: sales_product sales_foreign_key; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.sales_product
+    ADD CONSTRAINT sales_foreign_key FOREIGN KEY (sales_id) REFERENCES public.sales(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: product_category tax_foreign_key; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.product_category
+    ADD CONSTRAINT tax_foreign_key FOREIGN KEY (tax_id) REFERENCES public.taxs(id) ON DELETE SET NULL;
+
+
+--
+-- Name: sales user_foreign_key; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.sales
+    ADD CONSTRAINT user_foreign_key FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
