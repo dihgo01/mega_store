@@ -17,7 +17,7 @@ class SalesDeleteController
     public function handle(array $request)
     {
         try {
-            $sales = $this->deleteSales->execute($request['params']['id']);
+            $sales = $this->deleteSales->execute($request['body']['id']);
 
             http_response_code(201);
             $response = [

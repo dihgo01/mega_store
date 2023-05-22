@@ -12,15 +12,12 @@ try{
 
     $method = $_SERVER['REQUEST_METHOD'];
 
-    $body = json_decode(file_get_contents('php://input'), true);
-
-    $params = $_REQUEST;
+    $body = $_REQUEST;
 
     $request = [
         'uri' => $uri,
         'method' => $method,
         'body' => $body,
-        'params' => $params,
         'authorization' => isset($_SERVER['HTTP_AUTHORIZATION']) ? $_SERVER['HTTP_AUTHORIZATION'] : null
     ];
 

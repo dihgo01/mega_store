@@ -17,7 +17,8 @@ class ProductUpdateController
     public function handle(array $request)
     {
         try {
-            $product = $this->updateProduct->execute($request['body'], $request['params']['id']);
+            $id = $request['body']['id'];
+            $product = $this->updateProduct->execute($request['body'], $id);
 
             http_response_code(201);
             $response = [

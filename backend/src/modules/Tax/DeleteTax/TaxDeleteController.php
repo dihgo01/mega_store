@@ -17,7 +17,7 @@ class TaxDeleteController
     public function handle(array $request)
     {
         try {
-            $tax = $this->deleteTax->execute($request['params']['id']);
+            $tax = $this->deleteTax->execute($request['body']['id']);
 
             http_response_code(201);
             $response = [

@@ -17,7 +17,7 @@ class TaxUpdateController
     public function handle(array $request)
     {
         try {
-            $tax = $this->updateTax->execute($request['body'], $request['params']['id']);
+            $tax = $this->updateTax->execute($request['body'], $request['body']['id']);
 
             http_response_code(201);
             $response = [

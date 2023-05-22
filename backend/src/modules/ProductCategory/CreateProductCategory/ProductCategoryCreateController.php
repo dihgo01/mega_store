@@ -17,6 +17,7 @@ class ProductCategoryCreateController
     public function handle($request)
     {
         try {
+            $data = isset($request['body']);
             $category = $this->createProductCategory->execute($request['body']);
 
             http_response_code(201);

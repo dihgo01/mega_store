@@ -17,7 +17,7 @@ class ProductDeleteController
     public function handle(array $request)
     {
         try {
-            $product = $this->deleteProduct->execute($request['params']['id']);
+            $product = $this->deleteProduct->execute($request['body']['id']);
 
             http_response_code(201);
             $response = [

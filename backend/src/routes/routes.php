@@ -4,14 +4,29 @@ $routes = [
         '/taxs' => [
             'class' => 'Tax\\GetTax\\GetTaxfactory',
             'action' => 'handle',
-            'middlewares' => ['VerifyTokenJWT']
+            'middlewares' => ['']
+        ],
+        '/tax-only' => [
+            'class' => 'Tax\\GetOnlyTax\\GetOnlyTaxfactory',
+            'action' => 'handle',
+            'middlewares' => ['']
         ],
         '/product-categorys' => [
             'class' => 'ProductCategory\\GetProductCategory\\GetProductCategoryfactory',
             'action' => 'handle',
-            'middlewares' => ['VerifyTokenJWT']
+            'middlewares' => ['']
+        ],
+        '/product-category-only' => [
+            'class' => 'ProductCategory\\GetOnlyProductCategory\\GetOnlyProductCategoryfactory',
+            'action' => 'handle',
+            'middlewares' => ['']
         ],
         '/products' => [
+            'class' => 'Product\\GetProduct\\GetProductFactory',
+            'action' => 'handle',
+            'middlewares' => ['']
+        ],
+        '/product-only' => [
             'class' => 'Product\\GetProduct\\GetProductFactory',
             'action' => 'handle',
             'middlewares' => ['']
@@ -41,6 +56,31 @@ $routes = [
         '/sales' => [
             'class' => 'Sales\\GetSales\\GetSalesFactory',
             'action' => 'handle',
+            'middlewares' => ['']
+        ],
+        '/user-update' => [
+            'class' => 'User\\UpdateUser\\UpdateUserFactory',
+            'action' => 'handle',
+            'middlewares' => ['']
+        ],
+        '/tax-update' => [
+            'class' => 'Tax\\UpdateTax\\UpdateTaxfactory',
+            'action' => 'handle',
+            'middlewares' => ['']
+        ],
+        '/product-category-update' => [
+            'class' => 'ProductCategory\\UpdateProductCategory\\UpdateProductCategoryfactory',
+            'action' => 'handle',
+            'middlewares' => ['']
+        ],
+        '/product-update' => [
+            'class' => 'Product\\UpdateProduct\\UpdateProductFactory',
+            'action' => 'handle',
+            'middlewares' => ['']
+        ],
+        '/sales-update' => [
+            'class' => 'Sales\\UpdateSales\\UpdateSalesFactory',
+            'action' => 'handle',
             'middlewares' => ['VerifyTokenJWT']
         ],
     ],
@@ -58,12 +98,12 @@ $routes = [
         '/tax' => [
             'class' => 'Tax\\CreateTax\\CreateTaxfactory',
             'action' => 'handle',
-            'middlewares' => ['VerifyTokenJWT']
+            'middlewares' => ['']
         ],
         '/product-category' => [
             'class' => 'ProductCategory\\CreateProductCategory\\CreateProductCategoryFactory',
             'action' => 'handle',
-            'middlewares' => ['VerifyTokenJWT']
+            'middlewares' => ['']
         ],
         '/product' => [
             'class' => 'Product\\CreateProduct\\CreateProductFactory',
@@ -75,54 +115,50 @@ $routes = [
             'action' => 'handle',
             'middlewares' => ['VerifyTokenJWT']
         ],
-    ],
-    'PUT' => [
         '/user-update' => [
             'class' => 'User\\UpdateUser\\UpdateUserFactory',
             'action' => 'handle',
-            'middlewares' => ['VerifyTokenJWT']
+            'middlewares' => ['']
         ],
         '/tax-update' => [
             'class' => 'Tax\\UpdateTax\\UpdateTaxfactory',
             'action' => 'handle',
-            'middlewares' => ['VerifyTokenJWT']
+            'middlewares' => ['']
         ],
         '/product-category-update' => [
             'class' => 'ProductCategory\\UpdateProductCategory\\UpdateProductCategoryfactory',
             'action' => 'handle',
-            'middlewares' => ['VerifyTokenJWT']
+            'middlewares' => ['']
         ],
         '/product-update' => [
             'class' => 'Product\\UpdateProduct\\UpdateProductFactory',
             'action' => 'handle',
-            'middlewares' => ['VerifyTokenJWT']
+            'middlewares' => ['']
         ],
         '/sales-update' => [
             'class' => 'Sales\\UpdateSales\\UpdateSalesFactory',
             'action' => 'handle',
             'middlewares' => ['VerifyTokenJWT']
         ],
-    ],
-    'DELETE' => [
         '/tax-delete' => [
             'class' => 'Tax\\DeleteTax\\DeleteTaxfactory',
             'action' => 'handle',
-            'middlewares' => ['VerifyTokenJWT']
+            'middlewares' => ['']
         ],
         '/product-category-delete' => [
             'class' => 'ProductCategory\\DeleteProductCategory\\DeleteProductCategoryFactory',
             'action' => 'handle',
-            'middlewares' => ['VerifyTokenJWT']
+            'middlewares' => ['']
         ],
         '/product-delete' => [
             'class' => 'Product\\DeleteProduct\\DeleteProductFactory',
             'action' => 'handle',
-            'middlewares' => ['VerifyTokenJWT']
+            'middlewares' => ['']
         ],
         '/sales-delete' => [
             'class' => 'Sales\\DeleteSales\\DeleteSalesFactory',
             'action' => 'handle',
             'middlewares' => ['VerifyTokenJWT']
         ],
-    ]
+    ],
 ];

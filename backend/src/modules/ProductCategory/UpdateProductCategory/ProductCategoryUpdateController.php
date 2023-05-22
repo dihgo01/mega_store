@@ -17,7 +17,9 @@ class ProductCategoryUpdateController
     public function handle(array $request)
     {
         try {
-            $productCategory = $this->updateProductCategory->execute($request['body'], $request['params']['id']);
+            $id = $request['body']['id'];
+            
+            $productCategory = $this->updateProductCategory->execute($request['body'], $id);
 
             http_response_code(201);
             $response = [

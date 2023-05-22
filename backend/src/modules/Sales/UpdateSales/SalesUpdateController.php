@@ -17,7 +17,7 @@ class SalesUpdateController
     public function handle(array $request)
     {
         try {
-            $sales = $this->updateSales->execute($request['body'], $request['params']['id'], $request['user_id']);
+            $sales = $this->updateSales->execute($request['body'], $request['body']['id'], $request['user_id']);
 
             http_response_code(201);
             $response = [
