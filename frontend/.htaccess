@@ -1,0 +1,38 @@
+# HABILITANDO REESCRITA DE URL
+RewriteEngine 			On
+Options 				+FollowSymlinks
+#RewriteBase 			/
+
+# IMPEDE LISTAGEM DE DIRETORIOS
+Options 				-Indexes
+
+# REDIRECT NON-WWW | HTTPS
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [L,NE,R=301]
+
+# PAGINAS DE ERRO
+ErrorDocument 400 /errorPage.php
+ErrorDocument 401 /errorPage.php
+ErrorDocument 403 /errorPage.php
+ErrorDocument 404 /errorPage.php
+ErrorDocument 500 /errorPage.php
+
+<IfModule mod_headers.c>
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires 0
+</IfModule>
+
+#==========================
+#URLS
+#==========================
+
+#OPTIONS/CONFIG
+RewriteCond	%{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !\.(js|css|gif|jpg|png|ico)$ [NC]
+
+#SITE
+RewriteRule ^(.*)$ index.php [L]

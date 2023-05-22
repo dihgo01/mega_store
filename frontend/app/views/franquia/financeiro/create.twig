@@ -1,0 +1,145 @@
+<div class="container-fluid">
+    <div class="nk-content-inner">
+        <div class="nk-content-body">
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-between">
+                    <div class="nk-block-head-content">
+                        <h3 class="nk-block-title page-title">Financeiro / <strong class="text-primary small">Nova Movimentação</strong></h3>
+                        <div class="nk-block-des text-soft">
+                            <p>Tela para cadastrar movimentações financeiras.</p>
+                        </div>
+                    </div><!-- .nk-block-head-content -->
+                    <div class="nk-block-head-content">
+                        <div class="toggle-wrap nk-block-tools-toggle">
+                            <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em class="icon ni ni-menu-alt-r"></em></a>
+                            <div class="toggle-expand-content" data-content="pageMenu">
+                                <ul class="nk-block-tools g-2">
+                                    <li class="w-xs-100"><a href="/{{ url.parametros.var1 }}/{{ url.parametros.var2 }}/list" class="btn btn-white btn-outline-light w-xs-100 d-inline"><em class="icon ni ni-curve-up-left"></em><span>Voltar</span></a></li> 
+                                </ul>
+                            </div>
+                        </div><!-- .toggle-wrap -->
+                    </div><!-- .nk-block-head-content -->                    
+                </div><!-- .nk-block-between -->
+            </div><!-- .nk-block-head -->
+            <div class="nk-block">
+                <div class="card card-bordered card-stretch">
+                    <div class="card-inner-group">
+                        <div class="card-inner">
+                            <div class="preview-block">
+                                <span class="preview-title-lg overline-title">Dados Básicos</span>
+                                <form name="formCreate" id="formCreate" method="post" autocomplete="off">
+                                    <div class="row gy-4">
+                                        <div class="col-sm-3">
+                                            <label class="form-label" for="tipo">Tipo</label>
+                                            <div class="form-control-wrap ">
+                                                <select name="tipo" id="tipo" class="form-control qvSelect2_noSearch" required>
+                                                    <option></option>
+                                                    <option value="Contas a Receber">Contas a Receber</option>
+                                                    <option value="Contas a Pagar">Contas a Pagar</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-6">
+                                            <label class="form-label" for="categoria">Categoria</label>
+                                            <div class="form-control-wrap ">
+                                                <select name="categoria" id="categoria" class="form-control qvSelect2_noSearch" required>
+                                                    <option></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-6">
+                                            <label class="form-label" for="subcategoria">Sub-Categoria</label>
+                                            <div class="form-control-wrap ">
+                                                <select name="subcategoria" id="subcategoria" class="form-control qvSelect2_noSearch" required>
+                                                    <option></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-6">
+                                            <div class="form-group">
+                                                <label class="form-label" for="valor">Valor</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control maskMoney" name="valor" id="valor" placeholder="R$ 0,00" autocomplete="off" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-6">
+                                            <div class="form-group">
+                                                <label class="form-label" for="vencimento">Vencimento</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control inputCalendario" name="vencimento" id="vencimento" placeholder="00/00/0000" data-date-format="dd/mm/yyyy" value="{{ "now"|date("d/m/Y") }}" autocomplete="off" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6 col-12">
+                                            <div class="form-group">
+                                                <label class="form-label" for="descricao">Descrição</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control" name="descricao" id="descricao" placeholder="Um breve texto sobre essa movimentação..." autocomplete="off" maxlength="128" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-3">
+                                            <label class="form-label" for="status">Status</label>
+                                            <div class="form-control-wrap">
+                                                <select name="status" id="status" class="form-control qvSelect2_noSearch" required>
+                                                    <option></option>
+                                                    <option value="Concluído">Concluído</option>
+                                                    <option value="Pendente">Pendente</option>
+                                                </select>
+                                            </div>
+                                        </div>                                        
+
+                                        <span class="preview-title-lg overline-title">Extras</span>
+
+                                        <div class="col-sm-3 col-6 mt-0 mb-3">
+                                            <label class="form-label" for="recorrencia">Movimentação Recorrente?</label>
+                                            <div class="form-control-wrap">
+                                                <select name="recorrencia" id="recorrencia" class="form-control qvSelect2_noSearch" required>
+                                                    <option></option>
+                                                    <option value="Sim">Sim</option>
+                                                    <option value="Não">Não</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-6 mt-0 mb-3">
+                                            <div class="form-group d-none" id="divRecorrenciaDataFinal">
+                                                <label class="form-label" for="recorrenciaDataFinal">Fim da Recorrência</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control inputCalendario" name="recorrenciaDataFinal" id="recorrenciaDataFinal" placeholder="00/00/0000" data-date-format="dd/mm/yyyy" autocomplete="off">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div> <!-- ROW -->
+                                    <hr class="preview-hr">
+                                    <div class="row gy-4">
+                                        <div class="col-12">
+                                            <div class="form-group text-end">
+                                                <input type="hidden" name="formAcao" id="formAcao" value="create" />
+                                                <input type="hidden" name="qv_url_path" id="qv_url_path" value="{{ url.uri }}" />
+                                                <button type="submit" class="btn btn-lg btn-primary w-xs-100 d-inline">Cadastrar</button>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div><!-- .card-inner-group -->
+                </div><!-- .card -->
+            </div><!-- .nk-block -->
+        </div>
+    </div>
+</div>
+
+<!-- LOAD EXTRA FILES -->
+{{ include('scripts.twig') }}
+<script src="/assets/js/views/franquia/financeiro/financeiro.js?ts={{ random(100000, 999999) }}"></script>
+<script>
+$(function(){
+    qv_geral.init("#formCreate");
+	qv_create.init("#formCreate");
+});
+</script>

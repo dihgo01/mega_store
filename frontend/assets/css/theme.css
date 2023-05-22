@@ -1,0 +1,72 @@
+/*!
+ * Theme Name: Quinta Valentina
+ * Package : DashLite
+ * Author: Digital Borges
+ * Author URI: http://digitalborges.com.br
+ * Version	 :	1.0.0
+ * Updated	 :	01.05.2022
+**/
+
+#responsive-datatable thead, #table-colecoes thead, #table-lojas thead, #table-grades thead { background-color: #1f2b3a; color: #FFF; }
+#responsive-datatable thead th { color: #FFF; }
+.table-responsive, .dataTables_scrollBody {
+    /*overflow: visible !important;*/
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;    
+}
+
+#responsive-datatable_processing.card {
+    background-color: #1f2b3a;
+    opacity: 0.85;
+    color: #FFF;
+    z-index: 999;
+}
+
+/* Remove sorting arrows in jQuery Data Tables */
+table.dataTable thead th.sorting,
+table.dataTable thead th.sorting_asc,
+table.dataTable thead th.sorting_desc,
+table.dataTable thead th.sorting_desc:after,
+table.dataTable thead th.sorting_desc:before {
+    background: none;
+    content:none;
+}
+
+.feature-icon {
+width: 4rem;
+height: 4rem;
+border-radius: .75rem;
+}
+
+.icon-link > .bi {
+margin-top: .125rem;
+margin-left: .125rem;
+fill: currentcolor;
+transition: transform .25s ease-in-out;
+}
+.icon-link:hover > .bi {
+transform: translate(.25rem);
+}
+
+.icon-square {
+width: 3rem;
+height: 3rem;
+border-radius: .75rem;
+}
+
+.text-shadow-1 { text-shadow: 0 .125rem .25rem rgba(0, 0, 0, .25); }
+.text-shadow-2 { text-shadow: 0 .25rem .5rem rgba(0, 0, 0, .25); }
+.text-shadow-3 { text-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .25); }
+
+.card-cover {
+background-repeat: no-repeat;
+background-position: center center;
+background-size: cover;
+}
+
+span.user-avatar img {
+    object-fit: cover; /* Do not scale the image */
+    object-position: center; /* Center the image within the element */
+    width: 100%;
+    max-height: 32px;
+}

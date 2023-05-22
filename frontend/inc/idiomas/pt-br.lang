@@ -1,0 +1,21 @@
+usuario_nivel_nome              = 'Admin do Sistema'
+
+#MENU TOPO USUARIO
+menu_usuario_perfil             = 'Ver Meu Perfil'
+menu_usuario_configuracoes      = 'Configurações da Conta'
+menu_usuario_historico_login    = 'Histórico de Login'
+menu_usuario_modo_escuro        = 'Modo Escuro'
+menu_usuario_logout             = 'Sair da Conta'
+
+#LINKS GERAIS
+links_termos_uso                = 'Termos de Uso'
+links_politica_privacidade      = 'Política de Privacidade'
+links_ajuda                     = 'Ajuda'
+
+#NOTIFICACOES
+notificacoes_titulo             = 'Notificações'
+notificacoes_marcar_lida        = 'Marcar Todas como Lida'
+notificacoes_ver_todas          = 'Ver Todas'
+
+#SIDEBAR MENU
+sb_inicio                       = 'Início'

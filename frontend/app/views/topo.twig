@@ -1,0 +1,72 @@
+<!-- main header @s -->
+<div class="nk-header nk-header-fixed is-light">
+    <div class="container-fluid">
+        <div class="nk-header-wrap">
+            <div class="nk-menu-trigger d-xl-none ml-n1">
+                <a href="#" class="nk-nav-toggle nk-quick-nav-icon" data-target="sidebarMenu"><em class="icon ni ni-menu"></em></a>
+            </div>
+            <div class="nk-header-brand d-xl-none w-60 w-xs-50">
+                <a href="./" class="logo-link">
+                    <img class="logo-light logo-img" src="/assets/images/qv-logo-white.png" srcset="/assets/images/qv-logo-white.png 2x" alt="logo">
+                    <img class="logo-dark logo-img" src="/assets/images/qv-logo-black.png" srcset="/assets/images/qv-logo-black.png 2x" alt="logo-dark">
+                </a>
+            </div><!-- .nk-header-brand -->
+            <div class="nk-header-news d-none d-xl-block">
+            </div><!-- .nk-header-news -->
+            <div class="nk-header-tools">
+                <ul class="nk-quick-nav">
+                    
+                   
+                    <li class="d-none d-sm-block me-n1">
+                        <a href="#" class="nk-quick-nav-icon toggle" data-bs-tooltip="tooltip" data-bs-placement="bottom" title="Ver Carrinho"  data-target="userAside">
+                            <em class="icon ni ni-cart"></em>
+                        </a>
+                    </li>
+        
+                    
+                    <li class="dropdown user-dropdown">
+                        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
+                            <div class="user-toggle">
+                                <div class="user-avatar sm">
+                                    <em class="icon ni ni-user-alt"></em>
+                                </div>
+                                <div class="user-info d-none d-md-block">
+                                    <div class="user-status">{{ authentication.escopo }}</div>
+                                    <div class="user-name dropdown-indicator">{{ authentication.nome }}</div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1">
+                            <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
+                                <div class="user-card">
+                                    <div class="user-avatar">
+                                        <span>{{ authentication.iniciais }}</span>
+                                    </div>
+                                    <div class="user-info">
+                                        <span class="lead-text">{{ authentication.nome }}</span>
+                                        <span class="sub-text">{{ authentication.email }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dropdown-inner">
+                                <ul class="link-list">
+                                    <li><a href="/minha-conta"><em class="icon ni ni-user-alt"></em><span>{{ lang.menu_usuario_perfil }}</span></a></li>
+                                    <li><a href="/minha-conta/franquias"><em class="icon ni ni-setting-alt"></em><span>{{ lang.menu_usuario_configuracoes }}</span></a></li>
+                                    <li><a href="/minha-conta/historico"><em class="icon ni ni-activity-alt"></em><span>{{ lang.menu_usuario_historico_login }}</span></a></li>
+                                    <li><a class="dark-switch" href="#"><em class="icon ni ni-moon"></em><span>{{ lang.menu_usuario_modo_escuro }}</span></a></li>
+                                </ul>
+                            </div>
+                            <div class="dropdown-inner">
+                                <ul class="link-list">
+                                    <li><a href="/logout"><em class="icon ni ni-signout"></em><span>{{ lang.menu_usuario_logout }}</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li><!-- .dropdown -->
+
+                </ul><!-- .nk-quick-nav -->
+            </div><!-- .nk-header-tools -->
+        </div><!-- .nk-header-wrap -->
+    </div><!-- .container-fliud -->
+</div>
+<!-- main header @e -->

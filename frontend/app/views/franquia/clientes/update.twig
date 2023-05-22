@@ -1,0 +1,137 @@
+{% set CLIENTE = controller.conteudo.dados %}
+<div class="container-fluid">
+    <div class="nk-content-inner">
+        <div class="nk-content-body">
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-between">
+                    <div class="nk-block-head-content">
+                        <h3 class="nk-block-title page-title">Clientes / <strong class="text-primary small">Editar</strong></h3>
+                        <div class="nk-block-des text-soft">
+                            <p>Editar informações do cliente.</p>
+                        </div>
+                    </div><!-- .nk-block-head-content -->
+                    <div class="nk-block-head-content">
+                        <div class="toggle-wrap nk-block-tools-toggle">
+                            <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em class="icon ni ni-menu-alt-r"></em></a>
+                            <div class="toggle-expand-content" data-content="pageMenu">
+                                <ul class="nk-block-tools g-2">
+                                    <li class="w-xs-100"><a href="/{{ url.parametros.var1 }}/{{ url.parametros.var2 }}/list" class="btn btn-white btn-outline-light w-xs-100 d-inline"><em class="icon ni ni-curve-up-left"></em><span>Voltar</span></a></li> 
+                                </ul>
+                            </div>
+                        </div><!-- .toggle-wrap -->
+                    </div><!-- .nk-block-head-content -->                    
+                </div><!-- .nk-block-between -->
+            </div><!-- .nk-block-head -->
+            <div class="nk-block">
+                <div class="card card-bordered card-stretch">
+                    <div class="card-inner-group">
+                        <div class="card-inner">
+                            <div class="preview-block">
+                                <span class="preview-title-lg overline-title">Dados Básicos</span>
+                                <form name="formUpdate" id="atualizarCliente" method="post" autocomplete="off">
+                                    <div class="row gy-4">
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label class="form-label" for="cpf">CPF</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control maskCPF" value="{{ CLIENTE.cpf }}" name="cpf" id="cpf" placeholder="000.000.000-00" autocomplete="off" {% if authentication.franquias[authentication.franquiaActive].tipo_franquia == 'Loja' %}{{ "required"}}{% endif %}>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label class="form-label" for="nome">Nome</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control" value="{{ CLIENTE.nome }}" name="nome" id="nome" placeholder="Nome completo do cliente..." autocomplete="off" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label class="form-label" for="nascimento">Data Nascimento</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control maskData" value="{{ CLIENTE.nascimento}}" name="nascimento" id="nascimento" placeholder="00/00/0000" autocomplete="off" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="form-label" for="sexo">Sexo</label>
+                                            <div class="form-control-wrap ">
+                                                <select name="sexo" id="sexo" class="form-control qvSelect2_noSearch" required>
+                                                    <option></option>
+                                                    <option {% if CLIENTE.sexo == 'Masculino' %}{{ 'selected="selected"' }}{% endif %} value="Masculino">Masculino</option>
+                                                    <option {% if CLIENTE.sexo == 'Feminino' %}{{ 'selected="selected"' }}{% endif %} value="Feminino">Feminino</option>
+                                                </select>
+                                            </div>
+                                        </div>                                        
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label class="form-label" for="telefone01">Telefone #01</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control maskTelefone" value="{{ CLIENTE.telefone01}}" name="telefone01" id="telefone01" placeholder="(00) 00000-0000" autocomplete="off" required>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label class="form-label" for="telefone02">Telefone #02</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control maskTelefone" value="{{ CLIENTE.telefone02}}" name="telefone02" id="telefone02" placeholder="(00) 00000-0000" autocomplete="off">
+                                                </div>
+                                            </div>
+                                        </div>               
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label class="form-label" for="email">E-mail</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="email" class="form-control" name="email" id="email" value="{{ CLIENTE.email }}" placeholder="nome@provedor.com.br" autocomplete="off">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label class="form-label" for="tamanho">Tamanho (grade)</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="number" class="form-control" name="tamanho" value="{{ CLIENTE.tamanho}}" id="tamanho" placeholder="00" min="33" max="40" autocomplete="off">
+                                                </div>
+                                            </div>
+                                        </div>    
+                                        <div class="col-sm-12">
+                                            <div class="form-group rows-3" rows="3">
+                                                <label class="form-label" for="observacao"> Observação </label>
+                                                <div class="form-control-wrap">
+                                                <textarea rows="3" class="form-control "  name="observacao"  id="observacao" placeholder="Adicione observaoções sobre seu cliente aqui...">{{ CLIENTE.observacoes}}</textarea>
+                                                </div>
+                                            </div>
+                                        </div>                                    
+                                    </div>
+                                    <hr class="preview-hr">
+                                    <div class="row gy-4">
+                                        <div class="col-12">
+                                            <div class="form-group text-end">
+                                             <input type="hidden" name="formAcao" value="atualizarCliente">
+                                             <input type="hidden" name="idCliente" value="{{url.parametros.var4}}">
+                                             <input type="hidden" name="qv_url_path" id="qv_url_path" value="{{ url.uri }}" />
+                                                <button type="submit" class="btn btn-lg btn-primary w-xs-100 d-inline">Atualizar</button>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                </form>
+                                <span class="preview-title-lg overline-title">Dados Básicos</span>
+                            </div>
+                        </div>
+                    </div><!-- .card-inner-group -->
+                </div><!-- .card -->
+            </div><!-- .nk-block -->
+        </div>
+    </div>
+</div>
+
+<!-- LOAD EXTRA FILES -->
+{{ include('scripts.twig') }}
+<script src="/assets/js/views/{{ url.parametros.var1 }}/{{ url.parametros.var2 }}/{{ url.parametros.var2 }}.js?ts={{ random(100000, 999999) }}"></script>
+<script>
+$(function(){
+	qv_update.init("#atualizarCliente");
+});
+</script>

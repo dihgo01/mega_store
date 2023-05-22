@@ -1,0 +1,63 @@
+{% extends 'templates/main.twig' %}
+{% block title%} Intranet - Quinta Valentina {% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+
+    <div class="nk-content-inner">
+        <div class="nk-content-body">
+            <div class="nk-block">
+                <div class="card card-bordered card-stretch">
+                    <div class="row flex-lg-row-reverse align-items-center g-5 py-5 px-5">
+                        <div class="col-10 col-sm-8 col-lg-6">
+                            <div class="embed-responsive embed-responsive-16by9 mb-4">
+                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/x-DykG1u4B8?controls=1&autoplay=1&rel=0&showinfo=0" title="QV - Coleção Tons" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <img src="/assets/images/colecao-translacao.png" class="d-block mx-lg-auto img-fluid d-none" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+                        </div>
+                        <div class="col-lg-6">
+                            <h1 class="display-5 fw-bold lh-1 mb-3">Coleção Tons</h1>
+                            <p class="lead">Confira como foi a Live de Lançamento da Coleção Tons que aconteceu no dia 26/11.</p>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                                <button type="button" class="btn btn-primary btn-xl p-3 me-md-2 d-none">Saiba Mais</button>
+                            </div>
+                        </div>
+                    </div> <!-- ROW -->
+
+                    <hr>
+
+                    <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5 px-5">
+                        <div class="col">
+                            <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg img-bg-black" style="background-image: url('/assets/images/home-001.webp');">
+                                <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                                    <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Coturno for Trips</h2>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg img-bg-black" style="background-image: url('/assets/images/home-002.webp');">
+                                <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                                    <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Botas para o meu inverno</h2>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg img-bg-black" style="background-image: url('/assets/images/home-003.webp');">
+                                <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                                    <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Cores para animar as festas</h2>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> <!-- ROW -->                    
+                </div> <!-- CARD -->
+            </div> <!-- NK BLOCK -->
+        </div>
+    </div>
+</div>
+
+<!-- LOAD EXTRA FILES -->
+{{ include('scripts.twig') }}
+{% endblock %}

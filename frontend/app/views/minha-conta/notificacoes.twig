@@ -1,0 +1,67 @@
+<div class="card-inner card-inner-lg">
+    <div class="nk-block-head nk-block-head-lg">
+        <div class="nk-block-between">
+            <div class="nk-block-head-content">
+                <h4 class="nk-block-title">Configurações das Notificações</h4>
+                <div class="nk-block-des">
+                    <p>Você receberá apenas a notificação que ativou.</p>
+                </div>
+            </div>
+            <div class="nk-block-head-content align-self-start d-lg-none">
+                <a href="#" class="toggle btn btn-icon btn-trigger mt-n1" data-target="userAside"><em class="icon ni ni-menu-alt-r"></em></a>
+            </div>
+        </div>
+    </div><!-- .nk-block-head -->
+    <div class="nk-block-head nk-block-head-sm">
+        <div class="nk-block-head-content">
+            <h6>Alertas de Segurança</h6>
+            <p>Você receberá apenas as notificações por e-mail que deseja.</p>
+        </div>
+    </div><!-- .nk-block-head -->
+    <div class="nk-block-content">
+        <div class="gy-3">
+            <div class="g-item">
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" checked id="unusual-activity">
+                    <label class="custom-control-label" for="unusual-activity">Envie-me um e-mail sempre que encontrar atividades incomuns.</label>
+                </div>
+            </div>
+            <div class="g-item">
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="new-browser">
+                    <label class="custom-control-label" for="new-browser">Envie-me um e-mail se um novo navegador for usado para entrar.</label>
+                </div>
+            </div>
+        </div>
+    </div><!-- .nk-block-content -->
+    <div class="nk-block-head nk-block-head-sm">
+        <div class="nk-block-head-content">
+            <h6>Novidades</h6>
+            <p>Você receberá apenas as notificações por e-mail que deseja.</p>
+        </div>
+    </div><!-- .nk-block-head -->
+    <div class="nk-block-content">
+        <div class="gy-3">
+            <div class="g-item">
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" checked id="latest-sale">
+                    <label class="custom-control-label" for="latest-sale">Notifique-me por e-mail sobre vendas e últimas notícias.</label>
+                </div>
+            </div>
+            <div class="g-item">
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="feature-update">
+                    <label class="custom-control-label" for="feature-update">Envie-me um e-mail sobre novos recursos e atualizações.</label>
+                </div>
+            </div>
+            <div class="g-item">
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" checked id="account-tips">
+                    <label class="custom-control-label" for="account-tips">Envie-me um e-mail sobre dicas sobre como usar a conta.</label>
+                </div>
+            </div>
+        </div>
+    </div><!-- .nk-block-content -->
+</div>
+<!-- LOAD EXTRA FILES -->
+{{ include('scripts.twig') }}

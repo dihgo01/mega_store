@@ -1,0 +1,51 @@
+{% extends 'templates/main.twig' %}
+{% block title%} Mega Store {% endblock %}
+{% if url.parametros.var2 is empty %}
+    {% set arquivo = '/minha-conta/minha-conta.twig' %}
+{% else %}
+    {% set arquivo = '/minha-conta/' ~ url.parametros.var2 ~ '.twig' %}
+{% endif %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="nk-content-inner">
+        <div class="nk-content-body">
+            <div class="nk-block">
+                <div class="card card-bordered">
+                    <div class="card-aside-wrap">
+                        
+                        {# CARREGA ARQUIVO CORRETO #}
+                        {% include(arquivo) %}
+
+                        <div class="card-aside card-aside-left user-aside toggle-slide toggle-slide-left toggle-break-lg" data-toggle-body="true" data-content="userAside" data-toggle-screen="lg" data-toggle-overlay="true">
+                            <div class="card-inner-group" data-simplebar>
+                                <div class="card-inner">
+                                    <div class="user-card">
+                                        <div class="user-avatar bg-primary">
+                                            <span>{{ authentication.iniciais }}</span>
+                                        </div>
+                                        <div class="user-info">
+                                            <span class="lead-text">{{ authentication.nome }}</span>
+                                            <span class="sub-text">{{ authentication.email }}</span>
+                                        </div>
+                                    </div><!-- .user-card -->
+                                </div><!-- .card-inner -->
+                                <div class="card-inner p-0">
+                                    <ul class="link-list-menu">
+                                        <li><a class="active" href="/minha-conta"><em class="icon ni ni-user-fill-c"></em><span>Informações Básicas</span></a></li>
+                                        <li><a href="/minha-conta/notificacoes"><em class="icon ni ni-bell-fill"></em><span>Notificações</span></a></li>
+                                        <li><a href="/minha-conta/historico"><em class="icon ni ni-activity-round-fill"></em><span>Atividades da Conta</span></a></li>
+                                        <li><a href="/minha-conta/seguranca"><em class="icon ni ni-lock-alt-fill"></em><span>Segurança</span></a></li>
+                                        <li><a href="/minha-conta/franquias"><em class="icon ni ni-grid-add-fill-c"></em><span>Franquias</span></a></li>
+                                    </ul>
+                                </div><!-- .card-inner -->
+                            </div><!-- .card-inner-group -->
+                        </div><!-- card-aside -->
+
+                    </div><!-- .card-aside-wrap -->
+                </div><!-- .card -->
+            </div><!-- .nk-block -->
+        </div>
+    </div>
+</div>    
+{% endblock %}

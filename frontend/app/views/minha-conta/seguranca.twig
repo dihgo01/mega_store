@@ -1,0 +1,129 @@
+<div class="card-inner card-inner-lg">
+    <div class="nk-block-head nk-block-head-lg">
+        <div class="nk-block-between">
+            <div class="nk-block-head-content">
+                <h4 class="nk-block-title">Segurança</h4>
+                <div class="nk-block-des">
+                    <p>Essas configurações ajudam você a manter sua conta segura.</p>
+                </div>
+            </div>
+            <div class="nk-block-head-content align-self-start d-lg-none">
+                <a href="#" class="toggle btn btn-icon btn-trigger mt-n1" data-target="userAside"><em class="icon ni ni-menu-alt-r"></em></a>
+            </div>
+        </div>
+    </div><!-- .nk-block-head -->
+    <div class="nk-block">
+        <div class="card card-bordered">
+            <div class="card-inner-group">
+                <div class="card-inner d-none">
+                    <div class="between-center flex-wrap flex-md-nowrap g-3">
+                        <div class="nk-block-text">
+                            <h6>Salvar meus registros de atividades</h6>
+                            <p>Você pode salvar todos os seus registros de atividades, incluindo atividades incomuns detectadas.</p>
+                        </div>
+                        <div class="nk-block-actions">
+                            <ul class="align-center gx-3">
+                                <li class="order-md-last">
+                                    <div class="custom-control custom-switch me-n2">
+                                        <input type="checkbox" class="custom-control-input" checked="" id="activity-log">
+                                        <label class="custom-control-label" for="activity-log"></label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div><!-- .card-inner -->
+                <div class="card-inner">
+                    <div class="between-center flex-wrap g-3">
+                        <div class="nk-block-text">
+                            <h6>Alterar Senha</h6>
+                            <p>Defina uma senha exclusiva para proteger sua conta.</p>
+                        </div>
+                        <div class="nk-block-actions flex-shrink-sm-0">
+                            <ul class="align-center flex-wrap flex-sm-nowrap gx-3 gy-2">
+                                <li class="order-md-last">
+                                    <a href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalSenha">Alterar Senha</a>
+                                </li>
+                                <li class="">
+                                    <em class="text-soft text-date fs-12px">Última Alteração: <span>-</span></em>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div><!-- .card-inner -->
+                <div class="card-inner d-none">
+                    <div class="between-center flex-wrap flex-md-nowrap g-3">
+                        <div class="nk-block-text">
+                            <h6>Autenticação em 2 Fatores (2FA) &nbsp; <span class="badge bg-secondary ms-0">desabilitado</span></h6>
+                            <p>Proteja sua conta com segurança 2FA. Quando estiver ativado, você precisará inserir não apenas sua senha, mas também um código especial usando o aplicativo. Você pode receber este código no aplicativo móvel.</p>
+                        </div>
+                        <div class="nk-block-actions">
+                            <a href="javascript:void(0);" class="btn btn-primary">Habilitar</a>
+                        </div>
+                    </div>
+                </div><!-- .card-inner -->
+            </div><!-- .card-inner-group -->
+        </div><!-- .card -->
+    </div><!-- .nk-block -->
+</div><!-- .card-inner -->
+
+<!-- @@ Profile Edit Modal @e -->
+<div class="modal fade" role="dialog" id="modalSenha">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <a href="#" class="close" data-bs-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
+            <div class="modal-header">
+                <h5 class="modal-title">Alterar Senha</h5>
+            </div>            
+            <div class="modal-body">
+                <form method="post" name="formSenha" class="formSenha">
+                    <div class="row g-4">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="form-label" for="senhaAtual">Senha Atual</label>
+                                <div class="form-control-wrap">
+                                    <input type="password" class="form-control" id="senhaAtual" name="senhaAtual" placeholder="******" value="{{ franquia.qvemcasa_frase_destaque }}" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="form-label" for="senhaNova">Digite a Nova Senha</label>
+                                <div class="form-control-wrap">
+                                    <input type="password" class="form-control" id="senhaNova" name="senhaNova" placeholder="******" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="form-label" for="senhaNovaRepete">Repita a Nova Senha</label>
+                                <div class="form-control-wrap">
+                                    <input type="password" class="form-control" id="senhaNovaRepete" name="senhaNovaRepete" placeholder="******" required>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div> <!-- ROW -->
+                    <hr class="preview-hr mt-4 mb-2">
+                    <div class="row gy-4 mb-4">
+                        <div class="col-12">
+                            <div class="form-group text-end">
+                                <input type="hidden" name="formAcao" id="formAcao" value="alterarSenha" />
+                                <input type="hidden" name="qv_url_path" id="qv_url_path" value="{{ url.uri }}" />
+                                <button type="submit" class="btn btn-primary w-xs-100 d-inline">Salvar</button>
+                            </div>
+                        </div>                                        
+                    </div> <!-- ROW -->                                
+                </form>                
+            </div><!-- .modal-body -->
+        </div><!-- .modal-content -->
+    </div><!-- .modal-dialog -->
+</div><!-- .modal -->
+
+<!-- LOAD EXTRA FILES -->
+{{ include('scripts.twig') }}
+<script src="/assets/js/views/minha-conta/seguranca.js?ts={{ random(100000, 999999) }}"></script>
+<script>
+$(function(){
+    qv_update.init();
+});
+</script>

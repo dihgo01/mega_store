@@ -1,0 +1,21 @@
+{% extends 'templates/main.php' %}
+{% block title%} Mega Store{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="nk-content-inner">
+        <div class="nk-content-body">
+            <p>Starter page for general layout.</p>
+        </div>
+    </div>
+</div>
+
+<!-- LOAD EXTRA FILES -->
+{{ include('scripts.php') }}  
+<script src="/js/pages/login.js"></script>
+<script>
+/*$(function(){
+	//login.init();
+});*/
+</script>
+{% endblock %}

@@ -1,0 +1,173 @@
+<div class="container-fluid">
+    <div class="nk-content-inner">
+        <div class="nk-content-body">
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-between">
+                    <div class="nk-block-head-content">
+                        <h3 class="nk-block-title page-title">Vendas / <strong class="text-primary small">Visualizando Produto</strong></h3>
+                        <div class="nk-block-des text-soft">
+                            <p>{{ controller.conteudo.NOME }}</p>
+                        </div>
+                    </div><!-- .nk-block-head-content -->
+                    <div class="nk-block-head-content">
+                        <div class="toggle-wrap nk-block-tools-toggle">
+                            <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em class="icon ni ni-menu-alt-r"></em></a>
+                            <div class="toggle-expand-content" data-content="pageMenu">
+                                <ul class="nk-block-tools g-2">
+                                    <li class="w-xs-100 d-block-inline d-sm-none"><a href="javascript:void(0);" class="btn btn-white btn-outline-light w-xs-100 d-inline toggle" data-target="userAside"><em class="icon ni ni-cart"></em><span>Carrinho</span></a></li> 
+                                    <li class="w-xs-100"><a href="/{{ url.parametros.var1 }}/{{ url.parametros.var2 }}/create" class="btn btn-white btn-outline-light w-xs-100 d-inline"><em class="icon ni ni-curve-up-left"></em><span>Voltar</span></a></li> 
+                                </ul>
+                            </div>
+                        </div><!-- .toggle-wrap -->
+                    </div><!-- .nk-block-head-content -->                    
+                </div><!-- .nk-block-between -->
+            </div><!-- .nk-block-head -->
+            <div class="nk-block">
+                <div class="card card-bordered">
+                    <div class="card-inner">
+                        <div class="row pb-5">
+                            <div class="col-lg-6 mb-4">
+                                <div class="product-gallery me-xl-1 me-xxl-5">
+                                    <div class="slider-init" id="sliderFor" data-slick='{"arrows": false, "fade": true, "asNavFor":"#sliderNav", "slidesToShow": 1, "slidesToScroll": 1}'>
+                                        {% for foto in controller.conteudo.FOTOS %}
+                                        <div class="slider-item rounded">
+                                            <img src="{{ foto|e }}" class="w-100" alt="{{ controller.conteudo.NOME }}">
+                                        </div>                                        
+                                        {% endfor %} 
+                                    </div><!-- .slider-init -->
+                                    <div class="slider-init slider-nav" id="sliderNav" data-slick='{"arrows": false, "slidesToShow": 5, "slidesToScroll": 1, "asNavFor":"#sliderFor", "centerMode":true, "focusOnSelect": true, "responsive":[ {"breakpoint": 1539,"settings":{"slidesToShow": 4}}, {"breakpoint": 768,"settings":{"slidesToShow": 3}}, {"breakpoint": 420,"settings":{"slidesToShow": 2}} ] }'>
+                                        {% for foto in controller.conteudo.FOTOS %}
+                                        <div class="slider-item">
+                                            <div class="thumb">
+                                                <img src="{{ foto|e }}" alt="{{ controller.conteudo.NOME }}">
+                                            </div>
+                                        </div>              
+                                        {% endfor %} 
+                                    </div><!-- .slider-nav -->
+                                </div><!-- .product-gallery -->
+                            </div><!-- .col -->
+                            <div class="col-lg-6 mb-4">
+                                <div class="product-info mt-5 me-xxl-5">
+                                    <h4 class="product-price text-primary">
+                                        {{ controller.conteudo.PRECO|format_currency('BRL', {rounding_mode: 'floor'}) }} <small class="text-muted fs-14px"></small>
+                                    </h4>
+                                    <h2 class="product-title">{{ controller.conteudo.NOME }}</h2>
+                                    <div class="product-rating">
+                                        <div class="amount">{{ controller.conteudo.CATEGORIA }}</div>
+                                    </div><!-- .product-rating -->
+                                    <div class="product-excrept text-soft">
+                                        <p class="lead">{{ controller.conteudo.DESCRICAO }}</p>
+                                    </div>
+                                    <div class="product-meta d-none">
+                                        <ul class="d-flex g-3 gx-5">
+                                            <li>
+                                                <div class="fs-14px text-muted">Cor</div>
+                                                <div class="fs-16px fw-bold text-secondary">{{ controller.conteudo.COR }}</div>
+                                            </li>
+                                            <li>
+                                                <div class="fs-14px text-muted">Coleção</div>
+                                                <div class="fs-16px fw-bold text-secondary">{{ controller.conteudo.COLECAO }}</div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="product-meta">
+                                        <h6 class="title">Grade</h6>
+                                        <ul class="custom-control-group">
+                                            {% for key, grade in controller.conteudo.GRADE.ITENS %}
+                                                {% if grade.SALDO > 0 %}
+                                                    <li>
+                                                        <div class="custom-control custom-radio custom-control-pro no-control">
+                                                            <input type="radio" class="custom-control-input productInfo_Grade" name="sizeCheck" id="sizeCheck{{ key }}" data-saldo="{{ grade.SALDO }}" value="{{ grade.GRADE|e }}">
+                                                            <label class="custom-control-label" for="sizeCheck{{ key }}">{{ grade.GRADE|e }}</label>
+                                                        </div>
+                                                    </li>
+                                                {% endif %}
+                                            {% else %}
+                                                <li><p class="text-danger fw-bold">Sem Estoque</p></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div><!-- .product-meta -->
+                                    <div class="product-meta">
+                                        <ul class="d-flex flex-wrap ailgn-center g-2 pt-1">
+                                            <li class="w-140px w-xs-100">
+                                                <div class="form-control-wrap number-spinner-wrap">
+                                                    <button class="btn btn-icon btn-outline-light number-spinner-btn number-minus" data-number="minus"><em class="icon ni ni-minus"></em></button>
+                                                    <input type="number" class="form-control number-spinner productInfo_Quantidade" value="0" max="0">
+                                                    <button class="btn btn-icon btn-outline-light number-spinner-btn number-plus" data-number="plus"><em class="icon ni ni-plus"></em></button>
+                                                </div>
+                                            </li>
+                                            <li class="w-xs-100">
+                                                <button class="btn btn-primary d-inline w-xs-100" id="productInfo_AddShopCart" data-idProduto="{{ controller.conteudo.ID }}" data-preco="{{ controller.conteudo.PRECO }}">Adicionar ao Carrinho</button>
+                                            </li>
+                                        </ul>
+                                    </div><!-- .product-meta -->
+                                </div><!-- .product-info -->
+                            </div><!-- .col -->
+                            <div class="col-lg-6 mb-3 mt-3">
+                                <h5>Especificações:</h5>
+                                <ul class="list-group list-group-flush">
+                                    {% for key, especificacoes in controller.conteudo.ESPECIFICACOES %}
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <strong>{{ especificacoes.NOME|e }}</strong>
+                                        <span>{{ especificacoes.VALOR|e }}</span>
+                                    </li>                                      
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="col-lg-6 mb-3 mt-3">
+                                <h5>Extras:</h5>
+
+                                <div class="form-control-wrap mt-2 mb-4">
+                                    <label class="form-label" for="produtoLinkAfiliado">Link de Afiliado</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="produtoLinkAfiliado" id="produtoLinkAfiliado" value="https://quintavalentina.com.br/produtos/{{ controller.conteudo.SLUG }}/?franqueada={{ authentication.franquias[authentication.franquiaActive].slug }}" readonly>
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-outline-secondary btn-dim copiarAreaTransferencia" data-alvo="https://quintavalentina.com.br/produtos/{{ controller.conteudo.SLUG }}/?franqueada={{ authentication.franquias[authentication.franquiaActive].slug }}" title="Copiar Link de Afiliado">
+                                                <em class="icon ni ni-copy"></em>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {% if authentication.unidade == '573' %}
+                                <div class="form-control-wrap mb-4">
+                                    <label class="form-label" for="produtoEndereco">Endereço</label>
+                                    <input type="text" class="form-control" name="produtoEndereco" id="produtoEndereco" value="{{ controller.conteudo.PROTHEUS.enderecos }}" readonly>
+                                </div>
+                                {% endif %}
+
+                                <div class="form-control-wrap mb-4">
+                                    <label class="form-label mb-0">Compartilhe este Produto</label>
+                                    {% set link_url_encode = "https://quintavalentina.com.br/produtos/"  ~ controller.conteudo.SLUG ~ "/?franqueada=" ~ authentication.slug %}
+                                    <div class="p-0">
+                                        <a href="https://www.facebook.com/sharer.php?s=100&p[url]={{ link_url_encode|url_encode }}" class="text-azul fs-1" target="_blank"><em class="icon ni ni-facebook-fill"></em></a>
+
+                                        <a href="https://twitter.com/share?url={{ link_url_encode|url_encode }}" class="text-info fs-1" target="_blank"><em class="icon ni ni-twitter-round"></em></a>
+
+                                        <a href="whatsapp://send?text={{ 'Olha esse produto que lindo! ' ~ link_url_encode|url_encode }}" class="text-success d-inline-block d-sm-none fs-1" target="_blank" data-action="share/whatsapp/share"><em class="icon ni ni-whatsapp-round"></em></a>
+
+                                        <a href="https://api.whatsapp.com/send?text={{ 'Olha esse produto que lindo! ' ~ link_url_encode|url_encode }}" class="text-success d-none d-sm-inline-block fs-1" target="_blank" data-action="share/whatsapp/share"><em class="icon ni ni-whatsapp-round"></em></a>
+                                    </div>
+                                </div>                                
+
+                            </div>                            
+                        </div><!-- .row -->
+                    </div>
+                </div>
+            </div><!-- .nk-block -->
+        </div>
+    </div>
+</div>
+
+<!-- LOAD EXTRA FILES -->
+{{ include('scripts.twig') }}
+<script src="/assets/js/views/{{ url.parametros.var1 }}/{{ url.parametros.var2 }}/{{ url.parametros.var2 }}.js"></script>
+<script src="/assets/js/views/{{ url.parametros.var1 }}/{{ url.parametros.var2 }}/shopcart.js?ts={{ random(100000, 999999) }}"></script>
+<script>
+$(function(){
+	qv_productInfo.init();
+
+    // FUNCOES
+    carregarShopCart();
+});
+</script>

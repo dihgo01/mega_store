@@ -1,0 +1,15 @@
+{
+    "require": {
+        "twbs/bootstrap": "5.0.0-beta2",
+      "ext-mysqli": "*",
+      "ext-json": "*",
+      "ext-gd": "*",
+        "twig/twig": "^3.0",
+        "twig/intl-extra": "^3.3",
+        "moneyphp/money": "^4.0",
+        "phpoffice/phpspreadsheet": "^1.24",
+        "dompdf/dompdf": "^2.0",
+        "phpmailer/phpmailer": "^6.6",
+        "soundasleep/html2text": "^2.0"
+    }
+}

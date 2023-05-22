@@ -1,0 +1,543 @@
+<div class="container-fluid">
+    <div class="nk-content-inner">
+        <div class="nk-content-body">
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-between">
+                    <div class="nk-block-head-content">
+                        <h3 class="nk-block-title page-title">Produtos / <strong class="text-primary small">Novo</strong></h3>
+                        <div class="nk-block-des text-soft">
+                            <p>Tela para cadastrar novos produtos.</p>
+                        </div>
+                    </div><!-- .nk-block-head-content -->
+                    <div class="nk-block-head-content">
+                        <div class="toggle-wrap nk-block-tools-toggle">
+                            <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em class="icon ni ni-menu-alt-r"></em></a>
+                            <div class="toggle-expand-content" data-content="pageMenu">
+                                <ul class="nk-block-tools g-2">
+                                    <li class="w-xs-100"><a href="/{{ url.parametros.var1 }}/{{ url.parametros.var2 }}/list" class="btn btn-white btn-outline-light w-xs-100 d-inline"><em class="icon ni ni-curve-up-left"></em><span>Voltar</span></a></li> 
+                                </ul>
+                            </div>
+                        </div><!-- .toggle-wrap -->
+                    </div><!-- .nk-block-head-content -->                    
+                </div><!-- .nk-block-between -->
+            </div><!-- .nk-block-head -->
+            <div class="nk-block">
+                <div class="card card-bordered card-stretch">
+                    <div class="card-inner-group">
+                        <div class="card-inner">
+                            <div class="preview-block">
+                                <form name="formCreate" id="formCreate" method="post" autocomplete="off">
+                                    <ul class="nav nav-tabs mt-n3">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" data-bs-toggle="tab" href="#tabItem1">Dados Básicos</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-bs-toggle="tab" href="#tabItem2">Detalhes</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-bs-toggle="tab" href="#tabItem3">E-Commerce</a>
+                                        </li>                                        
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-bs-toggle="tab" href="#tabItem4">Coleções</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-bs-toggle="tab" href="#tabItem5">Lojas</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-bs-toggle="tab" href="#tabItem6">Grades</a>
+                                        </li> 
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-bs-toggle="tab" href="#tabItem7">Fotos e Vídeos</a>
+                                        </li>             
+                                    </ul>
+                                    <div class="tab-content">
+
+                                        <div class="tab-pane active" id="tabItem1">
+                                            <div class="row gy-4">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="nome">Nome</label>
+                                                        <div class="form-control-wrap">
+                                                            <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome Completo do Produto..." autocomplete="off" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 col-sm-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="codigo">Código</label>
+                                                        <div class="form-control-wrap">
+                                                            <input type="text" class="form-control" name="codigo" id="codigo" placeholder="000000" autocomplete="off" required>
+                                                        </div>
+                                                    </div>
+                                                </div>                                                
+                                                <div class="col-6 col-sm-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="codigoFornecedor">Código Fornecedor</label>
+                                                        <div class="form-control-wrap">
+                                                            <input type="text" class="form-control" name="codigoFornecedor" id="codigoFornecedor" placeholder="000000" autocomplete="off" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="ncm">NCM</label>
+                                                        <div class="form-control-wrap">
+                                                            <input type="text" class="form-control" name="ncm" id="ncm" placeholder="000000" autocomplete="off" value="64039990" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label class="form-label" for="precoCusto">Preço de Custo</label>
+                                                    <div class="form-control-wrap">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">R$</span>
+                                                            </div>
+                                                            <input type="text" class="form-control maskNumber" name="precoCusto" id="precoCusto" placeholder="0,00" autocomplete="off" required>
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                                <div class="col-sm-4">
+                                                    <label class="form-label" for="precoSellin">Preço de Sellin</label>
+                                                    <div class="form-control-wrap">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">R$</span>
+                                                            </div>
+                                                            <input type="text" class="form-control maskNumber" name="precoSellin" id="precoSellin" placeholder="0,00" autocomplete="off" required>
+                                                            <div class="input-group-append" title="Markup">
+                                                                <span class="input-group-text">0.00</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label class="form-label" for="precoSellout">Preço de Sellout</label>
+                                                    <div class="form-control-wrap">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">R$</span>
+                                                            </div>
+                                                            <input type="text" class="form-control maskNumber" name="precoSellout" id="precoSellout" placeholder="0,00" autocomplete="off" required>
+                                                            <div class="input-group-append" title="Markup">
+                                                                <span class="input-group-text">0.00</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label class="form-label" for="precoEcommerce">Preço de E-Commerce</label>
+                                                    <div class="form-control-wrap">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">R$</span>
+                                                            </div>
+                                                            <input type="text" class="form-control maskNumber" name="precoEcommerce" id="precoEcommerce" placeholder="0,00" autocomplete="off" required>
+                                                            <div class="input-group-append" title="Markup">
+                                                                <span class="input-group-text">0.00</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="descricao">Descrição</label>
+                                                        <div class="form-control-wrap">
+                                                            <textarea name="descricao" id="descricao" class="form-control no-resize" cols="4" placeholder="Digite a descrição do produto aqui..."></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>                                                
+                                            </div> <!-- ROW -->                                         
+                                        </div> <!-- TAB 1 -->
+
+                                        <div class="tab-pane" id="tabItem2">
+                                            <div class="row gy-4">
+                                                <div class="col-sm-4">
+                                                    <label class="form-label" for="idCategoria">Categoria</label>
+                                                    <div class="form-control-wrap ">
+                                                        <select name="idCategoria" id="idCategoria" class="form-control qvSelect2" data-search="on" required>
+                                                            <option></option>
+                                                            <option value="default_option">Default Option</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label class="form-label" for="idFornecedor">Fornecedor</label>
+                                                    <div class="form-control-wrap ">
+                                                        <select name="idFornecedor" id="idFornecedor" class="form-control qvSelect2" data-search="on" required>
+                                                            <option></option>
+                                                            <option value="default_option">Default Option</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label class="form-label" for="idCor">Cor</label>
+                                                    <div class="form-control-wrap ">
+                                                        <select name="idCor" id="idCor" class="form-control qvSelect2" data-search="on" required>
+                                                            <option></option>
+                                                            <option value="default_option">Default Option</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                        </select>
+                                                    </div>
+                                                </div> 
+                                                <div class="col-sm-4">
+                                                    <label class="form-label" for="idDetalhe">Detalhe</label>
+                                                    <div class="form-control-wrap ">
+                                                        <select name="idDetalhe" id="idDetalhe" class="form-control qvSelect2" data-search="on" required>
+                                                            <option></option>
+                                                            <option value="default_option">Default Option</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                        </select>
+                                                    </div>
+                                                </div> 
+                                                <div class="col-sm-4">
+                                                    <label class="form-label" for="idEstilo">Estilo</label>
+                                                    <div class="form-control-wrap ">
+                                                        <select name="idEstilo" id="idEstilo" class="form-control qvSelect2" data-search="on" required>
+                                                            <option></option>
+                                                            <option value="default_option">Default Option</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                        </select>
+                                                    </div>
+                                                </div> 
+                                                <div class="col-sm-4">
+                                                    <label class="form-label" for="idMaterial">Material</label>
+                                                    <div class="form-control-wrap ">
+                                                        <select name="idMaterial" id="idMaterial" class="form-control qvSelect2" data-search="on" required>
+                                                            <option></option>
+                                                            <option value="default_option">Default Option</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                        </select>
+                                                    </div>
+                                                </div> 
+                                                <div class="col-sm-4">
+                                                    <label class="form-label" for="idTamanho">Tamanho do Salto</label>
+                                                    <div class="form-control-wrap ">
+                                                        <select name="idTamanho" id="idTamanho" class="form-control qvSelect2" data-search="on" required>
+                                                            <option></option>
+                                                            <option value="default_option">Default Option</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                        </select>
+                                                    </div>
+                                                </div> 
+                                                <div class="col-sm-4">
+                                                    <label class="form-label" for="idAltura">Altura do Salto</label>
+                                                    <div class="form-control-wrap ">
+                                                        <select name="idAltura" id="idAltura" class="form-control qvSelect2" data-search="on" required>
+                                                            <option></option>
+                                                            <option value="default_option">Default Option</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                        </select>
+                                                    </div>
+                                                </div> 
+                                                <div class="col-sm-4">
+                                                    <label class="form-label" for="pesoBruto">Peso Bruto</label>
+                                                    <div class="form-control-wrap">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control maskNumber" name="pesoBruto" id="pesoBruto" placeholder="0,00" autocomplete="off" required>
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text">kg</span>
+                                                            </div>              
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                                <div class="col-sm-4">
+                                                    <label class="form-label" for="pesoLiquido">Peso Líquido</label>
+                                                    <div class="form-control-wrap">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control maskNumber" name="pesoLiquido" id="pesoLiquido" placeholder="0,00" autocomplete="off" required>
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text">kg</span>
+                                                            </div>              
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                                <div class="col-sm-4">
+                                                    <label class="form-label" for="altura">Altura</label>
+                                                    <div class="form-control-wrap">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control maskNumber" name="altura" id="altura" placeholder="0,00" autocomplete="off" required>
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text">cm</span>
+                                                            </div>              
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                                <div class="col-sm-4">
+                                                    <label class="form-label" for="largura">Largura</label>
+                                                    <div class="form-control-wrap">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control maskNumber" name="largura" id="largura" placeholder="0,00" autocomplete="off" required>
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text">cm</span>
+                                                            </div>              
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                                <div class="col-sm-4">
+                                                    <label class="form-label" for="comprimento">Comprimento</label>
+                                                    <div class="form-control-wrap">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control maskNumber" name="comprimento" id="comprimento" placeholder="0,00" autocomplete="off" required>
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text">cm</span>
+                                                            </div>              
+                                                        </div>
+                                                    </div>
+                                                </div>                   
+                                            </div> <!-- ROW -->
+                                        </div> <!-- TAB 2 -->
+
+                                        <div class="tab-pane" id="tabItem3">
+                                            <div class="row gy-4">
+                                                <div class="col-sm-4">
+                                                    <label class="form-label" for="ecommerceMostrar">Mostrar no E-Commerce</label>
+                                                    <div class="form-control-wrap ">
+                                                        <select name="ecommerceMostrar" id="ecommerceMostrar" class="form-control qvSelect2_noSearch" required>
+                                                            <option></option>
+                                                            <option value="default_option">Default Option</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label class="form-label" for="ecommerceOutlet">Colocar no Outlet</label>
+                                                    <div class="form-control-wrap ">
+                                                        <select name="ecommerceOutlet" id="ecommerceOutlet" class="form-control qvSelect2_noSearch" required>
+                                                            <option></option>
+                                                            <option value="default_option">Default Option</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label class="form-label" for="ecommerceFreteGratis">Frete Grátis</label>
+                                                    <div class="form-control-wrap ">
+                                                        <select name="ecommerceFreteGratis" id="ecommerceFreteGratis" class="form-control qvSelect2_noSearch" required>
+                                                            <option></option>
+                                                            <option value="default_option">Default Option</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                        </select>
+                                                    </div>
+                                                </div>                                      
+                                            </div>
+                                        </div> <!-- TAB 3 -->
+
+                                        <div class="tab-pane" id="tabItem4">
+                                            <div class="row gy-4 mb-4">
+                                                <div class="col-sm-6">
+                                                    <label class="form-label" for="colecoes">Coleções</label>
+                                                    <div class="form-control-wrap ">
+                                                        <select name="colecoes" id="colecoes" class="form-control qvSelect2" data-search="on" required>
+                                                            <option></option>
+                                                            <option value="default_option">Default Option</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                        </select>
+                                                    </div>
+                                                </div>                                               
+                                            </div> <!-- ROW -->
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="table-responsive">
+                                                        <table class="table" id="table-colecoes">
+                                                            <thead class="thead-dark">
+                                                                <tr>
+                                                                    <th scope="col">#</th>
+                                                                    <th scope="col">First</th>
+                                                                    <th scope="col">Last</th>
+                                                                    <th scope="col">Handle</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row">1</th>
+                                                                    <td>Mark</td>
+                                                                    <td>Otto</td>
+                                                                    <td>@mdo</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">2</th>
+                                                                    <td>Jacob</td>
+                                                                    <td>Thornton</td>
+                                                                    <td>@fat</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">3</th>
+                                                                    <td>Larry</td>
+                                                                    <td>the Bird</td>
+                                                                    <td>@twitter</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table> 
+                                                    </div> <!-- TABLE RESPONSIVE -->
+                                                </div> <!-- COL -->       
+                                            </div> <!-- ROW -->                             
+                                        </div> <!-- TAB 4 -->
+
+                                        <div class="tab-pane" id="tabItem5">
+                                            <div class="row gy-4 mb-4">
+                                                <div class="col-sm-6">
+                                                    <label class="form-label" for="lojasLista">Lojas</label>
+                                                    <div class="form-control-wrap">
+                                                        <select name="lojasLista" id="lojasLista" class="form-control qvSelect2" data-search="on" required>
+                                                            <option></option>
+                                                            <option value="default_option">Default Option</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                        </select>
+                                                    </div>
+                                                </div>                                               
+                                            </div> <!-- ROW -->
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="table-responsive">
+                                                        <table class="table" id="table-lojas">
+                                                            <thead class="thead-dark">
+                                                                <tr>
+                                                                    <th scope="col">#</th>
+                                                                    <th scope="col">First</th>
+                                                                    <th scope="col">Last</th>
+                                                                    <th scope="col">Handle</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row">1</th>
+                                                                    <td>Mark</td>
+                                                                    <td>Otto</td>
+                                                                    <td>@mdo</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">2</th>
+                                                                    <td>Jacob</td>
+                                                                    <td>Thornton</td>
+                                                                    <td>@fat</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">3</th>
+                                                                    <td>Larry</td>
+                                                                    <td>the Bird</td>
+                                                                    <td>@twitter</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table> 
+                                                    </div> <!-- TABLE RESPONSIVE -->
+                                                </div> <!-- COL -->       
+                                            </div> <!-- ROW --> 
+                                        </div> <!-- TAB 5 -->
+
+                                        <div class="tab-pane" id="tabItem6">
+                                            <div class="row gy-4 mb-4">
+                                                <div class="col-sm-6">
+                                                    <label class="form-label" for="lojas">Grades</label>
+                                                    <div class="form-control-wrap ">
+                                                        <select name="lojas" id="lojas" class="form-control qvSelect2" data-search="on" required>
+                                                            <option></option>
+                                                            <option value="default_option">Default Option</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                            <option value="option_select_name">Option select name</option>
+                                                        </select>
+                                                    </div>
+                                                </div>                                               
+                                            </div> <!-- ROW -->
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="table-responsive">
+                                                        <table class="table" id="table-grades">
+                                                            <thead class="thead-dark">
+                                                                <tr>
+                                                                    <th scope="col">#</th>
+                                                                    <th scope="col">First</th>
+                                                                    <th scope="col">Last</th>
+                                                                    <th scope="col">Handle</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row">1</th>
+                                                                    <td>Mark</td>
+                                                                    <td>Otto</td>
+                                                                    <td>@mdo</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">2</th>
+                                                                    <td>Jacob</td>
+                                                                    <td>Thornton</td>
+                                                                    <td>@fat</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">3</th>
+                                                                    <td>Larry</td>
+                                                                    <td>the Bird</td>
+                                                                    <td>@twitter</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table> 
+                                                    </div> <!-- TABLE RESPONSIVE -->
+                                                </div> <!-- COL -->       
+                                            </div> <!-- ROW -->
+                                        </div> <!-- TAB 6 -->
+
+                                        <div class="tab-pane" id="tabItem7">
+                                            <div class="row gy-4">
+                                                <div class="col-sm-12">
+                                                    <div class="upload-zone">
+                                                        <div class="dz-message" data-dz-message>
+                                                            <span class="dz-message-text">Arraste e Solte Aqui os seus Arquivos</span>
+                                                            <span class="dz-message-or">ou</span>
+                                                            <button class="btn btn-primary">Procure Aqui</button>
+                                                        </div>
+                                                    </div>                                                    
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="video">Vídeo</label>
+                                                        <div class="form-control-wrap">
+                                                            <input type="url" class="form-control" name="video" id="video" placeholder="URL do Vídeo no Youtube ou Vimeo..." autocomplete="off" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> <!-- ROW -->
+                                        </div> <!-- TAB 7 -->
+
+                                    </div> <!-- TAB CONTENT -->
+                                    <hr class="preview-hr">
+                                    <div class="row gy-4">
+                                        <div class="col-12">
+                                            <div class="form-group text-end">
+                                                <button type="submit" class="btn btn-lg btn-primary w-xs-100 d-inline">Cadastrar</button>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div><!-- .card-inner-group -->
+                </div><!-- .card -->
+            </div><!-- .nk-block -->
+        </div>
+    </div>
+</div>
+
+<!-- LOAD EXTRA FILES -->
+{{ include('scripts.twig') }}
+<script src="/assets/js/views/{{ url.parametros.var1 }}/{{ url.parametros.var2 }}/{{ url.parametros.var2 }}.js?ts={{ random(100000, 999999) }}"></script>
+<script>
+$(function(){
+	qv_create.init("#formCreate");
+});
+</script>
