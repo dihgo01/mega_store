@@ -7,22 +7,21 @@ if (file_exists($model)) {
 	// INCLUDE MODEL
 	include $model;
 
-	//******* CRIANDO CATEGORIA
 	if ($_QV['URL']['parametros']['var2'] == 'imposto' && $_QV['URL']['parametros']['var3'] == 'list') {
 
-		// Instância Class
-		$classe = new QV_Categorias();
+		$classe = new QV_Imposto();
 
-		// Chama Funcao de Consulta de Categorias
 		$_QV['controller'] = $classe->consulta();
-	} //******* CONSULTA PEDIDO
-	elseif ($_QV['URL']['parametros']['var2'] == 'imposto' && $_QV['URL']['parametros']['var3'] == 'create') {
-		
-		// Instância Class
-		$classe = new QV_Categorias();
+	} elseif ($_QV['URL']['parametros']['var2'] == 'imposto' && $_QV['URL']['parametros']['var3'] == 'create') {
 
-		// Chama Funcao de Consulta de Categorias
-		$_QV['controller'] = $classe->consulta_imposto();
+		$resultadoFinal = array('resultado' => true, 'mensagem' => 'Consulta Realizada com Sucesso');
+
+		return $resultadoFinal;
+	} elseif ($_QV['URL']['parametros']['var2'] == 'imposto' && $_QV['URL']['parametros']['var3'] == 'update') {
+
+		$classe = new QV_Imposto();
+
+		$_QV['controller'] = $classe->consulta_unica($_QV['URL']['parametros']['var4']);
 	}
 } else {
 	$_QV['controller'] = false;

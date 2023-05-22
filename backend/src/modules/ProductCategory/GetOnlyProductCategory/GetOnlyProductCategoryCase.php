@@ -12,10 +12,10 @@ class GetOnlyProductCategoryCase
     }
 
 
-    public function execute()
+    public function execute(string $id)
     {
 
-        $productCategory = $this->productCategoryRepository->list();
+        $productCategory = $this->productCategoryRepository->list($id);
 
         return $productCategory;
     }

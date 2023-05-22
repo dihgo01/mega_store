@@ -699,6 +699,150 @@ var qv_create = function() {
             // VARIAVEIS IMPORTANTES
             let QV_requisicaoAjax = "";			
 
+			
+				// VARIAVEIS
+				var F_acionador 	= $(this).attr('id');
+				var F_buscador 		= $("#F_buscador").val();
+				var F_categoria 	= $("#F_categoria option:selected").val();
+				var F_tamanho 		= $("#F_tamanho option:selected").val();
+				var F_salto 		= $("#F_salto option:selected").val();
+				var F_order 		= $("#F_order").val();
+				//var F_hasBalance 	= $("#F_hasBalance option:selected").val();
+				var F_paginacao 	= $("#F_paginacao").val();
+				var F_paginacaoMais = parseInt(F_paginacao) + parseInt(9);
+
+				var retornoResultado;
+				var retornoMensagem;
+				var retornoConteudo;
+
+				// MANIPULANDO VARIAVEIS CONFORME ACIONADOR
+				if(F_acionador == 'btFiltrarProdutos') {
+					F_paginacao 	= 0;
+					F_paginacaoMais = parseInt(F_paginacao) + parseInt(9);
+				}
+
+				// REMOVER BT CARREGAR MAIS SEMPRE QUE FOR FEITA NOVA REQUISICAO
+				$("#btCarregarMais").remove();
+
+				// BARRA PROGRESSO
+				var barraProgresso = '<div class="row" id="barraProgresso"><div class="col-12 text-center">'+
+				'<div class="spinner-border text-dark" role="status">'+
+				'<span class="sr-only">Carregando...</span>'+
+				'</div></div></div>';
+
+				// BARRA PROGRESSO - REESCREVER CONTAINER OU ADICONAR
+				if(F_paginacao == 0) {
+					$("#recebeProdutos").html(barraProgresso);
+				} else {
+					$("#recebeProdutos").append(barraProgresso);
+				}
+
+				// CANCELA REQUISICAO ANTERIOR
+				if(QV_requisicaoAjax.length) {
+					QV_requisicaoAjax.abort();
+				}				
+
+				// REQUISICAO AJAX
+				QV_requisicaoAjax = $.ajax({
+					type: 'POST',
+					dataType : "json",
+					data: 	'acao=consulta-estoque&F_buscador='+F_buscador+'&F_categoria='+F_categoria+'&F_tamanho='+F_tamanho+'&F_salto='+F_salto+'&F_order='+F_order+'&F_paginacao='+F_paginacao+'&qv_url_path='+qv_url_path,
+					url: '/app/controllers/franquia/vendas/ajax.php',
+					success: function(retorno){
+						retornoResultado = retorno.resultado;
+						retornoMensagem  = retorno.mensagem;
+						retornoConteudo  = retorno.conteudo;
+					}, // SUCCESS
+					complete: function() {
+						if(retornoResultado === true) {
+
+							if(retornoConteudo['RESULTADOS'] == 0 && F_paginacao == 0) {
+
+								$("#recebeProdutos").html('<div class="row"><div class="col-12 text-center"><h3>Nenhum Resultado Encontrado</h3></div></div>');
+
+							} else if(retornoConteudo['RESULTADOS'] == 0 && F_paginacao > 0) {
+
+								$("#btCarregarMais").addClass('d-none');
+								$("#barraProgresso").remove();
+
+							} else {
+
+								// GERA BT CARREGAR MAIS
+								var btCarregarMais = 
+									'<div class="col-12" id="divBTCarregarMais"><a href="javascript:void(0);" id="btCarregarMais" class="btn btn-secondary d-block w-25 mx-auto my-2" data-paginacao="'+F_paginacaoMais+'">Carregar Mais</a></div>';
+
+								// MONTANDO HTML
+								var conteudo_html = "";
+								for(let i = 0; i < retornoConteudo['ITENS'].length; i++) {
+									
+									conteudo_html += 
+										'<div class="col-md-4 mb-3">'+
+										'	<div class="card card-bordered product-card">'+
+										'		<div class="product-thumb">'+
+										'			<a href="/franquia/vendas/produto/'+retornoConteudo['ITENS'][i]['SLUG']+'">'+
+										'				<img class="card-img-top" src="'+retornoConteudo['ITENS'][i]['FOTO']+'" alt="">'+
+										'			</a>'+
+										'			<ul class="product-badges '+(retornoConteudo['ITENS'][i]['NOVIDADE'] ? '' : 'd-none')+'">'+
+										'				<li><span class="badge bg-success">Novidade</span></li>'+
+										'			</ul>'+
+										'		</div>'+
+										'		<div class="card-inner text-center">'+
+										'			<ul class="product-tags">'+
+										'				<li><a href="#">'+retornoConteudo['ITENS'][i]['CATEGORIA']+'</a></li>'+
+										'			</ul>'+
+										'			<h5 class="product-title"><a href="/franquia/vendas/produto/'+retornoConteudo['ITENS'][i]['SLUG']+'">'+retornoConteudo['ITENS'][i]['NOME']+'</a></h5>'+
+										'			<div class="product-price text-primary h5">R$ '+retornoConteudo['ITENS'][i]['PRECO']+'</div>'+
+										'			<ul class="product-tags">'+
+										'				<li><p class="small">'+retornoConteudo['ITENS'][i]['SALDO']+' Unidades</p></li>'+
+										'			</ul>'+
+										'		</div>'+
+										'	</div>'+
+										'</div><!-- .col -->';
+
+								} // FOR
+
+								// HTML DE PRODUTOS - REESCREVER CONTAINER OU ADICONAR
+								if(F_paginacao == 0) {
+									$("#recebeProdutos").html(conteudo_html);
+								} else {
+									$("#barraProgresso").remove();
+									$("#recebeProdutos").append(conteudo_html);
+								}
+								
+								// VALIDANDO EXIBICAO DO BT CARREGAR MAIS
+								if(retornoConteudo['RESULTADOS'] == 9) {
+									$("#recebeProdutos").append(btCarregarMais);
+								}
+
+								// ATUALIZA NOVO VALOR DE PAGINACAO NO BT CARREGAR MAIS
+								$("#F_paginacao").val(F_paginacaoMais);
+
+								//$("#btCarregarMais").attr('data-paginacao',F_paginacaoMais);
+
+							}
+																
+
+						} else {
+
+							// ALERT
+							swal.fire({
+								title: "Oops...",
+								allowEscapeKey: false,
+								allowOutsideClick: false,								
+								text: retornoMensagem,
+								icon: "warning"
+							});
+
+						}						
+
+					}
+
+				});
+
+
+
+
+
 			// BUSCADOR POR TERMO
 			$('body').on('keyup', '#F_buscador', function (e) {
 				var F_buscador = $(this).val();

@@ -46,8 +46,8 @@ class __TwigTemplate_9d87e5cef36e8fdb51f4ff68146bd03a extends Template
         // line 9
         echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["projeto"] ?? null), "urlProjeto", [], "any", false, false, false, 9), "html", null, true);
         echo "\" class=\"logo-link nk-sidebar-logo\">
-                <img class=\"logo-light logo-img w-60\" src=\"/assets/images/qv-logo-white.png\" srcset=\"/assets/images/qv-logo-white.png 2x\" alt=\"logo\">
-                <img class=\"logo-dark logo-img w-60\" src=\"/assets/images/qv-logo-black.png\" srcset=\"/assets/images/qv-logo-black.png 2x\" alt=\"logo-dark\">
+                <img class=\"logo-light logo-img w-100\" src=\"/assets/images/qv-logo-white.png\" srcset=\"/assets/images/qv-logo-white.png 2x\" alt=\"logo\">
+                <img class=\"logo-dark logo-img w-100\" src=\"/assets/images/qv-logo-black.png\" srcset=\"/assets/images/qv-logo-black.png 2x\" alt=\"logo-dark\">
             </a>
         </div>
     </div><!-- .nk-sidebar-element -->
@@ -82,7 +82,22 @@ class __TwigTemplate_9d87e5cef36e8fdb51f4ff68146bd03a extends Template
 
                     <li class=\"nk-menu-item has-sub\">
                         <a href=\"#\" class=\"nk-menu-link nk-menu-toggle\">
-                            <span class=\"nk-menu-icon\"><em class=\"icon ni ni-users\"></em></span>
+                            <span class=\"nk-menu-icon\"><em class=\"icon ni ni-package\"></em></span>
+                            <span class=\"nk-menu-text\">Produtos</span>
+                        </a>
+                        <ul class=\"nk-menu-sub\">
+                            <li class=\"nk-menu-item\">
+                                <a href=\"/produtos/produto/create\" class=\"nk-menu-link\"><span class=\"nk-menu-text\">Novo Produto</span></a>
+                            </li>
+                            <li class=\"nk-menu-item\">
+                                <a href=\"/produtos/produto/list\" class=\"nk-menu-link\"><span class=\"nk-menu-text\">Consultar</span></a>
+                            </li>
+                        </ul><!-- .nk-menu-sub -->
+                    </li>
+
+                    <li class=\"nk-menu-item has-sub\">
+                        <a href=\"#\" class=\"nk-menu-link nk-menu-toggle\">
+                            <span class=\"nk-menu-icon\"><em class=\"icon ni ni-layer\"></em></span>
                             <span class=\"nk-menu-text\">Categoria</span>
                         </a>
                         <ul class=\"nk-menu-sub\">

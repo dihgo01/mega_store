@@ -3,22 +3,6 @@
 session_start();
 
 //////////////////////////////////////////////////////
-/***  FUNCAO PARA CONECTAR COM O BANCO DE DADOS ***/
-/////////////////////////////////////////////////////
-function bancoDados($comando, $conexao = false) {
-
-	//$MODO_CONEXAO = "PROD"; // DEV PROD
-
-	if($comando == "conectar") {
-		include "conexao.php";
-		return $conexaoBD;	
-	} else {
-		return false;
-	}
-
-}
-
-//////////////////////////////////////////////////////
 /**********  FUNCAO GERAR DADOS DO PROJETO **********/
 /////////////////////////////////////////////////////
 function projetoDados() {
@@ -27,29 +11,6 @@ function projetoDados() {
 	global $_QV;	
 
 	$_QV['PROJETO'] = parse_ini_file($_SERVER['DOCUMENT_ROOT'].'/projeto.env');
-
-}
-
-//////////////////////////////////////////////////////
-/***  DEFININDO IDIOMA PARA A APLICACAO ***/
-/////////////////////////////////////////////////////
-function IDIOMA() {
-
-	// DEFININDO GLOBAL
-	global $_QV;
-
-	if(!isset($_QV['IDIOMA'])){
-		$idioma = explode(",", $_SERVER["HTTP_ACCEPT_LANGUAGE"]);
-		if(file_exists(strtolower($idioma[0]).'.lang')) {
-			$_QV['IDIOMA'] = parse_ini_file(strtolower($_SERVER['DOCUMENT_ROOT'].'/inc/idiomas/'.$idioma[0]).'.lang');
-		} else {
-			$_QV['IDIOMA'] = parse_ini_file($_SERVER['DOCUMENT_ROOT'].'/inc/idiomas/pt-br.lang');
-		}
-	} elseif(isset($_GET['lang'])) {
-		$_QV['IDIOMA'] = parse_ini_file(strtolower($_SERVER['DOCUMENT_ROOT'].'/inc/idiomas/'.$_GET['lang']).'.lang');
-	} else {
-		$_QV['IDIOMA'] = parse_ini_file($_SERVER['DOCUMENT_ROOT'].'/inc/idiomas/pt-br.lang');
-	}
 
 }
 
@@ -225,69 +186,6 @@ function anti_injection($variavel) {
 
 	return $variavel;
 }
-
-/////////////////////////////////////////////////////
-/***  FUNCAO PARA CONVERTER DATAS ***/
-/////////////////////////////////////////////////////
-function converterData($dataRecebida, $formatoConversao) {
-	if($formatoConversao == "BR") {
-		$data_temp = explode('-', $dataRecebida);
-		$data = $data_temp[2].'/'.$data_temp[1].'/'.$data_temp[0];
-		return $data;
-	} elseif($formatoConversao == "EN") {
-		$data_temp = explode('/', $dataRecebida);
-		$data = $data_temp[2].'-'.$data_temp[1].'-'.$data_temp[0];
-		return $data;
-	} else {
-		$data_temp = $dataRecebida;
-		$data = implode("/", array_reverse(explode("-", substr($data_temp, 0, 10)))).substr($data_temp, 10);
-		return $data;
-	}
-}
-
-/////////////////////////////////////////////////////
-// FUNCAO PARA GERAR NOME DO MES
-/////////////////////////////////////////////////////
-function nomeMes($mes) {
-
-	switch ($mes) {
-		case "01":    $mes = 'Janeiro';     break;
-		case "02":    $mes = 'Fevereiro';   break;
-		case "03":    $mes = 'Março';       break;
-		case "04":    $mes = 'Abril';       break;
-		case "05":    $mes = 'Maio';        break;
-		case "06":    $mes = 'Junho';       break;
-		case "07":    $mes = 'Julho';       break;
-		case "08":    $mes = 'Agosto';      break;
-		case "09":    $mes = 'Setembro';    break;
-		case "10":    $mes = 'Outubro';     break;
-		case "11":    $mes = 'Novembro';    break;
-		case "12":    $mes = 'Dezembro';    break; 
-	}	
-
-	return $mes;
-
-}
-
-
-
-
-
-
-/////////////////////////////////////////////////////
-/***  FUNCAO PARA REMOVER ACENTOS ***/
-/////////////////////////////////////////////////////
-function removeAcentos($texto) {
-	$array1 = array( "á", "à", "â", "ã", "ä", "é", "è", "ê", "ë", "í", "ì", "î", "ï", "ó", "ò", "ô", "õ", "ö", "ú", "ù", "û", "ü", "ç"
-	, "Á", "À", "Â", "Ã", "Ä", "É", "È", "Ê", "Ë", "Í", "Ì", "Î", "Ï", "Ó", "Ò", "Ô", "Õ", "Ö", "Ú", "Ù", "Û", "Ü", "Ç" );
-	$array2 = array( "a", "a", "a", "a", "a", "e", "e", "e", "e", "i", "i", "i", "i", "o", "o", "o", "o", "o", "u", "u", "u", "u", "c"
-	, "A", "A", "A", "A", "A", "E", "E", "E", "E", "I", "I", "I", "I", "O", "O", "O", "O", "O", "U", "U", "U", "U", "C" );
-		$texto = str_replace( $array1, $array2, $texto);
-		$texto = preg_replace("/[^a-z0-9\s\-]/i", "", $texto);
-		//$texto = preg_replace("/\s/", "_", $texto); // Replace all spaces with underline
-	return $texto;
-}
-
 
 /////////////////////////////////////////////////////
 // CONVERTE STRING EM URL AMIGÁVEL

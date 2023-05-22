@@ -295,6 +295,10 @@ table tr.row-vertical-align td, table tr.row-vertical-align th {
     color: rgb(236, 236, 236) !important;
 }
 
+.nk-tb-item:not(:last-child) .nk-tb-col {
+    border-bottom: 1px solid #dbdfea;
+}
+
 #DataTables_Table_0_paginate {
     float: right;
 }

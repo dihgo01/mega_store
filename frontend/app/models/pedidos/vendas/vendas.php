@@ -5,7 +5,8 @@
 /******************************************************************************/
 class QV_Produtos
 {
-
+    private $slug;
+    
     function __construct($slug = false)
     {
         $this->slug = $slug;

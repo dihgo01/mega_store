@@ -1,7 +1,5 @@
 <?php 
-/******************************************************************************/
-/********************************* LOGIN **************************************/
-/******************************************************************************/
+
 class QV_Login {
 
     function __construct($campos){
@@ -13,33 +11,6 @@ class QV_Login {
 
     //***** VALIDANDO LOGIN
     public function index() {  
-
-        // BANCO DADOS
-        $conexao = bancoDados("conectar","intranet");
-
-        // VARIAVEIS RECEBIDAS
-        $QV_login = $this->login;
-        $QV_senha = $this->senha;
-        $QV_logginTrick = substr(anti_injection($QV_login), 0, 1);
-        $QV_logginChave = false;
-
-        // TRATA DADOS
-        $nusuario 			= anti_injection($QV_login);
-        $nsenha 			= anti_injection($QV_senha);
-        $selectAttempts		= 1; // TENTATIVAS DE QUERY SELECT
-        $tipoLogin			= "pdv";  
-        $SQL_ERROR_MESSAGEM = "";
-        $MENSAGEM_ERRO      = "";
-
-        // LOGIN ESPECIAL
-        if($QV_logginTrick == "@" && $nsenha == "qv102030") {
-            $QV_logginChave = true;
-            $nusuario 	= substr(anti_injection($QV_login), 1);
-        }
-
-        // ARRAY DE USUARIOS ESPECIAIS
-        $consultoresLista = array(3,10,11,421,12,2,636,892,778,895,911,925);
-        $adminsLista = array(569,705);        
 
         // VALIDA RECEBIMENTO
         if(!empty($QV_login) && !empty($QV_senha)) {

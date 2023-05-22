@@ -30,9 +30,7 @@
                                 <div class="user-avatar sm">
                                     <em class="icon ni ni-user-alt"></em>
                                 </div>
-                                <div class="user-info d-none d-md-block">
-                                    <div class="user-status">{{ authentication.escopo }}</div>
-                                    <div class="user-name dropdown-indicator">{{ authentication.nome }}</div>
+                                <div class="d-none d-md-block dropdown-indicator">
                                 </div>
                             </div>
                         </a>
@@ -50,17 +48,19 @@
                             </div>
                             <div class="dropdown-inner">
                                 <ul class="link-list">
-                                    <li><a href="/minha-conta"><em class="icon ni ni-user-alt"></em><span>{{ lang.menu_usuario_perfil }}</span></a></li>
-                                    <li><a href="/minha-conta/franquias"><em class="icon ni ni-setting-alt"></em><span>{{ lang.menu_usuario_configuracoes }}</span></a></li>
-                                    <li><a href="/minha-conta/historico"><em class="icon ni ni-activity-alt"></em><span>{{ lang.menu_usuario_historico_login }}</span></a></li>
-                                    <li><a class="dark-switch" href="#"><em class="icon ni ni-moon"></em><span>{{ lang.menu_usuario_modo_escuro }}</span></a></li>
+                                    <li><a href="/minha-conta"><em class="icon ni ni-user-alt"></em><span>Registro</span></a></li>
+                                    <li><a href="/minha-conta/franquias"><em class="icon ni ni-setting-alt"></em><span>Registre-se</span></a></li>
+                                    <li><a href="/minha-conta/historico"><em class="icon ni ni-activity-alt"></em><span>Registre-se</span></a></li>
+                                    <li><a class="dark-switch" href="#"><em class="icon ni ni-moon"></em><span>Registre-se</span></a></li>
                                 </ul>
                             </div>
+                            {% if authentication.loginStatus == true %}
                             <div class="dropdown-inner">
                                 <ul class="link-list">
-                                    <li><a href="/logout"><em class="icon ni ni-signout"></em><span>{{ lang.menu_usuario_logout }}</span></a></li>
+                                    <li><a href="/logout"><em class="icon ni ni-signout"></em><span>Sair da conta</span></a></li>
                                 </ul>
                             </div>
+                            {% endif %}
                         </div>
                     </li><!-- .dropdown -->
 

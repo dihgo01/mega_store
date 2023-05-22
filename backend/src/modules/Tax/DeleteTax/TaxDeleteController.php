@@ -21,7 +21,7 @@ class TaxDeleteController
 
             http_response_code(201);
             $response = [
-                'message' => 'Successfully deleted tax!',
+                'message' => 'Imposto excluido com sucesso!',
                 'data' => $tax
             ];
 

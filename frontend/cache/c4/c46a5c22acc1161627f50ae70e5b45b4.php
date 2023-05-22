@@ -89,27 +89,28 @@ class __TwigTemplate_f542f1de7e763f766749abd8e8676d18 extends Template
         $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, ($context["controller"] ?? null), "conteudo", [], "any", false, false, false, 45));
         foreach ($context['_seq'] as $context["_key"] => $context["categoria"]) {
             // line 46
-            echo "                                            <tr>
-                                                <td class=\"text-center\">";
+            echo "                                            <tr class=\"nk-tb-item\">
+                                                <td class=\"nk-tb-col text-center\">";
             // line 47
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["categoria"], "category", [], "any", false, false, false, 47));
             echo "</td>
-                                                <td class=\"text-center\">";
+                                                <td class=\"nk-tb-col text-center\">";
             // line 48
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["categoria"], "tax", [], "any", false, false, false, 48));
             echo "</td>
-                                                <td class=\"tb-odr-action\">
+                                                <td class=\"nk-tb-col text-center nk-tb-col-tools\">
                                                     <div class=\"dropdown\">
                                                         <a class=\"text-soft dropdown-toggle btn btn-icon btn-trigger\" data-bs-toggle=\"dropdown\" data-offset=\"-8,0\"><em class=\"icon ni ni-more-h\"></em></a>
                                                         <div class=\"dropdown-menu dropdown-menu-xs\">
                                                                 <ul class=\"link-list-plain\">
-                                                                    <li><a href=\"/pms/product/collor/";
+                                                                    <li><a href=\"/produtos/categoria/update/";
             // line 54
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["categoria"], "id", [], "any", false, false, false, 54));
-            echo "/edit\" class=\"text-primary\">Editar</a></li>
-                                                                        <form method=\"POST\" action=\"\">
-                                                                            <li><a href=\"#\" class=\"text-danger btnDeleteItem\" data-deletedMessage=\"Tem certeza que deseja excluir esta cor?\">Excluir</a></li>
-                                                                        </form>
+            echo "\" class=\"text-primary\">Editar</a></li>
+                                                                    <li><a href=\"#\" class=\"text-danger btn_delete_category\" data-id=\"";
+            // line 55
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["categoria"], "id", [], "any", false, false, false, 55));
+            echo "\">Excluir</a></li>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -120,7 +121,7 @@ class __TwigTemplate_f542f1de7e763f766749abd8e8676d18 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['categoria'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 64
+        // line 62
         echo "                                    </tbody>
                                 </table>
                             </div> <!-- RESPONSIVE TABLE -->
@@ -136,24 +137,20 @@ class __TwigTemplate_f542f1de7e763f766749abd8e8676d18 extends Template
 
 <!-- LOAD EXTRA FILES -->
 ";
-        // line 78
+        // line 76
         echo twig_include($this->env, $context, "scripts.twig");
         echo "
 <script src=\"/assets/js/views/";
-        // line 79
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["url"] ?? null), "parametros", [], "any", false, false, false, 79), "var1", [], "any", false, false, false, 79), "html", null, true);
+        // line 77
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["url"] ?? null), "parametros", [], "any", false, false, false, 77), "var1", [], "any", false, false, false, 77), "html", null, true);
         echo "/";
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["url"] ?? null), "parametros", [], "any", false, false, false, 79), "var2", [], "any", false, false, false, 79), "html", null, true);
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["url"] ?? null), "parametros", [], "any", false, false, false, 77), "var2", [], "any", false, false, false, 77), "html", null, true);
         echo "/";
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["url"] ?? null), "parametros", [], "any", false, false, false, 79), "var2", [], "any", false, false, false, 79), "html", null, true);
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["url"] ?? null), "parametros", [], "any", false, false, false, 77), "var2", [], "any", false, false, false, 77), "html", null, true);
         echo ".js?ts=";
         echo twig_escape_filter($this->env, twig_random($this->env, 100000, 999999), "html", null, true);
         echo "\"></script>
-<script>
-\$(function(){
-\tqv_list.init();
-});
-</script>";
+";
     }
 
     public function getTemplateName()
@@ -168,7 +165,7 @@ class __TwigTemplate_f542f1de7e763f766749abd8e8676d18 extends Template
 
     public function getDebugInfo()
     {
-        return array (  144 => 79,  140 => 78,  124 => 64,  108 => 54,  99 => 48,  95 => 47,  92 => 46,  88 => 45,  56 => 18,  37 => 1,);
+        return array (  145 => 77,  141 => 76,  125 => 62,  112 => 55,  108 => 54,  99 => 48,  95 => 47,  92 => 46,  88 => 45,  56 => 18,  37 => 1,);
     }
 
     public function getSourceContext()

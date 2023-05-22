@@ -22,6 +22,7 @@ var INIT_QV_CUSTOM = function () {
 
             // MASKs
             $('input.maskCPF').mask('999.999.999-99');
+            $('.input_percentage').mask('99');
             $('input.maskCNPJ').mask('99.999.999/9999-99');
             $('input.maskData').mask('99/99/9999');
             $('input.maskCEP').mask('99999-999');

@@ -1,0 +1,72 @@
+<div class="container-fluid">
+    <div class="nk-content-inner">
+        <div class="nk-content-body">
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-between">
+                    <div class="nk-block-head-content">
+                        <h3 class="nk-block-title page-title">Produtos / <strong class="text-primary small">Novo</strong></h3>
+                        <div class="nk-block-des text-soft">
+                            <p>Tela para cadastrar novos de produtos.</p>
+                        </div>
+                    </div><!-- .nk-block-head-content -->
+                    <div class="nk-block-head-content">
+                        <div class="toggle-wrap nk-block-tools-toggle">
+                            <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em class="icon ni ni-menu-alt-r"></em></a>
+                            <div class="toggle-expand-content" data-content="pageMenu">
+                                <ul class="nk-block-tools g-2">
+                                    <li class="w-xs-100"><a href="/{{ url.parametros.var1 }}/{{ url.parametros.var2 }}/list" class="btn btn-white btn-outline-light w-xs-100 d-inline"><em class="icon ni ni-curve-up-left"></em><span>Voltar</span></a></li> 
+                                </ul>
+                            </div>
+                        </div><!-- .toggle-wrap --> 
+                    </div><!-- .nk-block-head-content -->                    
+                </div><!-- .nk-block-between -->
+            </div><!-- .nk-block-head -->
+            <div class="nk-block">
+                <div class="card card-bordered card-stretch">
+                    <div class="card-inner-group">
+                        <div class="card-inner">
+                            <div class="preview-block">
+                                <span class="preview-title-lg overline-title">Dados Básicos</span>
+                                <form name="formCreate" id="formCreate" method="post" autocomplete="off">
+                                    <div class="row gy-4">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="form-label" for="nome">Nome</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control input_name" name="name" placeholder="Nome completo do imposto..." autocomplete="off" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="form-label" for="codigo">Percentual</label>
+                                                <div class="form-control-wrap">
+                                                   <div class="form-control-wrap ">
+                                                         <input type="text" class="form-control input_percentage input_percentage" name="percentage" placeholder="Percentual..." autocomplete="off" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                      
+                                    </div>
+                                    <hr class="preview-hr">
+                                    <div class="row gy-4">
+                                        <div class="col-12">
+                                            <div class="form-group text-end">
+                                                <button type="button" class="btn btn-lg btn-primary w-xs-100 d-inline submit_register_tax">Cadastrar</button>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div><!-- .card-inner-group -->
+                </div><!-- .card -->
+            </div><!-- .nk-block -->
+        </div>
+    </div>
+</div>
+
+<!-- LOAD EXTRA FILES -->
+{{ include('scripts.twig') }}
+<script src="/assets/js/views/{{ url.parametros.var1 }}/{{ url.parametros.var2 }}/{{ url.parametros.var2 }}.js?ts={{ random(100000, 999999) }}"></script>

@@ -18,14 +18,14 @@ class ProductCategoryGetOnlyRepository
     public function list(string $id)
     {
         try {
-            $sql = "SELECT PC.id AS id, PC.name AS category, T.name  AS tax, PC.created_at AS created_at
+            $sql = "SELECT PC.id AS id, PC.name AS category, T.id AS tax_id, T.name AS tax, PC.created_at AS created_at
             FROM product_category PC 
             INNER JOIN taxs T ON PC.tax_id = T.id  
             WHERE PC.deleted_at IS NULL AND PC.id = '{$id}' ";
 
             $result = $this->connection->query($sql);
     
-            return $result->fetchAll();
+            return $result->fetch();
         } catch (Exception $e) {
             return $e->getMessage();
         }

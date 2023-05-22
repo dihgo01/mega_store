@@ -69,8 +69,8 @@ function alertaFormasPagamento() {
 
     // VARIAVEIS IMPORTANTES
     var paginaAtual         = window.location.pathname;
-    var paginaCheckout      = '/franquia/vendas/checkout';
-    var paginaEditar        = '/franquia/vendas/update';
+    var paginaCheckout      = '/pedidos/vendas/checkout';
+    var paginaEditar        = '/pedidos/vendas/update';
     var valorDesconto       = $("#totalDesconto").val();
     var diferencaCentavos   = parseInt(5);
 

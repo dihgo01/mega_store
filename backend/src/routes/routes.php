@@ -17,7 +17,7 @@ $routes = [
             'middlewares' => ['']
         ],
         '/product-category-only' => [
-            'class' => 'ProductCategory\\GetOnlyProductCategory\\GetOnlyProductCategoryfactory',
+            'class' => 'ProductCategory\\GetOnlyProductCategory\\GetOnlyProductCategoryFactory',
             'action' => 'handle',
             'middlewares' => ['']
         ],

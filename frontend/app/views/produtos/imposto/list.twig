@@ -15,7 +15,7 @@
                             <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em class="icon ni ni-menu-alt-r"></em></a>
                             <div class="toggle-expand-content" data-content="pageMenu">
                                 <ul class="nk-block-tools g-2">
-                                    <li class="w-xs-100"><a href="/{{ url.parametros.var1 }}/{{ url.parametros.var2 }}/create" class="btn btn-white btn-outline-light w-xs-100 d-inline"><em class="icon ni ni-plus-circle"></em><span>Criar Nova Categoria</span></a></li>
+                                    <li class="w-xs-100"><a href="/{{ url.parametros.var1 }}/{{ url.parametros.var2 }}/create" class="btn btn-white btn-outline-light w-xs-100 d-inline"><em class="icon ni ni-plus-circle"></em><span>Criar Novo Imposto</span></a></li>
                                 </ul>
                             </div>
                         </div><!-- .toggle-wrap -->
@@ -43,18 +43,16 @@
                                     </thead>
                                     <tbody>
                                      {% for imposto in controller.conteudo %}
-                                            <tr>
-                                                <td class="text-center">{{ imposto.category|e}}</td>
-                                                <td class="text-center">{{ imposto.tax|e }}</td>
-                                                <td class="tb-odr-action">
+                                            <tr class="nk-tb-item">
+                                                <td class="nk-tb-col text-center">{{ imposto.name|e}}</td>
+                                                <td class="nk-tb-col text-center">{{ imposto.percentage|e }} %</td>
+                                                <td class="nk-tb-col text-center nk-tb-col-tools">
                                                     <div class="dropdown">
                                                         <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown" data-offset="-8,0"><em class="icon ni ni-more-h"></em></a>
                                                         <div class="dropdown-menu dropdown-menu-xs">
                                                                 <ul class="link-list-plain">
-                                                                    <li><a href="/pms/product/collor/{{ imposto.id|e }}/edit" class="text-primary">Editar</a></li>
-                                                                        <form method="POST" action="">
-                                                                            <li><a href="#" class="text-danger btnDeleteItem" data-deletedMessage="Tem certeza que deseja excluir esta cor?">Excluir</a></li>
-                                                                        </form>
+                                                                    <li><a href="/produtos/imposto/update/{{ imposto.id|e }}" class="text-primary">Editar</a></li>
+                                                                    <li><a href="#" class="text-danger btn_delete_tax" data-id="{{imposto.id|e}}">Excluir</a></li>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -77,8 +75,3 @@
 <!-- LOAD EXTRA FILES -->
 {{ include('scripts.twig') }}
 <script src="/assets/js/views/{{ url.parametros.var1 }}/{{ url.parametros.var2 }}/{{ url.parametros.var2 }}.js?ts={{ random(100000, 999999) }}"></script>
-<script>
-$(function(){
-	qv_list.init();
-});
-</script>

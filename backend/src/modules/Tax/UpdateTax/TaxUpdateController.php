@@ -21,7 +21,7 @@ class TaxUpdateController
 
             http_response_code(201);
             $response = [
-                'message' => 'Successfully updated tax!',
+                'message' => 'Imposto atualizado com sucesso!',
                 'data' => $tax
             ];
 

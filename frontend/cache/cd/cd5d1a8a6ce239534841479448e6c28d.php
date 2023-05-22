@@ -66,15 +66,7 @@ class __TwigTemplate_3d898d9d2a20e11a527b18c182188c1b extends Template
                                 <div class=\"user-avatar sm\">
                                     <em class=\"icon ni ni-user-alt\"></em>
                                 </div>
-                                <div class=\"user-info d-none d-md-block\">
-                                    <div class=\"user-status\">";
-        // line 34
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["authentication"] ?? null), "escopo", [], "any", false, false, false, 34), "html", null, true);
-        echo "</div>
-                                    <div class=\"user-name dropdown-indicator\">";
-        // line 35
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["authentication"] ?? null), "nome", [], "any", false, false, false, 35), "html", null, true);
-        echo "</div>
+                                <div class=\"d-none d-md-block dropdown-indicator\">
                                 </div>
                             </div>
                         </a>
@@ -86,45 +78,37 @@ class __TwigTemplate_3d898d9d2a20e11a527b18c182188c1b extends Template
                                     </div>
                                     <div class=\"user-info\">
                                         <span class=\"lead-text\">";
-        // line 46
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["authentication"] ?? null), "nome", [], "any", false, false, false, 46), "html", null, true);
+        // line 44
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["authentication"] ?? null), "nome", [], "any", false, false, false, 44), "html", null, true);
         echo "</span>
                                         <span class=\"sub-text\">";
-        // line 47
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["authentication"] ?? null), "email", [], "any", false, false, false, 47), "html", null, true);
+        // line 45
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["authentication"] ?? null), "email", [], "any", false, false, false, 45), "html", null, true);
         echo "</span>
                                     </div>
                                 </div>
                             </div>
                             <div class=\"dropdown-inner\">
                                 <ul class=\"link-list\">
-                                    <li><a href=\"/minha-conta\"><em class=\"icon ni ni-user-alt\"></em><span>";
-        // line 53
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["lang"] ?? null), "menu_usuario_perfil", [], "any", false, false, false, 53), "html", null, true);
-        echo "</span></a></li>
-                                    <li><a href=\"/minha-conta/franquias\"><em class=\"icon ni ni-setting-alt\"></em><span>";
-        // line 54
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["lang"] ?? null), "menu_usuario_configuracoes", [], "any", false, false, false, 54), "html", null, true);
-        echo "</span></a></li>
-                                    <li><a href=\"/minha-conta/historico\"><em class=\"icon ni ni-activity-alt\"></em><span>";
-        // line 55
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["lang"] ?? null), "menu_usuario_historico_login", [], "any", false, false, false, 55), "html", null, true);
-        echo "</span></a></li>
-                                    <li><a class=\"dark-switch\" href=\"#\"><em class=\"icon ni ni-moon\"></em><span>";
-        // line 56
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["lang"] ?? null), "menu_usuario_modo_escuro", [], "any", false, false, false, 56), "html", null, true);
-        echo "</span></a></li>
+                                    <li><a href=\"/minha-conta\"><em class=\"icon ni ni-user-alt\"></em><span>Registro</span></a></li>
+                                    <li><a href=\"/minha-conta/franquias\"><em class=\"icon ni ni-setting-alt\"></em><span>Registre-se</span></a></li>
+                                    <li><a href=\"/minha-conta/historico\"><em class=\"icon ni ni-activity-alt\"></em><span>Registre-se</span></a></li>
+                                    <li><a class=\"dark-switch\" href=\"#\"><em class=\"icon ni ni-moon\"></em><span>Registre-se</span></a></li>
                                 </ul>
                             </div>
-                            <div class=\"dropdown-inner\">
+                            ";
+        // line 57
+        if ((twig_get_attribute($this->env, $this->source, ($context["authentication"] ?? null), "loginStatus", [], "any", false, false, false, 57) == true)) {
+            // line 58
+            echo "                            <div class=\"dropdown-inner\">
                                 <ul class=\"link-list\">
-                                    <li><a href=\"/logout\"><em class=\"icon ni ni-signout\"></em><span>";
-        // line 61
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["lang"] ?? null), "menu_usuario_logout", [], "any", false, false, false, 61), "html", null, true);
-        echo "</span></a></li>
+                                    <li><a href=\"/logout\"><em class=\"icon ni ni-signout\"></em><span>Sair da conta</span></a></li>
                                 </ul>
                             </div>
-                        </div>
+                            ";
+        }
+        // line 64
+        echo "                        </div>
                     </li><!-- .dropdown -->
 
                 </ul><!-- .nk-quick-nav -->
@@ -147,7 +131,7 @@ class __TwigTemplate_3d898d9d2a20e11a527b18c182188c1b extends Template
 
     public function getDebugInfo()
     {
-        return array (  123 => 61,  115 => 56,  111 => 55,  107 => 54,  103 => 53,  94 => 47,  90 => 46,  76 => 35,  72 => 34,  37 => 1,);
+        return array (  111 => 64,  103 => 58,  101 => 57,  86 => 45,  82 => 44,  37 => 1,);
     }
 
     public function getSourceContext()

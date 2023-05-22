@@ -51,28 +51,7 @@ class __TwigTemplate_6748419131bfa78281083bf47ae1b555 extends Template
         // line 5
         echo twig_escape_filter($this->env, twig_random($this->env, 100000, 999999), "html", null, true);
         echo "\"></script>
-
 ";
-        // line 7
-        if ((twig_get_attribute($this->env, $this->source, ($context["authentication"] ?? null), "nivel", [], "any", false, false, false, 7) != "1")) {
-            // line 8
-            echo "<!--Start of Tawk.to Script-->
-<script type=\"text/javascript\">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement(\"script\"),s0=document.getElementsByTagName(\"script\")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/5ec2acda967ae56c521ae885/default';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script--> 
-";
-        }
-        // line 21
-        echo "  ";
     }
 
     public function getTemplateName()
@@ -87,11 +66,11 @@ s0.parentNode.insertBefore(s1,s0);
 
     public function getDebugInfo()
     {
-        return array (  75 => 21,  59 => 8,  57 => 7,  52 => 5,  48 => 4,  44 => 3,  40 => 2,  37 => 1,);
+        return array (  52 => 5,  48 => 4,  44 => 3,  40 => 2,  37 => 1,);
     }
 
     public function getSourceContext()
     {
-        return new Source("", "scripts.twig", "C:\\Users\\Diego\\Desktop\\prog\\SoftExpert\\qv-vitrine\\_V2\\app\\views\\scripts.twig");
+        return new Source("", "scripts.twig", "C:\\Users\\Diego\\Desktop\\prog\\SoftExpert\\frontend\\app\\views\\scripts.twig");
     }
 }

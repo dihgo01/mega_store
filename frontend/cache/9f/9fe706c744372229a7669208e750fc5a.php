@@ -69,7 +69,6 @@ class __TwigTemplate_0683b653e0ed6316e2841dd7d3c99d9c extends Template
 
 <!-- FAVICON -->
 <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/assets/images/favicon/favicon.png\">
-<link rel=\"manifest\" href=\"/assets/images/favicon/manifest.json\">
 <meta name=\"msapplication-TileColor\" content=\"#ffffff\">
 <meta name=\"theme-color\" content=\"#ffffff\">
 <!-- FAVICON -->
@@ -88,19 +87,19 @@ class __TwigTemplate_0683b653e0ed6316e2841dd7d3c99d9c extends Template
     <div class=\"nk-app-root\">
         <div class=\"nk-main \"> 
             ";
-        // line 49
+        // line 48
         echo twig_include($this->env, $context, "sidebar.twig");
         echo "
             <div class=\"nk-wrap\">
                 ";
-        // line 51
+        // line 50
         echo twig_include($this->env, $context, "topo.twig");
         echo "
                 <div class=\"nk-content \">
                 ";
-        // line 53
+        // line 52
         $this->displayBlock('content', $context, $blocks);
-        // line 54
+        // line 53
         echo "                </div> <!-- content @s -->     
             </div> <!-- wrap @s -->
         </div> <!-- main @e -->
@@ -115,7 +114,7 @@ class __TwigTemplate_0683b653e0ed6316e2841dd7d3c99d9c extends Template
         $macros = $this->macros;
     }
 
-    // line 53
+    // line 52
     public function block_content($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -133,7 +132,7 @@ class __TwigTemplate_0683b653e0ed6316e2841dd7d3c99d9c extends Template
 
     public function getDebugInfo()
     {
-        return array (  119 => 53,  113 => 18,  104 => 54,  102 => 53,  97 => 51,  92 => 49,  58 => 18,  39 => 1,);
+        return array (  118 => 52,  112 => 18,  103 => 53,  101 => 52,  96 => 50,  91 => 48,  58 => 18,  39 => 1,);
     }
 
     public function getSourceContext()

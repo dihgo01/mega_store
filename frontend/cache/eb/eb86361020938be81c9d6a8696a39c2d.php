@@ -141,12 +141,7 @@ class __TwigTemplate_046c6beac312e36c3d7621c39fd01cbd extends Template
         echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["url"] ?? null), "parametros", [], "any", false, false, false, 77), "var2", [], "any", false, false, false, 77), "html", null, true);
         echo ".js?ts=";
         echo twig_escape_filter($this->env, twig_random($this->env, 100000, 999999), "html", null, true);
-        echo "\"></script>
-<script>
-\$(function(){
-\tqv_create.init(\"#formCreate\");
-}); 
-</script>";
+        echo "\"></script>";
     }
 
     public function getTemplateName()

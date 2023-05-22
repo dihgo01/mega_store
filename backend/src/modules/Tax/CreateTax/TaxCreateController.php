@@ -21,7 +21,7 @@ class TaxCreateController
 
             http_response_code(201);
             $response = [
-                'message' => 'Successfully registered tax!',
+                'message' => 'Imposto cadastro com sucesso!',
                 'data' => $tax
             ];
 

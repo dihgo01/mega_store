@@ -47,7 +47,7 @@ class __TwigTemplate_9434e5e54ddf2d6202c105277912fd8d extends Template
     public function block_title($context, array $blocks = [])
     {
         $macros = $this->macros;
-        echo " Intranet - Quinta Valentina ";
+        echo " Mega Store ";
     }
 
     // line 4
@@ -64,7 +64,6 @@ class __TwigTemplate_9434e5e54ddf2d6202c105277912fd8d extends Template
                     <div class=\"row flex-lg-row-reverse align-items-center g-5 py-5 px-5\">
                         <div class=\"col-10 col-sm-8 col-lg-6\">
                             <div class=\"embed-responsive embed-responsive-16by9 mb-4\">
-                                <iframe class=\"embed-responsive-item\" src=\"https://www.youtube.com/embed/x-DykG1u4B8?controls=1&autoplay=1&rel=0&showinfo=0\" title=\"QV - Coleção Tons\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>
                             </div>
                             <img src=\"/assets/images/colecao-translacao.png\" class=\"d-block mx-lg-auto img-fluid d-none\" alt=\"Bootstrap Themes\" width=\"700\" height=\"500\" loading=\"lazy\">
                         </div>
@@ -113,7 +112,7 @@ class __TwigTemplate_9434e5e54ddf2d6202c105277912fd8d extends Template
 
 <!-- LOAD EXTRA FILES -->
 ";
-        // line 62
+        // line 61
         echo twig_include($this->env, $context, "scripts.twig");
         echo "
 ";
@@ -131,11 +130,11 @@ class __TwigTemplate_9434e5e54ddf2d6202c105277912fd8d extends Template
 
     public function getDebugInfo()
     {
-        return array (  117 => 62,  58 => 5,  54 => 4,  47 => 2,  36 => 1,);
+        return array (  116 => 61,  58 => 5,  54 => 4,  47 => 2,  36 => 1,);
     }
 
     public function getSourceContext()
     {
-        return new Source("", "home.twig", "C:\\Users\\Diego\\Desktop\\prog\\SoftExpert\\qv-vitrine\\_V2\\app\\views\\home.twig");
+        return new Source("", "home.twig", "C:\\Users\\Diego\\Desktop\\prog\\SoftExpert\\frontend\\app\\views\\home.twig");
     }
 }

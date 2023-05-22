@@ -22,7 +22,7 @@ class ProductCategoryCreateController
 
             http_response_code(201);
             $response = [
-                'message' => 'Successfully registered category!',
+                'message' => 'Categoria cadastrada com sucesso!',
                 'data' => $category
             ];
 

@@ -4,9 +4,9 @@
             <div class="nk-block-head nk-block-head-sm">
                 <div class="nk-block-between">
                     <div class="nk-block-head-content">
-                        <h3 class="nk-block-title page-title">Produtos / Imposto / <strong class="text-primary small">Nova</strong></h3>
+                        <h3 class="nk-block-title page-title">Produtos / Imposto / <strong class="text-primary small">Novo</strong></h3>
                         <div class="nk-block-des text-soft">
-                            <p>Tela para cadastrar novas impostos de produtos.</p>
+                            <p>Tela para cadastrar novos impostos de produtos.</p>
                         </div>
                     </div><!-- .nk-block-head-content -->
                     <div class="nk-block-head-content">
@@ -17,7 +17,7 @@
                                     <li class="w-xs-100"><a href="/{{ url.parametros.var1 }}/{{ url.parametros.var2 }}/list" class="btn btn-white btn-outline-light w-xs-100 d-inline"><em class="icon ni ni-curve-up-left"></em><span>Voltar</span></a></li> 
                                 </ul>
                             </div>
-                        </div><!-- .toggle-wrap -->
+                        </div><!-- .toggle-wrap --> 
                     </div><!-- .nk-block-head-content -->                    
                 </div><!-- .nk-block-between -->
             </div><!-- .nk-block-head -->
@@ -33,7 +33,7 @@
                                             <div class="form-group">
                                                 <label class="form-label" for="nome">Nome</label>
                                                 <div class="form-control-wrap">
-                                                    <input type="text" class="form-control" name="name" placeholder="Nome completo da categoria..." autocomplete="off" required>
+                                                    <input type="text" class="form-control input_name" name="name" placeholder="Nome completo do imposto..." autocomplete="off" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -42,7 +42,7 @@
                                                 <label class="form-label" for="codigo">Percentual</label>
                                                 <div class="form-control-wrap">
                                                    <div class="form-control-wrap ">
-                                                         <input type="text" class="form-control" name="percentage" placeholder="Percentual..." autocomplete="off" required>
+                                                         <input type="text" class="form-control input_percentage input_percentage" name="percentage" placeholder="Percentual..." autocomplete="off" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -53,7 +53,7 @@
                                     <div class="row gy-4">
                                         <div class="col-12">
                                             <div class="form-group text-end">
-                                                <button type="submit" class="btn btn-lg btn-primary w-xs-100 d-inline">Cadastrar</button>
+                                                <button type="button" class="btn btn-lg btn-primary w-xs-100 d-inline submit_register_tax">Cadastrar</button>
                                             </div>
                                         </div>                                        
                                     </div>
@@ -70,8 +70,3 @@
 <!-- LOAD EXTRA FILES -->
 {{ include('scripts.twig') }}
 <script src="/assets/js/views/{{ url.parametros.var1 }}/{{ url.parametros.var2 }}/{{ url.parametros.var2 }}.js?ts={{ random(100000, 999999) }}"></script>
-<script>
-$(function(){
-	qv_create.init("#formCreate");
-});
-</script>

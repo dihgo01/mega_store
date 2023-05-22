@@ -6,7 +6,7 @@ use Modules\ProductCategory\GetOnlyProductCategory\GetOnlyProductCategoryCase;
 use Modules\ProductCategory\GetOnlyProductCategory\ProductCategoryGetOnlyController;
 use Repositories\ProductCategory\ProductCategoryGetOnlyRepository;
 
-class GetOnlyOnlyProductCategoryFactory {
+class GetOnlyProductCategoryFactory {
 
     public function handle ($request) {
         $productCategoryRepository = new ProductCategoryGetOnlyRepository();

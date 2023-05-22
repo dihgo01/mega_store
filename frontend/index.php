@@ -8,14 +8,12 @@ $capturaURL = explode('/', $_SERVER['REQUEST_URI']);
 
 // FUNCOES PADROES
 url_friendly($capturaURL, $_SERVER['REQUEST_URI']);
-IDIOMA();
 projetoDados();
 protegePagina($_QV['URL']['parametros']['var1']);
 
 // INSTANCIANDO
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
-use Twig\Extra\Intl\IntlExtension;
 
 // Carregando a pasta de templates
 $loader = new FilesystemLoader('app/views');

@@ -23,7 +23,15 @@ if (file_exists($model)) {
 
 		// Chama Funcao de Consulta de Categorias
 		$_QV['controller'] = $classe->consulta_imposto();
+	} elseif ($_QV['URL']['parametros']['var2'] == 'categoria' && $_QV['URL']['parametros']['var3'] == 'update') {
+		
+		// Instância Class
+		$classe = new QV_Categorias();
+
+		// Chama Funcao de Consulta de Categorias
+		$_QV['controller'] = $classe->consulta_categoria_unica($_QV['URL']['parametros']['var4']);
 	}
+
 } else {
 	$_QV['controller'] = false;
 }

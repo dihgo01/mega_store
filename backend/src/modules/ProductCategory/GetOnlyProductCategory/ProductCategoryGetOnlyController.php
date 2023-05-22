@@ -14,10 +14,10 @@ class ProductCategoryGetOnlyController
         $this->getOnlyProductCategory = $getOnlyProductCategory;
     }
 
-    public function handle()
+    public function handle(array $request)
     {
         try {
-            $productCategory = $this->getOnlyProductCategory->execute();
+            $productCategory = $this->getOnlyProductCategory->execute($request['body']['id']);
 
             http_response_code(201);
             $response = $productCategory;

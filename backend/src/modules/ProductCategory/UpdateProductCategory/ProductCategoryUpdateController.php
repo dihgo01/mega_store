@@ -23,7 +23,7 @@ class ProductCategoryUpdateController
 
             http_response_code(201);
             $response = [
-                'message' => 'Successfully updated category!',
+                'message' => 'Categoria atualizada com sucesso!',
                 'data' => $productCategory
             ];
 
