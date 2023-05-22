@@ -20,9 +20,7 @@ class TaxGetController
             $tax = $this->getTax->execute();
 
             http_response_code(201);
-            $response = [
-                'data' => $tax
-            ];
+            $response = $tax;
 
             echo json_encode($response);
         } catch (Exception $e) {

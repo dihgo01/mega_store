@@ -14,7 +14,29 @@ $routes = [
         '/products' => [
             'class' => 'Product\\GetProduct\\GetProductFactory',
             'action' => 'handle',
+            'middlewares' => ['']
+        ],
+        '/sales' => [
+            'class' => 'Sales\\GetSales\\GetSalesFactory',
+            'action' => 'handle',
             'middlewares' => ['VerifyTokenJWT']
+        ],
+    ],
+    'OPTIONS' => [
+        '/taxs' => [
+            'class' => 'Tax\\GetTax\\GetTaxfactory',
+            'action' => 'handle',
+            'middlewares' => ['']
+        ],
+        '/product-categorys' => [
+            'class' => 'ProductCategory\\GetProductCategory\\GetProductCategoryfactory',
+            'action' => 'handle',
+            'middlewares' => ['']
+        ],
+        '/products' => [
+            'class' => 'Product\\GetProduct\\GetProductFactory',
+            'action' => 'handle',
+            'middlewares' => ['']
         ],
         '/sales' => [
             'class' => 'Sales\\GetSales\\GetSalesFactory',

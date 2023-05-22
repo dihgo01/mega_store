@@ -3,6 +3,8 @@ require '../vendor/autoload.php';
 require 'routes/routes.php';
 require 'routes/Router.php';
 
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: Authorization, Content-Type, x-xsrf-token, x_csrftoken, Cache-Control, X-Requested-With');
 try{
     $router = new Router\Router($routes);
 

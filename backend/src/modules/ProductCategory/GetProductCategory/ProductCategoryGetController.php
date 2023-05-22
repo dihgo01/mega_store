@@ -20,9 +20,7 @@ class ProductCategoryGetController
             $productCategory = $this->getProductCategory->execute();
 
             http_response_code(201);
-            $response = [
-                'data' => $productCategory
-            ];
+            $response = $productCategory;
 
             echo json_encode($response);
         } catch (Exception $e) {
