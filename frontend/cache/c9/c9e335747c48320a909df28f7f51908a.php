@@ -12,8 +12,8 @@ use Twig\Sandbox\SecurityNotAllowedFunctionError;
 use Twig\Source;
 use Twig\Template;
 
-/* /produtos/produto/create.twig */
-class __TwigTemplate_7a71b9955a7c7632d6b22990e5a84f41 extends Template
+/* /produtos/produto/update.twig */
+class __TwigTemplate_7ddadf71a6caf83c9d3fe9c2b2542139 extends Template
 {
     private $source;
     private $macros = [];
@@ -40,9 +40,9 @@ class __TwigTemplate_7a71b9955a7c7632d6b22990e5a84f41 extends Template
             <div class=\"nk-block-head nk-block-head-sm\">
                 <div class=\"nk-block-between\">
                     <div class=\"nk-block-head-content\">
-                        <h3 class=\"nk-block-title page-title\">Produtos / <strong class=\"text-primary small\">Novo</strong></h3>
+                        <h3 class=\"nk-block-title page-title\">Produtos / <strong class=\"text-primary small\">Atualizar</strong></h3>
                         <div class=\"nk-block-des text-soft\">
-                            <p>Tela para cadastrar novos de produtos.</p>
+                            <p>Tela para atualizar produtos.</p>
                         </div>
                     </div><!-- .nk-block-head-content -->
                     <div class=\"nk-block-head-content\">
@@ -58,7 +58,7 @@ class __TwigTemplate_7a71b9955a7c7632d6b22990e5a84f41 extends Template
         echo "/list\" class=\"btn btn-white btn-outline-light w-xs-100 d-inline\"><em class=\"icon ni ni-curve-up-left\"></em><span>Voltar</span></a></li> 
                                 </ul>
                             </div>
-                        </div><!-- .toggle-wrap --> 
+                        </div><!-- .toggle-wrap -->
                     </div><!-- .nk-block-head-content -->                    
                 </div><!-- .nk-block-between -->
             </div><!-- .nk-block-head -->
@@ -68,13 +68,16 @@ class __TwigTemplate_7a71b9955a7c7632d6b22990e5a84f41 extends Template
                         <div class=\"card-inner\">
                             <div class=\"preview-block\">
                                 <span class=\"preview-title-lg overline-title\">Dados Básicos</span>
-                                <form name=\"formCreate\" id=\"formCreate\" method=\"post\" autocomplete=\"off\">
+                                <form name=\"formCreate\" id=\"formCreate\" method=\"post\" enctype=\"multipart/form-data\" autocomplete=\"off\">
                                     <div class=\"row gy-4\">
                                         <div class=\"col-sm-6\">
                                             <div class=\"form-group\">
                                                 <label class=\"form-label\" for=\"name\">Nome</label>
                                                 <div class=\"form-control-wrap\">
-                                                    <input type=\"text\" class=\"form-control input_name required\" name=\"name\" placeholder=\"Nome completo do produto...\" autocomplete=\"off\" required>
+                                                    <input type=\"text\" class=\"form-control input_name required\" name=\"name\" placeholder=\"Nome completo do produto...\" value=\"";
+        // line 36
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["controller"] ?? null), "conteudo", [], "any", false, false, false, 36), "name", [], "any", false, false, false, 36), "html", null, true);
+        echo "\" autocomplete=\"off\" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -83,7 +86,10 @@ class __TwigTemplate_7a71b9955a7c7632d6b22990e5a84f41 extends Template
                                                 <label class=\"form-label\" for=\"price\">Preço</label>
                                                 <div class=\"form-control-wrap\">
                                                    <div class=\"form-control-wrap \">
-                                                         <input type=\"text\" class=\"form-control input_price maskMoney required\" name=\"price\" placeholder=\"R\$ 0,00\" autocomplete=\"off\" required>
+                                                         <input type=\"text\" class=\"form-control input_price maskMoney required\" name=\"price\" value=\"";
+        // line 45
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["controller"] ?? null), "conteudo", [], "any", false, false, false, 45), "price", [], "any", false, false, false, 45), "html", null, true);
+        echo "\" placeholder=\"R\$ 0,00\" autocomplete=\"off\" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -98,20 +104,34 @@ class __TwigTemplate_7a71b9955a7c7632d6b22990e5a84f41 extends Template
                                                             ";
         // line 57
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, ($context["controller"] ?? null), "conteudo", [], "any", false, false, false, 57));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, ($context["controller"] ?? null), "categoria", [], "any", false, false, false, 57));
         foreach ($context['_seq'] as $context["_key"] => $context["categoria"]) {
             // line 58
-            echo "                                                                <option value=\"";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["categoria"], "id", [], "any", false, false, false, 58));
-            echo "\">";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["categoria"], "category", [], "any", false, false, false, 58));
-            echo "</option>
-                                                            ";
+            echo "                                                                ";
+            if ((twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["categoria"], "id", [], "any", false, false, false, 58)) == twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["controller"] ?? null), "conteudo", [], "any", false, false, false, 58), "category_id", [], "any", false, false, false, 58)))) {
+                // line 59
+                echo "                                                                <option selected value=\"";
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["categoria"], "id", [], "any", false, false, false, 59));
+                echo "\">";
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["categoria"], "category", [], "any", false, false, false, 59));
+                echo "</option>
+                                                                ";
+            } else {
+                // line 61
+                echo "                                                                <option value=\"";
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["categoria"], "id", [], "any", false, false, false, 61));
+                echo "\">";
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["categoria"], "category", [], "any", false, false, false, 61));
+                echo "</option>
+                                                                ";
+            }
+            // line 63
+            echo "                                                            ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['categoria'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 60
+        // line 64
         echo "                                                        </select>
                                                     </div>
                                                 </div>
@@ -123,7 +143,11 @@ class __TwigTemplate_7a71b9955a7c7632d6b22990e5a84f41 extends Template
                                     <div class=\"row gy-4\">
                                         <div class=\"col-12\">
                                             <div class=\"form-group text-end\">
-                                                <button type=\"button\" class=\"btn btn-lg btn-primary w-xs-100 d-inline submit_register_product\">Cadastrar</button>
+                                                <input type=\"hidden\" name=\"id\" class=\"input_id\" value=\"";
+        // line 75
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["controller"] ?? null), "conteudo", [], "any", false, false, false, 75), "id", [], "any", false, false, false, 75), "html", null, true);
+        echo "\">
+                                                <button type=\"button\" class=\"btn btn-lg btn-primary w-xs-100 d-inline btn_update_product\">Salvar Alterações</button>
                                             </div>
                                         </div>                                        
                                     </div>
@@ -132,7 +156,6 @@ class __TwigTemplate_7a71b9955a7c7632d6b22990e5a84f41 extends Template
                         </div>
                     </div><!-- .card-inner-group -->
                 </div><!-- .card -->
-
             </div><!-- .nk-block -->
         </div>
     </div>
@@ -140,16 +163,16 @@ class __TwigTemplate_7a71b9955a7c7632d6b22990e5a84f41 extends Template
 
 <!-- LOAD EXTRA FILES -->
 ";
-        // line 87
+        // line 91
         echo twig_include($this->env, $context, "scripts.twig");
         echo "
 <script src=\"/assets/js/views/";
-        // line 88
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["url"] ?? null), "parametros", [], "any", false, false, false, 88), "var1", [], "any", false, false, false, 88), "html", null, true);
+        // line 92
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["url"] ?? null), "parametros", [], "any", false, false, false, 92), "var1", [], "any", false, false, false, 92), "html", null, true);
         echo "/";
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["url"] ?? null), "parametros", [], "any", false, false, false, 88), "var1", [], "any", false, false, false, 88), "html", null, true);
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["url"] ?? null), "parametros", [], "any", false, false, false, 92), "var1", [], "any", false, false, false, 92), "html", null, true);
         echo "/";
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["url"] ?? null), "parametros", [], "any", false, false, false, 88), "var2", [], "any", false, false, false, 88), "html", null, true);
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["url"] ?? null), "parametros", [], "any", false, false, false, 92), "var2", [], "any", false, false, false, 92), "html", null, true);
         echo ".js?ts=";
         echo twig_escape_filter($this->env, twig_random($this->env, 100000, 999999), "html", null, true);
         echo "\"></script>
@@ -158,7 +181,7 @@ class __TwigTemplate_7a71b9955a7c7632d6b22990e5a84f41 extends Template
 
     public function getTemplateName()
     {
-        return "/produtos/produto/create.twig";
+        return "/produtos/produto/update.twig";
     }
 
     public function isTraitable()
@@ -168,11 +191,11 @@ class __TwigTemplate_7a71b9955a7c7632d6b22990e5a84f41 extends Template
 
     public function getDebugInfo()
     {
-        return array (  148 => 88,  144 => 87,  115 => 60,  104 => 58,  100 => 57,  55 => 17,  37 => 1,);
+        return array (  171 => 92,  167 => 91,  148 => 75,  135 => 64,  129 => 63,  121 => 61,  113 => 59,  110 => 58,  106 => 57,  91 => 45,  79 => 36,  55 => 17,  37 => 1,);
     }
 
     public function getSourceContext()
     {
-        return new Source("", "/produtos/produto/create.twig", "C:\\Users\\Diego\\Desktop\\prog\\SoftExpert\\frontend\\app\\views\\produtos\\produto\\create.twig");
+        return new Source("", "/produtos/produto/update.twig", "C:\\Users\\Diego\\Desktop\\prog\\SoftExpert\\frontend\\app\\views\\produtos\\produto\\update.twig");
     }
 }

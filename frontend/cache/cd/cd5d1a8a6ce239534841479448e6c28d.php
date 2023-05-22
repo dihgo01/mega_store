@@ -54,7 +54,7 @@ class __TwigTemplate_3d898d9d2a20e11a527b18c182188c1b extends Template
                     
                    
                     <li class=\"d-none d-sm-block me-n1\">
-                        <a href=\"#\" class=\"nk-quick-nav-icon toggle\" data-bs-tooltip=\"tooltip\" data-bs-placement=\"bottom\" title=\"Ver Carrinho\"  data-target=\"userAside\">
+                        <a href=\"#\" data-target=\"addProductCart\" id=\"btnCartButton\" class=\"nk-quick-nav-icon toggle cartProductAdd\" data-bs-tooltip=\"tooltip\" data-bs-placement=\"bottom\" title=\"Ver Carrinho\">
                             <em class=\"icon ni ni-cart\"></em>
                         </a>
                     </li>

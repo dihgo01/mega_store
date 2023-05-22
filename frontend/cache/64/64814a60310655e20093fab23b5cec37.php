@@ -42,7 +42,7 @@ class __TwigTemplate_f69cc26a2f098075ccf21dd9ccc5a387 extends Template
                     <div class=\"nk-block-head-content\">
                         <h3 class=\"nk-block-title page-title\">Produtos / Imposto / <strong class=\"text-primary small\">Novo</strong></h3>
                         <div class=\"nk-block-des text-soft\">
-                            <p>Tela para cadastrar novas impostos de produtos.</p>
+                            <p>Tela para cadastrar novos impostos de produtos.</p>
                         </div>
                     </div><!-- .nk-block-head-content -->
                     <div class=\"nk-block-head-content\">

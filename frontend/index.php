@@ -47,7 +47,6 @@ if(file_exists($controller)) {
 # View
 #
 echo $twig->render($_QV['URL']['PG'], [
-    'lang'              => $_QV['IDIOMA'],
     'url'               => $_QV['URL'],
     'projeto'           => $_QV['PROJETO'],
     'controller'        => $_QV['controller'],

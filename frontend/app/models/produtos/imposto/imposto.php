@@ -13,12 +13,7 @@ class QV_Imposto
     public function consulta()
     {
 
-        // VARIAVEIS
-        $slug = $this->slug;
-
         $url = "http://localhost:8000/taxs";
-
-        $token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2ODQ3MzgwMzcsImlhdCI6MTY4NDcyODAzNywiaWQiOiJjMWE0MWYwNzllMGQzN2U4MjgyOGEyYmE2YzdjNTUwMSJ9.yZaWKMTHQW7pARbD0598FI324sAEQs4rjLrM45FwBgg';
 
         // CURL - START
         ponto_CURL_START:
@@ -32,9 +27,6 @@ class QV_Imposto
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => array(
-                'Authorization: Bearer ' . $token
-            ),
         ));
         $body = curl_exec($curl);
         $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);

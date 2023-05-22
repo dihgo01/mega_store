@@ -22,7 +22,7 @@ class ProductUpdateController
 
             http_response_code(201);
             $response = [
-                'message' => 'Successfully updated product!',
+                'message' => 'Produto atualizado com sucesso!',
                 'data' => $product
             ];
 

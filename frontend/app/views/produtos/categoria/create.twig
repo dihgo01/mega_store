@@ -33,7 +33,7 @@
                                             <div class="form-group">
                                                 <label class="form-label" for="nome">Nome</label>
                                                 <div class="form-control-wrap">
-                                                    <input type="text" class="form-control input_name" name="name" placeholder="Nome completo da categoria..." autocomplete="off" required>
+                                                    <input type="text" class="form-control input_name required" name="name" placeholder="Nome completo da categoria..." autocomplete="off" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -42,7 +42,7 @@
                                                 <label class="form-label" for="codigo">Imposto</label>
                                                 <div class="form-control-wrap">
                                                    <div class="form-control-wrap ">
-                                                        <select name="tax_id" id="tax_id" class="form-control qvSelect2" data-search="on" required>
+                                                        <select name="tax_id" id="tax_id" class="form-control qvSelect2 required" data-search="on" required>
                                                             <option></option>
                                                             {% for imposto in controller.conteudo %}
                                                                 <option value="{{ imposto.id|e }}">{{ imposto.name|e }}</option>

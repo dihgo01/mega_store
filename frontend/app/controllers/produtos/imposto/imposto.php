@@ -1,10 +1,8 @@
 <?php
 
-// FIND MODEL
 $model = carregarMVC($_QV['URL'], 'models');
 if (file_exists($model)) {
 
-	// INCLUDE MODEL
 	include $model;
 
 	if ($_QV['URL']['parametros']['var2'] == 'imposto' && $_QV['URL']['parametros']['var3'] == 'list') {
@@ -14,9 +12,11 @@ if (file_exists($model)) {
 		$_QV['controller'] = $classe->consulta();
 	} elseif ($_QV['URL']['parametros']['var2'] == 'imposto' && $_QV['URL']['parametros']['var3'] == 'create') {
 
+		$classe = new QV_Imposto();
+
 		$resultadoFinal = array('resultado' => true, 'mensagem' => 'Consulta Realizada com Sucesso');
 
-		return $resultadoFinal;
+		$_QV['controller'] = $resultadoFinal;
 	} elseif ($_QV['URL']['parametros']['var2'] == 'imposto' && $_QV['URL']['parametros']['var3'] == 'update') {
 
 		$classe = new QV_Imposto();

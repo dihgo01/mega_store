@@ -74,7 +74,7 @@ class __TwigTemplate_046c6beac312e36c3d7621c39fd01cbd extends Template
                                             <div class=\"form-group\">
                                                 <label class=\"form-label\" for=\"nome\">Nome</label>
                                                 <div class=\"form-control-wrap\">
-                                                    <input type=\"text\" class=\"form-control input_name\" name=\"name\" placeholder=\"Nome completo da categoria...\" autocomplete=\"off\" required>
+                                                    <input type=\"text\" class=\"form-control input_name required\" name=\"name\" placeholder=\"Nome completo da categoria...\" autocomplete=\"off\" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -83,7 +83,7 @@ class __TwigTemplate_046c6beac312e36c3d7621c39fd01cbd extends Template
                                                 <label class=\"form-label\" for=\"codigo\">Imposto</label>
                                                 <div class=\"form-control-wrap\">
                                                    <div class=\"form-control-wrap \">
-                                                        <select name=\"tax_id\" id=\"tax_id\" class=\"form-control qvSelect2\" data-search=\"on\" required>
+                                                        <select name=\"tax_id\" id=\"tax_id\" class=\"form-control qvSelect2 required\" data-search=\"on\" required>
                                                             <option></option>
                                                             ";
         // line 47

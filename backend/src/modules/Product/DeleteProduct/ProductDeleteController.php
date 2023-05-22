@@ -21,7 +21,7 @@ class ProductDeleteController
 
             http_response_code(201);
             $response = [
-                'message' => 'Successfully deleted product!',
+                'message' => 'Produto excluido com sucesso!',
                 'data' => $product
             ];
 

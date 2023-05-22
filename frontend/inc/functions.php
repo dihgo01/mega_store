@@ -208,6 +208,20 @@ function ConverteURL($str){
 }
 
 /////////////////////////////////////////////////////
+/***  FUNCAO PARA REMOVER ACENTOS ***/
+/////////////////////////////////////////////////////
+function removeAcentos($texto) {
+	$array1 = array( "á", "à", "â", "ã", "ä", "é", "è", "ê", "ë", "í", "ì", "î", "ï", "ó", "ò", "ô", "õ", "ö", "ú", "ù", "û", "ü", "ç"
+	, "Á", "À", "Â", "Ã", "Ä", "É", "È", "Ê", "Ë", "Í", "Ì", "Î", "Ï", "Ó", "Ò", "Ô", "Õ", "Ö", "Ú", "Ù", "Û", "Ü", "Ç" );
+	$array2 = array( "a", "a", "a", "a", "a", "e", "e", "e", "e", "i", "i", "i", "i", "o", "o", "o", "o", "o", "u", "u", "u", "u", "c"
+	, "A", "A", "A", "A", "A", "E", "E", "E", "E", "I", "I", "I", "I", "O", "O", "O", "O", "O", "U", "U", "U", "U", "C" );
+		$texto = str_replace( $array1, $array2, $texto);
+		$texto = preg_replace("/[^a-z0-9\s\-]/i", "", $texto);
+		//$texto = preg_replace("/\s/", "_", $texto); // Replace all spaces with underline
+	return $texto;
+}
+
+/////////////////////////////////////////////////////
 /***  FUNCAO PARA LIMPAR STRINGS, REMOVENDO SIMBOLOS ***/
 /////////////////////////////////////////////////////
 function limpar($limparStringRecebida) {
@@ -228,213 +242,6 @@ function limpar($limparStringRecebida) {
 
 
 
-
-
-
-
-/////////////////////////////////////////////////////////////////
-/***  FUNCAO PEGAR DADOS DO PRODUTO NA INTRANET ***/
-////////////////////////////////////////////////////////////////
-function qvProdutosInfo_Intranet($idProduto) {
-
-	// CONECTA COM BANCO
-	$conexaoIntranet = bancoDados("conectar","intranet");	
-
-	// CONSULTA DADOS PRODUTO
-	$consultaProduto = mysqli_query($conexaoIntranet, "SELECT P.id AS ID_PRODUTO, P.slug AS SLUG, P.nome_comercial AS NOME, C.nome AS CATEGORIA FROM qv_produtos P INNER JOIN qv_categorias C ON C.id = P.categoria_id WHERE P.id = '".$idProduto."' ");
-	$resProd = mysqli_fetch_array($consultaProduto);
-	
-	// GERANDO IMAGEM
-	$produto_foto = qvImagens_Intranet($resProd['ID_PRODUTO']);
-	
-	// ARRAY DADOS DO PRODUTO
-	$produtoInfo = array('ID' => $resProd['ID_PRODUTO'], 'NOME' => $resProd['NOME'], 'CATEGORIA' => $resProd['CATEGORIA'], 'SLUG' => $resProd['SLUG'], 'FOTO' => $produto_foto[0]);
-
-	// RETORNO
-	return $produtoInfo;
-
-}
-
-
-
-/////////////////////////////////////////////////////
-// GERADOR SKU
-/////////////////////////////////////////////////////
-function geradorSKU($idProduto,$grade) {
-
-	// BANCO DADOS
-	$conexao  = bancoDados("conectar","intranet"); 
-
-	// TRATAMENTO
-	$grade = str_pad($grade, 2, '0', STR_PAD_LEFT);
-
-	// CONSULTA PRODUTO
-	$consulta = mysqli_query($conexao, "SELECT F.codigo AS FORNECEDOR, C.codigo AS CATEGORIA, C2.codigo AS COR, P.codigo AS PRODUTO 
-						FROM qv_produtos P
-						INNER JOIN qv_fornecedores F ON F.id = P.fornecedor_id
-						INNER JOIN qv_categorias C ON C.id = P.categoria_id
-						INNER JOIN qv_cores C2 ON C2.id = P.cor_id
-						WHERE P.id = '".$idProduto."' ");
-	$resultado = mysqli_fetch_array($consulta);
-
-	$sku = $resultado['FORNECEDOR'].$resultado['CATEGORIA'].$resultado['COR'].$grade.$resultado['PRODUTO'];
-
-	if(strlen($sku) == 14) {
-		return $sku;
-	} else {
-		return false;
-	}
-
-}
-
-/////////////////////////////////////////////////////
-// PEGA ID DE PEDIDO ABERTO
-/////////////////////////////////////////////////////
-function consultaPedido() {
-
-	// BANCO DADOS
-	$conexao = bancoDados("conectar","intranet"); 
-
-	// VARIAVEIS IMPORTANTES
-	$QV_Unidade = $_SESSION['Authentication']['franquias'][$_SESSION['Authentication']['franquiaActive']]['unidade'];
-	$QV_idUsuario = $_SESSION['Authentication']['id_usuario'];
-	
-	// ACESSO COM PRIVILEGIOS PARA CONSULTA
-	if($_SESSION['Authentication']['nivel'] == 1 || $_SESSION['Authentication']['nivel'] == 5) {
-		$queryCustom = "P.idUnidade = ".$QV_Unidade;
-	} else {
-		$queryCustom = "P.idUnidade = ".$QV_Unidade." AND P.idUsuario = ".$QV_idUsuario;
-	}
-
-	// CONSULTA PEDIDO ABERTO
-	$consulta = mysqli_query($conexao, "SELECT P.idPedido AS ID_PEDIDO
-							FROM PDV_pedidos P
-							WHERE ".$queryCustom." AND P.status = 'Ativo' AND P.dataDelete IS NULL");
-	$resConsulta = mysqli_fetch_array($consulta);
-	if(mysqli_num_rows($consulta) == 0) {
-
-		// SQL INSERT - NOVO PEDIDO
-		$adicionar = mysqli_query($conexao, "INSERT INTO PDV_pedidos (idUnidade, idUsuario, dataInsert) VALUES (".$QV_Unidade.", ".$QV_idUsuario.", NOW())");
-		
-		// DEFINE NOVO ID DO PEDIDO
-		$resConsulta['ID_PEDIDO'] = mysqli_insert_id($conexao);
-
-		// SQL INSERT - DADOS DE PAGAMENETO
-		$adicionarDP = mysqli_query($conexao, "INSERT INTO PDV_pedidosFormasPagamento (idPedido, vencimento, dataInsert) VALUES (".$resConsulta['ID_PEDIDO'].", NOW(), NOW())");
-
-	}     
-
-	// RETORNO
-	return $resConsulta['ID_PEDIDO'];
-
-}   
-
-/////////////////////////////////////////////////////
-// CALCULA IDADE EM ANOS COM BASE DATA NASCIMENTO
-/////////////////////////////////////////////////////
-function calcularIdade($dataNascimento) {
-	$data = new DateTime($dataNascimento);
-	$resultado = $data->diff(new DateTime(date('Y-m-d')));
-	return $resultado->format('%Y');
-}
-
-
-/////////////////////////////////////////////////////
-// CONSULTA DOCUMENTO FISCAL - FOCUS NFe/NFCe
-/////////////////////////////////////////////////////
-function focusConsDocFiscal($idUnidade,$ref) {
-
-	// BANCO DADOS
-	$conexao = bancoDados("conectar","intranet"); 
-
-	// CONSULTA DADOS FISCAIS DA UNIDADE FRANQUEADA
-	$consulta = mysqli_query($conexao, "SELECT * FROM PDV_unidadesDadosFiscais WHERE idUnidade = '".$idUnidade."' ");
-	$resultado = mysqli_fetch_array($consulta);
-
-	//********** INTEGRACAO COM FOCUS - ECRAS | CONFIGS
-	$tipoAmbiente = "https://api.focusnfe.com.br";
-	//$tipoAmbiente = "https://homologacao.focusnfe.com.br";
-
-	// Dados de Autenticacao na Focus
-	$login = $resultado['token'];
-	$password = "";
-	$NF_Token = base64_encode($login.":".$password);
-
-	// DEFININDO ENDPOINT
-	$endpoint = ($resultado['tipoDocumento'] == 'NFCe' ? "/v2/nfce/" : "/v2/nfe/" );
-
-	// CURL - START
-	ponto_CURL_START:
-	$curl = curl_init();
-	curl_setopt_array($curl, array(
-		CURLOPT_URL => $tipoAmbiente . $endpoint . $ref . "?completa=0",
-		CURLOPT_RETURNTRANSFER => true,
-		CURLOPT_ENCODING => '',
-		CURLOPT_MAXREDIRS => 10,
-		CURLOPT_TIMEOUT => 0,
-		CURLOPT_FOLLOWLOCATION => true,
-		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-		CURLOPT_CUSTOMREQUEST => 'GET',
-		CURLOPT_HTTPHEADER => array(
-			'Authorization: Basic ' . $NF_Token
-		),
-	));
-	$body = curl_exec($curl);
-	$http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-	curl_close($curl);
-	$resposta = json_decode($body, true);
-	// CURL - END
-	
-	//logDebug("CONSULTA DE DOCUMENTO FISCAL - ". json_encode($resposta));
-	//logDebug("REQUEST - ". $tipoAmbiente . $endpoint . $ref);
-
-	// VALIDANDO RETORNO
-	if($resposta['status'] == 'processando_autorizacao') {
-		goto ponto_CURL_START;
-	}
-
-	// TRATANDO RETORNO
-	if($http_code == 200) {
-		return $resposta;
-	} else {
-		return false;
-	}
-
-}
-
-/////////////////////////////////////////////////////
-// CRIPTOGRAFIA DE SENHA - BCRYPT
-/////////////////////////////////////////////////////
-function B_CRYPT($modo, $senha, $hash = false) {
-
-	if($modo == "validar") {
-
-		if(crypt($senha, $hash) === $hash) {
-			return true;
-		} else { return false; }		
-
-	} else {
-
-		//***** RANDOM SALT
-		$saltLength = 22;
-		$seed = uniqid(mt_rand(), true); // Salt seed
-
-		// Generate salt
-		$salt = base64_encode($seed);
-		$salt = str_replace('+', '.', $salt);
-		$salt = substr($salt, 0, $saltLength);
-		//***** RANDOM SALT
-
-		// Gera um hash baseado em bcrypt
-		$custo = '10';
-		$hash = crypt($senha, '$2y$' . $custo . '$' . $salt . '$');
-
-		return $hash;
-
-	}
-
-}
-
 /**
 * Função que protege uma página
 */
@@ -452,18 +259,3 @@ function protegePagina($paginaAtual) {
 	}
 
 }
-
-
-/**
-* Função para expulsar um visitante
-*/
-function expulsaVisitante() {
-
-	// Remove as variáveis da sessão (caso elas existam)
-	unset($_SESSION['Authentication']);
-
-	// Manda pra tela de login
-	header("Location: /login");
-}
-
-?>

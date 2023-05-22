@@ -16,23 +16,7 @@ class QV_Login {
         if(!empty($QV_login) && !empty($QV_senha)) {
 
             // SQL - SELECT
-            $consulta = mysqli_query($conexao, 
-                "SELECT DISTINCT
-                    U.id AS ID_USUARIO,
-                    U.email AS LOGIN,
-                    U.password AS SENHA,
-                    U.display_name AS NOME,
-                    U.name AS NOME_COMPLETO,
-                    U.email AS EMAIL,
-                    U.nascimento AS NASCIMENTO,
-                    DATE(U.created_at) AS DATA_CRIACAO
-                FROM
-                    users U
-                WHERE U.email = '".$nusuario."' AND U.deleted_at IS NULL LIMIT 1 ");
-
-            // ARMAZENA MENSAGENS DE ERRO
-            $SQL_ERROR_MESSAGEM .= (!empty(mysqli_errno($conexao)) ? mysqli_errno($conexao) : '').(!empty(mysqli_error($conexao)) ? ": ".mysqli_error($conexao) : '');
-            $MENSAGEM_ERRO = "Erro ao realizar a consulta - SQL SELECT."; 
+            
             
             // CHECA SE ALGUM USUARIO FOI ENCONTRADO COM LOGIN INFORMADO
             if(mysqli_num_rows($consulta) == 0) {

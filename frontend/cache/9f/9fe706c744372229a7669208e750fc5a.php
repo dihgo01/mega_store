@@ -100,10 +100,169 @@ class __TwigTemplate_0683b653e0ed6316e2841dd7d3c99d9c extends Template
         // line 52
         $this->displayBlock('content', $context, $blocks);
         // line 53
-        echo "                </div> <!-- content @s -->     
-            </div> <!-- wrap @s -->
-        </div> <!-- main @e -->
-    </div> <!-- app-root @e -->   
+        echo "                </div>     
+            </div> 
+        </div> 
+    </div>  
+
+<div id=\"addProductCart\" class=\"nk-add-product toggle-slide toggle-slide-right\" data-content=\"addProductCart\"
+    data-toggle-screen=\"any\" data-toggle-overlay=\"true\" data-toggle-body=\"true\" data-simplebar>
+        <div class=\"card-inner-group\" data-simplebar>
+                <div class=\"card-inner card-inner-sm\">
+                    <h5 class=\"text-center my-2\">Carrinho de Produtos</h5>
+                    <ul class=\"btn-toolbar justify-center gx-1\">
+                        <li class=\"d-none\"><a href=\"javascript:void(0);\" class=\"btn btn-trigger btn-icon\"
+                                data-bs-tooltip=\"tooltip\" data-bs-placement=\"top\"
+                                title=\"Salvar Pedido como Rascunho\"><em class=\"icon ni ni-save\"></em></a></li>
+                        <li class=\"d-flex\"><a href=\"#inputBiparCaixas\" id=\"sku_bipe\" class=\"btn btn-trigger btn-icon\"
+                                data-bs-toggle=\"collapse\" data-bs-tooltip=\"tooltip\" data-bs-placement=\"top\"
+                                title=\"Bipar Caixas\"><i class=\"far fa-scanner-gun px-2\"></i></a></li>
+                        <li><a href=\"javascript:void(0);\" class=\"btn btn-trigger btn-icon text-danger cleanSales\"
+                                data-bs-tooltip=\"tooltip\" data-bs-placement=\"top\" title=\"Limpar Carrinho Inteiro\"
+                                data-id=\"\">
+                                <em class=\"icon ni ni-na\"></em></a></li>
+                    </ul>
+                    <div class=\"collapse\" id=\"inputBiparCaixas\">
+                        <div class=\"card card-body\">
+                            <div class=\"form-group text-center\">
+                                <label class=\"form-label\" for=\"sku_bipe_sales\">Bipando Caixas - SKU</label>
+                                <div class=\"form-control-wrap\">
+                                    <div class=\"input-group\">
+                                        <input type=\"text\" class=\"form-control search_sku_sales\" id=\"sku_bipe_sales\"
+                                            name=\"sku_bipe\" placeholder=\"00000000000000\" maxlength=\"14\"
+                                            oninput=\"this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\\..*)\\./g, '\$1');\"
+                                            anpaste=\"sku_bipe(this);\">
+                                        <div class=\"input-group-append\">
+                                            <button type=\"button\"
+                                                class=\"btn btn-outline-success btn-dim add_product_sku\"
+                                                data-id=\"\"
+                                                data-bs-tooltip=\"tooltip\" data-bs-placement=\"top\"
+                                                title=\"Adicionar desconto\"><em class=\"icon ni ni-check\"></em></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- .card-inner -->
+                <div class=\"card-inner text-center\">
+                    <div class=\"overline-title-alt mb-2\">Resumo do Pedido</div>
+
+                    <div class=\"profile-balance\">
+                        <div class=\"profile-balance-group d-inline-flex gx-5\">
+                            <div class=\"profile-balance-sub\">
+                                <div class=\"profile-balance-amount\">
+                                    <div class=\"number\">
+                                        <small class=\"currency currency-usd fs-12px\">R\$</small>
+                                        <span class=\"fs-15px\" id=\"shopCartSubTotalSale\"
+                                            data-valor=\"0\">0,00</span>
+                                    </div>
+                                </div>
+                                <div class=\"profile-balance-subtitle mt-0 fs-11px\">SubTotal</div>
+                            </div>
+                            <div class=\"profile-balance-sub\">
+                                <div class=\"profile-balance-amount\">
+                                    <div class=\"number\">
+                                        <small class=\"currency currency-usd fs-12px\">R\$</small>
+                                        <span class=\"fs-15px\" id=\"shopCartSalesDiscount\"
+                                            data-valor=\"0\">0,00</span>
+                                    </div>
+                                </div>
+                                <div class=\"profile-balance-subtitle mt-0 fs-11px\">Descontos</div>
+                            </div>
+                            <div class=\"profile-balance-sub\">
+                                <div class=\"profile-balance-amount\">
+                                    <div class=\"number\">
+                                        <small class=\"currency currency-usd fs-12px\">R\$</small>
+                                        <span class=\"fs-15px total_price\" id=\"shopCartSales\"
+                                            data-valor=\"0\">0,00</span>
+                                    </div>
+                                </div>
+                                <div class=\"profile-balance-subtitle mt-0 fs-11px\">Total</div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- .card-inner -->
+                <div class=\"card-inner px-0 py-0\">
+                    <ul class=\"list-group list-group-flush\" id=\"shopCart_Sales\" data-desconto-tipo=\"Nenhum\"
+                        data-desconto=\"0.00\">
+                            <li class=\"list-group-item list_item_grid_sales\"
+                                    data-id=\"\">
+                                    <div class=\"row p-0 align-items-center\">
+                                        <div class=\"col-2 p-0 mb-1\">
+                                            <img class=\"icon me-1 img-fluid rounded-circle\"
+                                                src=\"/assets/images/no_product.jpg\"
+                                                alt=\"Quinta Valentina\">
+                                        </div> <!-- COL -->
+                                        <div class=\"col-8 px-1 py-0 mb-1\">
+                                            <p class=\"fs-12px mb-0\">
+                                               Produto Excluido
+                                            </p>
+                                        </div> <!-- COL -->
+                                        <div class=\"col-2 p-0 mb-1\">
+                                            <a href=\"javascript:void(0);\"
+                                                class=\"btn btn-sm btn-outline-danger btnRemoverCartSales\"
+                                                data-id=\"\"><i class=\"fas fa-trash\"></i></a>
+                                        </div> <!-- COL -->
+                                        <div class=\"display-11 col-12\">
+
+                                        </div>
+                                        <div class=\"col-5\">
+                                            <h5 class=\"display-11 text-center\">Quantidade</h5>
+                                            <div class=\"form-control-wrap number-spinner-wrap\">
+                                                <button
+                                                    class=\"btn btn-icon btn-outline-light number-spinner-btn number-minus remove_number_cart_sale\"
+                                                    data-id=\"\" data-number=\"minus-qv\"><em
+                                                        class=\"icon ni ni-minus\"></em></button>
+                                                <input type=\"number\"
+                                                    class=\"form-control number-spinner input_qtd_sales_\"
+                                                    value=\"0\" min=\"1\" readonly=\"\">
+                                                <button
+                                                    class=\"btn btn-icon btn-outline-light number-spinner-btn number-plus add_number_cart_sale\"
+                                                    data-id=\"\" data-number=\"plus-qv\"><em
+                                                        class=\"icon ni ni-plus\"></em></button>
+                                            </div>
+                                        </div> <!-- COL -->
+                                        <div class=\"col-3\">
+                                            <h5 class=\"display-11 text-center\">Grade</h5>
+                                            <div class=\"form-control-wrap\">
+                                                <input type=\"number\" class=\"form-control\"
+                                                    value=\"32\"
+                                                    readonly=\"\">
+                                            </div>
+                                        </div> <!-- COL -->
+                                        <div class=\"col-4\">
+                                            <h5 class=\"display-11 text-center \">Preço</h5>
+                                            <div class=\"form-control-wrap\">
+                                                <input type=\"hidden\"
+                                                    class=\"form-control input_price_sales_\"
+                                                    value=\"154\">
+                                                <input type=\"text\"
+                                                    class=\"form-control price_input_sales_\"
+                                                    value=\"2\"
+                                                    readonly=\"\">
+                                            </div>
+                                        </div>
+                                    </div> <!-- COL -->
+                                </li>
+                    </ul>
+                </div><!-- .card-inner -->
+                <div class=\"card-inner footer-btn-sales\">
+                    <a href=\"javascript:void(0);\"
+                        class=\"btn btn-outline-secondary text-center w-100 mb-1 d-block toggle cartProductAdd\"
+                        data-target=\"addProductCart\">
+                        Fechar
+                    </a>
+                    <a href=\"/fms/sales-cart/finish/\" id=\"btCheckout\"
+                        class=\"btn btn-primary text-center w-100 d-block \">
+                        Checkout da venda
+                    </a>
+                </div> <!-- card-inner-->
+            </div>
+      
+</div><!-- .card-aside -->
+
 </body>
 </html>";
     }
@@ -132,7 +291,7 @@ class __TwigTemplate_0683b653e0ed6316e2841dd7d3c99d9c extends Template
 
     public function getDebugInfo()
     {
-        return array (  118 => 52,  112 => 18,  103 => 53,  101 => 52,  96 => 50,  91 => 48,  58 => 18,  39 => 1,);
+        return array (  277 => 52,  271 => 18,  103 => 53,  101 => 52,  96 => 50,  91 => 48,  58 => 18,  39 => 1,);
     }
 
     public function getSourceContext()

@@ -27,7 +27,7 @@ $routes = [
             'middlewares' => ['']
         ],
         '/product-only' => [
-            'class' => 'Product\\GetProduct\\GetProductFactory',
+            'class' => 'Product\\GetOnlyProduct\\GetOnlyProductFactory',
             'action' => 'handle',
             'middlewares' => ['']
         ],
@@ -108,7 +108,7 @@ $routes = [
         '/product' => [
             'class' => 'Product\\CreateProduct\\CreateProductFactory',
             'action' => 'handle',
-            'middlewares' => ['VerifyTokenJWT']
+            'middlewares' => ['']
         ],
         '/sales' => [
             'class' => 'Sales\\CreateSales\\CreateSalesFactory',

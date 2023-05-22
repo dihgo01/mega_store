@@ -81,7 +81,7 @@ class __TwigTemplate_6489b6180230b90f336a59d20d85e7c0 extends Template
                                         <tr class=\"nk-tb-item nk-tb-head\">
                                             <th class=\"nk-tb-col text-center\">NOME</th>
                                             <th class=\"nk-tb-col text-center\">CATEGORIA</th>
-                                            <th class=\"nk-tb-col text-center\">CUSTO</th>
+                                            <th class=\"nk-tb-col text-center\">PREÇO</th>
                                             <th class=\"nk-tb-col nk-tb-col-tools text-right\">OPÇÕES</th>
                                         </tr>
                                     </thead>
@@ -114,9 +114,9 @@ class __TwigTemplate_6489b6180230b90f336a59d20d85e7c0 extends Template
             // line 58
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["produto"], "id", [], "any", false, false, false, 58));
             echo "\" class=\"text-primary\">Editar</a></li>
-                                                                    <li><a href=\"#\" class=\"text-danger btn_delete_tax\" data-id=\"";
+                                                                    <li><a href=\"#\" class=\"text-danger btn_delete_product\" data-id=\"";
             // line 59
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["imposto"] ?? null), "id", [], "any", false, false, false, 59));
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["produto"], "id", [], "any", false, false, false, 59));
             echo "\">Excluir</a></li>
                                                                 </ul>
                                                             </div>

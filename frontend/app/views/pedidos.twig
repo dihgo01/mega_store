@@ -17,9 +17,6 @@
        
     {% endif %}
     
-    {# CARREGA SIDEBAR DO CARRINHO EM TODAS PAGINAS DO MODULO PDV #}
-    {% if url.parametros.var1 == 'pedidos' and url.parametros.var2 == 'vendas' %}
-        {% include('/' ~ url.parametros.var1 ~ '/shopcart.twig') %}
-    {% endif %}
+   
 
 {% endblock %}

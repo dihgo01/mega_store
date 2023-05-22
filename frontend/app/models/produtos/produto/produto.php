@@ -2,14 +2,7 @@
 
 class QV_Produto
 {
-    private $slug;
 
-    function __construct($slug = false)
-    {
-        $this->slug = $slug;
-    }
-
-    //***** CONSULTA DE DADOS DO PRODUTO
     public function consulta()
     {
 
@@ -38,13 +31,10 @@ class QV_Produto
         return $resultadoFinal;
     }
 
-    //***** CONSULTA DE DADOS DO IMPOSTO
-    public function consulta_imposto()
+    public function consulta_categoria()
     {
 
-        $url = "http://localhost:8000/taxs";
-
-        $token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2ODQ3MzgwMzcsImlhdCI6MTY4NDcyODAzNywiaWQiOiJjMWE0MWYwNzllMGQzN2U4MjgyOGEyYmE2YzdjNTUwMSJ9.yZaWKMTHQW7pARbD0598FI324sAEQs4rjLrM45FwBgg';
+        $url = "http://localhost:8000/product-categorys";
 
         // CURL - START
         ponto_CURL_START:
@@ -58,9 +48,6 @@ class QV_Produto
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => array(
-                'Authorization: Bearer ' . $token
-            ),
         ));
         $body = curl_exec($curl);
         $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
@@ -73,12 +60,10 @@ class QV_Produto
         return $resultadoFinal;
     }
 
-    //***** CONSULTA DE CATEGORIA UNICA
-    public function consulta_categoria_unica($id)
+    public function consulta_produto_unica($id)
     {
 
-        $url = "http://localhost:8000/product-category-only?id=" . $id;
-
+        $url = "http://localhost:8000/product-only?id=" . $id;
 
         // CURL - START
         ponto_CURL_START:
@@ -98,13 +83,13 @@ class QV_Produto
         curl_close($curl);
         $resposta = json_decode($body, true);
 
-        $url_imposto = "http://localhost:8000/taxs";
+        $url_categoria = "http://localhost:8000/product-categorys";
 
         // CURL - START
-        ponto_CURL_START_IMPOSTO:
+        ponto_CURL_START_CATEGORIA:
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => $url_imposto,
+            CURLOPT_URL => $url_categoria,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -116,9 +101,9 @@ class QV_Produto
         $body = curl_exec($curl);
         $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         curl_close($curl);
-        $resposta_imposto = json_decode($body, true);
+        $resposta_categoria = json_decode($body, true);
 
-        $resultadoFinal = array('resultado' => true, 'mensagem' => 'Consulta Realizada com Sucesso', 'conteudo' => $resposta, 'imposto' => $resposta_imposto);
+        $resultadoFinal = array('resultado' => true, 'mensagem' => 'Consulta Realizada com Sucesso', 'conteudo' => $resposta, 'categoria' =>  $resposta_categoria);
 
         // RETORNO
         return $resultadoFinal;

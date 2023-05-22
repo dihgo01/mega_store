@@ -21,7 +21,7 @@ class ProductCreateController
 
             http_response_code(201);
             $response = [
-                'message' => 'Successfully registered product!',
+                'message' => 'Produto cadastrado com sucesso!',
                 'data' => $product
             ];
 
