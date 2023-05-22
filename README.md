@@ -6,20 +6,20 @@
 <div align="center" style="margin: 20px;">
 
 <p align="center" >
-  <a href="#star-introduction"> :star: Introdução</a> |
-  <a href="#rocket-technologies"> :rocket: Tecnologias</a> |
-  <a href="#hammer-application-deploy"> :hammer: Implantação de aplicativo</a> |
-  <a href="#computer-how-to-use"> :computer: Como usar </a> |
+  <a href="#star-introdução"> :star: Introdução</a> |
+  <a href="#rocket-tecnologias"> :rocket: Tecnologias</a> |
+  <a href="#hammer-implantação-de-aplicativo"> :hammer: Implantação de aplicativo</a> |
+  <a href="#computer-como-usar"> :computer: Como usar </a> |
 </p>
 
 </div>
 
-## :star: Introduction
+## :star: Introdução
 
 Aplicativo para venda e cadastro de produtos
 com modulo de imposto para controle de tarifas.
 
-## :rocket: Technologies
+## :rocket: Tecnologias
 
 Este projeto foi desenvolvido para teste técnico da empresa SoftExpert com as seguintes tecnologias:
 
