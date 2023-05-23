@@ -41,13 +41,13 @@ class UserUpdateRepository
     public function update($user, string $id)
     {
         try {
-            $password = $user['password'];
+            $password = $user->password;
             $date = date('Y-m-d H:i:s');
 
             $data = [
                 'id' => $id,
-                'name' => $user['name'],
-                'email' => $user['email'],
+                'name' => $user->name,
+                'email' => $user->email,
                 'password' => $password,
                 'updated_at' => $date
             ];

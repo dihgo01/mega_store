@@ -21,7 +21,7 @@ class UserCreateController
 
             http_response_code(201);
             $response = [
-                'message' => 'Successfully registered user!',
+                'message' => 'Usuario cadastrado com sucesso!',
                 'data' => $user
             ];
 

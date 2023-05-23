@@ -8,7 +8,7 @@ use Repositories\User\UserCreateRepository;
 
 class CreateUserfactory {
 
-    public function handle ($request) {
+    public function handle($request) {
         $userRepository = new UserCreateRepository();
         $createUser = new CreateUserCase($userRepository);
         $userCreateController = new UserCreateController($createUser);

@@ -19,11 +19,9 @@ class CreateUserCase
      */
     public function execute(array $data)
     {
-        $userClass = new User($data['name'], $data['email'], $data['password']);
+        $user = new User($data['name'], $data['email'], $data['password']);
 
-        $user = $userClass->create();
-
-        $userExist = $this->userRepository->findByEmail($user['email']);
+        $userExist = $this->userRepository->findByEmail($user->email);
 
         if ($userExist) {
             throw new Exception('User already exists.');

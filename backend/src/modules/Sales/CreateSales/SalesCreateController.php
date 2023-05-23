@@ -21,6 +21,7 @@ class SalesCreateController
 
             http_response_code(201);
             $response = [
+                'message' => 'Venda cadastrada com sucesso!',
                 'data' => $sales
             ];
 

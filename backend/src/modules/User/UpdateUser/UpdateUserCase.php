@@ -39,9 +39,7 @@ class UpdateUserCase
             }
         }
 
-        $userClass = new User($data['name'], $data['email'], $password);
-
-        $user = $userClass->create();
+        $user = new User($data['name'], $data['email'], $password);
     
         $userResponse = $this->userRepository->update($user, $id);
 

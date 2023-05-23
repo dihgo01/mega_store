@@ -30,7 +30,7 @@ class CreateSalesCase
         }
 
         foreach($data['products'] as $product) {
-            $sales_product[] = new SalesProduct($product['product_id'],$product['price'], $product['amount']);
+            $sales_product[] = new SalesProduct($product['product_id'],(float)$product['price'], $product['amount']);
         }
 
         $sales = $this->salesRepository->create($salesClass, $sales_product);

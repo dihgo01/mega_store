@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 use Repositories\Tax\Memory\TaxGetRepositoryMemory;
 use Modules\Tax\GetTax\GetTaxCase;
 
-class GetTaxTest extends TestCase
+class GetOnlyTaxTest extends TestCase
 {
     private $taxRepository;
     private $getTax;

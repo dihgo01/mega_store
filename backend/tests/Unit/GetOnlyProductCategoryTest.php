@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 use Repositories\ProductCategory\Memory\ProductCategoryGetRepositoryMemory;
 use Modules\ProductCategory\GetProductCategory\GetProductCategoryCase;
 
-class GetProductCategoryTest extends TestCase
+class GetOnlyProductCategoryTest extends TestCase
 {
     private $ProductCategoryRepository;
     private $getProductCategory;

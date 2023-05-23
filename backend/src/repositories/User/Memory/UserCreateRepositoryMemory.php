@@ -2,6 +2,8 @@
 
 namespace Repositories\User\Memory;
 
+use Entities\User;
+
 class UserCreateRepositoryMemory 
 {
     protected $users = [];
@@ -20,11 +22,15 @@ class UserCreateRepositoryMemory
     }
 
     /**
-     * @var array
+     * @var Entities\User
      */
-    public function create($user)
+    public function create(User $user)
     {   
-        $user['id'] = '1';
+        $user = [
+            'id' => '1',
+            'name' => $user->name,
+            'email' => $user->email
+        ];
         $this->users[] = $user;
         return $user;
     }

@@ -3,7 +3,6 @@
 namespace Repositories\User\Memory;
 
 use Entities\User;
-
 class UserUpdateRepositoryMemory
 {
     protected $users = [];
@@ -58,14 +57,14 @@ class UserUpdateRepositoryMemory
     /**
      * @var Entities\User
      */
-    public function update($user, string $id)
+    public function update(User $user, string $id)
     {
         foreach ($this->users as $key => $item) {
             if ($item['id'] === $id) {
                 $userUpdate = [
                     'id' => '1',
-                    'name' => $user['name'],
-                    'email' => $user['email'],
+                    'name' => $user->name,
+                    'email' => $user->email,
                     'password' => '$2y$10$QIZGS6A9bA1ecWHW6qFdMuf2DzQyDCsc3LW/i1.b8hlcxotPlUv8e'
                 ];
 

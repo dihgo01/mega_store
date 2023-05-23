@@ -34,13 +34,13 @@ class UserCreateRepository
     {
         try {
 
-            $password = password_hash($user['password'], PASSWORD_DEFAULT);
+            $password = password_hash($user->password, PASSWORD_DEFAULT);
             $date = date('Y-m-d H:i:s');
 
             $data = [
                 'id' => md5(uniqid(rand(), true)),
-                'name' => $user['name'],
-                'email' => $user['email'],
+                'name' => $user->name,
+                'email' => $user->email,
                 'password' => $password,
                 'created_at' => $date,
                 'updated_at' => $date

@@ -18,7 +18,8 @@ class SalesGetRepository
     public function list(string $id)
     {
         try {
-            $sql = "SELECT id, price, status, created_at FROM sales WHERE deleted_at IS NULL and user_id = '{$id}'";
+            $sql = "SELECT id, price, status, created_at FROM sales 
+            WHERE deleted_at IS NULL and user_id = '{$id}'";
 
             $result = $this->connection->query($sql);
     

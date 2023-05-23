@@ -21,7 +21,7 @@ class SessionCreateController
 
             http_response_code(201);
             $response = [
-                'message' => 'Login successful',
+                'message' => 'Login realizado com sucesso.',
                 'data' => $session
             ];
 
