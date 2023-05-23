@@ -18,19 +18,81 @@
                                     <li class="w-xs-100"><a href="/{{ url.parametros.var1 }}/{{ url.parametros.var2 }}/list" class="btn btn-white btn-outline-light w-xs-100 d-inline"><em class="icon ni ni-curve-up-left"></em><span>Voltar</span></a></li> 
                                 </ul>
                             </div>
-                        </div><!-- .toggle-wrap -->
-                    </div><!-- .nk-block-head-content -->                    
-                </div><!-- .nk-block-between -->
-            </div><!-- .nk-block-head -->
+                        </div>
+                    </div>                   
+                </div>
+            </div>
             <div class="nk-block">
                 <div class="card card-bordered card-stretch">
                     <div class="card-inner-group">
                         <div class="card-inner">
-                            <div class="row" id="recebeProdutos"></div> <!-- ROW -->
-                        </div> <!-- CAARD INNER -->
-                    </div><!-- .card-inner-group -->
-                </div><!-- .card -->
-            </div><!-- .nk-block -->
+                            <div class="row g-gs" id="recebeProdutos">
+                                {% if controller.conteudo %}
+                                    {% for produto in controller.conteudo %}
+                                        <div class="col-sm-6 col-lg-4 col-xl-6 col-xxl-3 col-12">
+                                                            <div class="gallery card card-bordered">
+
+                                                                <a class="gallery-image popup-image"
+                                                                    href="">
+                                                                    <img class="w-100 rounded-top"
+                                                                    style="max-height: 376px; min-height: 376px;"
+                                                                        src="https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis1.jpg"
+                                                                        alt="">
+                                                                </a>
+                                                                <div
+                                                                    class="gallery-body card-inner align-center justify-between flex-wrap">
+                                                                    <div class="col-12">
+                                                                        <h4 class="h4 fw-500 block-with-text txt-ellipses"
+                                                                            data-bs-tooltip="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="{{produto.name|e}}">
+                                                                            {{produto.name|e}}
+                                                                        </h4>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="gallery-body align-center justify-between flex-wrap mb-2 mt-2 row"
+                                                                    style="padding-left: 1.5rem; padding-right: 1.5rem;">
+
+                                                                    <div class="col-12 col-md-12">
+                                                                        <span class="sub-text">PREÇO </span>
+                                                                        <span
+                                                                            class="h4 fw-500 text-primary">{{produto.price|e}}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="gallery-body align-center justify-center flex-wrap mb-2 row"
+                                                                    style="padding-left: 5.5rem; padding-right: 5.5rem;">
+                                                                        <button
+                                                                            class="btn btn-primary add_cart p-1"
+                                                                            data-id="{{produto.id|e}}"
+                                                                            type="submit"><em class="icon ni ni-cart"
+                                                                                style="margin-bottom:4px;"></em>
+                                                                            <span class="text-center"
+                                                                                style="margin-top: 2px; margin-bottom:2px;">Adicionar</span></button>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="d-flex justify-content-center align-items-center" style="height: 550px;">
+                                        <div>
+                                            <h3 class="text-center"><em
+                                                class="icon ni ni-info text-center"
+                                                style="font-size: 60px;"></em></h3>
+                                            <h3 class="h4 fw-700 text-center">Ops! Nenhum produto encontrado</h3>
+                                            <h6 class="text-muted text-center">Por enquanto não há
+                                                produtos adicionado para esta loja. Por favor entre em
+                                                contato com responsável.</h6>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div> 
+                        </div> 
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -39,18 +101,3 @@
 <!-- LOAD EXTRA FILES -->
 {{ include('scripts.twig') }}
 <script src="/assets/js/views/{{ url.parametros.var1 }}/{{ url.parametros.var2 }}/{{ url.parametros.var2 }}.js"></script>
-<script src="/assets/js/views/{{ url.parametros.var1 }}/{{ url.parametros.var2 }}/shopcart.js?ts={{ random(100000, 999999) }}"></script>
-<script>
-$(function(){
-
-    // ACIONADOR DO METODO
-	qv_create.init("#formCreate");
-
-    // TRIGERS
-    $("#btFiltrarProdutos").trigger('click');
-    
-    // FUNCOES
-    carregarShopCart();
-    
-});
-</script>

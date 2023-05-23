@@ -12,8 +12,8 @@ use Twig\Sandbox\SecurityNotAllowedFunctionError;
 use Twig\Source;
 use Twig\Template;
 
-/* /pedidos/shopcart.twig */
-class __TwigTemplate_93a1586a59a8ff24c6c7a429984fdfcd extends Template
+/* shopcart.twig */
+class __TwigTemplate_364d8b0d35fcfe099585885097026607 extends Template
 {
     private $source;
     private $macros = [];
@@ -69,7 +69,7 @@ class __TwigTemplate_93a1586a59a8ff24c6c7a429984fdfcd extends Template
                 data-target=\"addProductCart\">
                 Fechar
             </a>
-            <a href=\"/fms/sales-cart/finish/\" id=\"btCheckout\"
+            <a href=\"/pedidos/vendas/checkout\" id=\"btCheckout\"
                 class=\"btn btn-primary text-center w-100 d-block \">
                     Checkout da venda
             </a>
@@ -80,7 +80,7 @@ class __TwigTemplate_93a1586a59a8ff24c6c7a429984fdfcd extends Template
 
     public function getTemplateName()
     {
-        return "/pedidos/shopcart.twig";
+        return "shopcart.twig";
     }
 
     public function getDebugInfo()
@@ -90,6 +90,6 @@ class __TwigTemplate_93a1586a59a8ff24c6c7a429984fdfcd extends Template
 
     public function getSourceContext()
     {
-        return new Source("", "/pedidos/shopcart.twig", "C:\\Users\\Diego\\Desktop\\prog\\SoftExpert\\frontend\\app\\views\\pedidos\\shopcart.twig");
+        return new Source("", "shopcart.twig", "C:\\Users\\Diego\\Desktop\\prog\\SoftExpert\\frontend\\app\\views\\shopcart.twig");
     }
 }

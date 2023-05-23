@@ -35,32 +35,17 @@
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1">
-                            <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
-                                <div class="user-card">
-                                    <div class="user-avatar">
-                                        <em class="icon ni ni-user-alt"></em>
-                                    </div>
-                                    <div class="user-info">
-                                        <span class="lead-text">{{ authentication.nome }}</span>
-                                        <span class="sub-text">{{ authentication.email }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="dropdown-inner">
+                            <div class="dropdown-inner session_user">
                                 <ul class="link-list">
-                                    <li><a href="/minha-conta"><em class="icon ni ni-user-alt"></em><span>Registro</span></a></li>
-                                    <li><a href="/minha-conta/franquias"><em class="icon ni ni-setting-alt"></em><span>Registre-se</span></a></li>
-                                    <li><a href="/minha-conta/historico"><em class="icon ni ni-activity-alt"></em><span>Registre-se</span></a></li>
-                                    <li><a class="dark-switch" href="#"><em class="icon ni ni-moon"></em><span>Registre-se</span></a></li>
+                                    <li><a href="#" class="btn_modal_login_user"><em class="icon ni ni-user-alt"></em><span>Login</span></a></li>
+                                    <li><a href="#" class="btn_modal_register_user"><em class="icon ni ni-setting-alt"></em><span>Registre-se</span></a></li>
                                 </ul>
                             </div>
-                            {% if authentication.loginStatus == true %}
-                            <div class="dropdown-inner">
+                            <div class="dropdown-inner user_session d-none">
                                 <ul class="link-list">
-                                    <li><a href="/logout"><em class="icon ni ni-signout"></em><span>Sair da conta</span></a></li>
+                                    <li><a href="#" class="submit_logout_session"><em class="icon ni ni-signout"></em><span>Sair da conta</span></a></li>
                                 </ul>
                             </div>
-                            {% endif %}
                         </div>
                     </li><!-- .dropdown -->
 

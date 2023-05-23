@@ -96,6 +96,8 @@ var INIT_QV_CUSTOM = function () {
         
             }
 
+            
+
             // MASKMONEY
             $("input.maskMoney").maskMoney({
                 "prefix": 'R$ ',

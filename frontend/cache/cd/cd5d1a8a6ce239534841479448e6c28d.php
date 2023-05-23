@@ -71,44 +71,18 @@ class __TwigTemplate_3d898d9d2a20e11a527b18c182188c1b extends Template
                             </div>
                         </a>
                         <div class=\"dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1\">
-                            <div class=\"dropdown-inner user-card-wrap bg-lighter d-none d-md-block\">
-                                <div class=\"user-card\">
-                                    <div class=\"user-avatar\">
-                                        <em class=\"icon ni ni-user-alt\"></em>
-                                    </div>
-                                    <div class=\"user-info\">
-                                        <span class=\"lead-text\">";
-        // line 44
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["authentication"] ?? null), "nome", [], "any", false, false, false, 44), "html", null, true);
-        echo "</span>
-                                        <span class=\"sub-text\">";
-        // line 45
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["authentication"] ?? null), "email", [], "any", false, false, false, 45), "html", null, true);
-        echo "</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class=\"dropdown-inner\">
+                            <div class=\"dropdown-inner session_user\">
                                 <ul class=\"link-list\">
-                                    <li><a href=\"/minha-conta\"><em class=\"icon ni ni-user-alt\"></em><span>Registro</span></a></li>
-                                    <li><a href=\"/minha-conta/franquias\"><em class=\"icon ni ni-setting-alt\"></em><span>Registre-se</span></a></li>
-                                    <li><a href=\"/minha-conta/historico\"><em class=\"icon ni ni-activity-alt\"></em><span>Registre-se</span></a></li>
-                                    <li><a class=\"dark-switch\" href=\"#\"><em class=\"icon ni ni-moon\"></em><span>Registre-se</span></a></li>
+                                    <li><a href=\"#\" class=\"btn_modal_login_user\"><em class=\"icon ni ni-user-alt\"></em><span>Login</span></a></li>
+                                    <li><a href=\"#\" class=\"btn_modal_register_user\"><em class=\"icon ni ni-setting-alt\"></em><span>Registre-se</span></a></li>
                                 </ul>
                             </div>
-                            ";
-        // line 57
-        if ((twig_get_attribute($this->env, $this->source, ($context["authentication"] ?? null), "loginStatus", [], "any", false, false, false, 57) == true)) {
-            // line 58
-            echo "                            <div class=\"dropdown-inner\">
+                            <div class=\"dropdown-inner user_session d-none\">
                                 <ul class=\"link-list\">
-                                    <li><a href=\"/logout\"><em class=\"icon ni ni-signout\"></em><span>Sair da conta</span></a></li>
+                                    <li><a href=\"#\" class=\"submit_logout_session\"><em class=\"icon ni ni-signout\"></em><span>Sair da conta</span></a></li>
                                 </ul>
                             </div>
-                            ";
-        }
-        // line 64
-        echo "                        </div>
+                        </div>
                     </li><!-- .dropdown -->
 
                 </ul><!-- .nk-quick-nav -->
@@ -124,14 +98,9 @@ class __TwigTemplate_3d898d9d2a20e11a527b18c182188c1b extends Template
         return "topo.twig";
     }
 
-    public function isTraitable()
-    {
-        return false;
-    }
-
     public function getDebugInfo()
     {
-        return array (  111 => 64,  103 => 58,  101 => 57,  86 => 45,  82 => 44,  37 => 1,);
+        return array (  37 => 1,);
     }
 
     public function getSourceContext()

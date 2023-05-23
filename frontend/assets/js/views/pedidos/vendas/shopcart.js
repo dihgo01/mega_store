@@ -1,397 +1,480 @@
-// ATUALIZA TOTAL SHOPCART
-function atualizarTotalShopCart() {
-    
-    // VARIAVEIS
-    var shopCart_SubTotalCarrinho = 0;
-    var shopCart_TotalCarrinho = 0;
-    var descontoTipo = $("#shopCart_RecebeItens").attr('data-desconto-tipo');
-    var desconto     = $("#shopCart_RecebeItens").attr('data-desconto');
-    var descontoPercentual = 0;    
+$(document).ready(function () {
+    const cart_memory_init = JSON.parse(localStorage.getItem('cart'));
 
-    // PERCORRE ITENS
-    $("#shopCart_RecebeItens li").each(function() {
-        var currentValue = $(this).attr("data-valor");
-        shopCart_SubTotalCarrinho = parseFloat(shopCart_SubTotalCarrinho) + parseFloat(currentValue);
-    });
-    $("#shopCart_SubTotalPedido").html(shopCart_SubTotalCarrinho.toFixed(2));
-
-    // DESCONTOS
-    if(descontoTipo == 'Valor') {
-        shopCart_TotalCarrinho = parseFloat(shopCart_SubTotalCarrinho) - parseFloat(desconto);
-    } else if(descontoTipo == 'Porcentagem') {
-        descontoPercentual = (parseFloat(desconto)/100) * parseFloat(shopCart_SubTotalCarrinho);
-        shopCart_TotalCarrinho = parseFloat(shopCart_SubTotalCarrinho) - parseFloat(descontoPercentual);
-        desconto = parseFloat(descontoPercentual).toFixed(2);
-    } else {
-        shopCart_TotalCarrinho = shopCart_SubTotalCarrinho;
+    if (cart_memory_init) {
+        $(cart_memory_init).each(function (index, value) {
+            const total_price_cart = parseFloat($('#shopCartSales').text().replace(',', '.'));
+            const total = parseFloat(total_price_cart) + parseFloat(value.price);
+            $('#shopCartSales').html(total.toFixed(2));
+            $('#shopCart_Sales').append(
+                '<li class="list-group-item list_item_grid_' + value.id + '" data-id="' + value.id + '">' +
+                '<div class="row p-0 align-items-center">' +
+                '<div class="col-2 p-0 mb-1">' +
+                '<img class="icon me-1 img-fluid rounded-circle" src="https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis1.jpg" alt="">' +
+                '</div>' +
+                '<div class="col-8 px-1 py-0 mb-1">' +
+                '<p class="fs-12px mb-0">' + value.name + '</p>' +
+                '</div>' +
+                '<div class="col-2 p-0 mb-1">' +
+                '<a href="javascript:void(0);" class="btn btn-sm btn-outline-danger btnRemoverCart" data-id="' + value.id + '" ><i class="fas fa-trash"></i></a>' +
+                '</div>' +
+                '<div class="col-6">' +
+                '<h5 class="display-11 text-center">Quantidade</h5>' +
+                '<div class="form-control-wrap number-spinner-wrap">' +
+                '<button class="btn btn-icon btn-outline-light number-spinner-btn number-minus remove_cart_item" data-id="' + value.id + '" data-number="minus-qv"><em class="icon ni ni-minus"></em></button>' +
+                '<input type="number" class="form-control number-spinner input_qtd_' + value.id + '" value="1" min="1" readonly="">' +
+                '<button class="btn btn-icon btn-outline-light number-spinner-btn number-plus add_cart_item" data-id="' + value.id + '" ><em class="icon ni ni-plus"></em></button>' +
+                '</div>' +
+                '</div>' +
+                '<div class="col-6">' +
+                '<h5 class="display-11 text-center">Preço</h5>' +
+                '<div class="form-control-wrap">' +
+                '<input type="text" class="form-control price_input_' + value.id + '" value="' + value.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '" readonly="">' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '</li>'
+            );
+        });
     }
 
-    // APLICA TOTAL, SUBTOTAL e DESCONTO
-    $("#shopCart_SubTotalPedido").html(shopCart_SubTotalCarrinho.toFixed(2));
-    $("#shopCart_TotalPedido").html(shopCart_TotalCarrinho.toFixed(2));
-    $("#shopCart_TotalPedido").attr('data-valor',shopCart_TotalCarrinho.toFixed(2));
-    $("#shopCart_Descontos").html(desconto);
+    // REMOVE CART
+    $('body').on('click', '.remove_cart_item', function () {
+        const id = $(this).attr('data-id');
 
-    // VALIDA EXIBICAO DO BOTAO DE CHECKOUT
-    if(shopCart_SubTotalCarrinho > 0) {
-        $("#btCheckout").removeClass('d-none');
-    } else {
-        $("#btCheckout").addClass('d-none');
-    }
-
-}
-
-// ATUALIZA TOTAL SHOPCART
-function atualizarLinhasFormaPagamento() {
-
-    // CHECA PAGINA ATUAL
-    var paginaAtual = window.location.pathname;
-    var paginaCheckout = '/franquia/vendas/checkout';
-    var paginaEditar = '/franquia/vendas/update';
-    var valorPrimeiraLinha = $("#recebeFormasPagamento .linhaFormaPagamento[data-linha=1] .C_valor").maskMoney('unmasked')[0];
-    var valorShopCart = $("#shopCart_TotalPedido").attr('data-valor');
-    var parcelas = $("#recebeFormasPagamento .linhaFormaPagamento[data-linha=1] .C_parcelas").val();
-    var valorParcelas = (parseFloat(valorShopCart) / parseInt(parcelas)).toFixed(2);
-    var linhasQTDAtual = contarElementos("#recebeFormasPagamento .linhaFormaPagamento");
-
-    // CHECA SE A PAGINA ATUAL É VALIDA PARA TAL ACAO E SE A PRIMEIRA LINHA DE PAGAMENTO ESTA VAZIA
-    if( (paginaAtual.toLowerCase().includes(paginaCheckout.toLowerCase()) || paginaAtual.toLowerCase().includes(paginaEditar.toLowerCase())) && (parseInt(linhasQTDAtual) == 1) ) {
-
-        $("#recebeFormasPagamento .linhaFormaPagamento[data-linha=1] .C_valor").val(parseFloat(valorShopCart).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
-        $("#recebeFormasPagamento .linhaFormaPagamento[data-linha=1] .recebeValorParcela").html("(R$ "+parseFloat(valorParcelas).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })+")");
-
-    }
-
-}
-
-// VALIDACAO DO PREENCHIMENTO MANUAL DE VALORES DAS FORMAS PAGAMENTO
-function alertaFormasPagamento() {
-
-    // VARIAVEIS IMPORTANTES
-    var paginaAtual         = window.location.pathname;
-    var paginaCheckout      = '/pedidos/vendas/checkout';
-    var paginaEditar        = '/pedidos/vendas/update';
-    var valorDesconto       = $("#totalDesconto").val();
-    var diferencaCentavos   = parseInt(5);
-
-    // CHECA SE A PAGINA ATUAL É VALIDA PARA TAL ACAO E SE A PRIMEIRA LINHA DE PAGAMENTO ESTA VAZIA
-    if((paginaAtual.toLowerCase().includes(paginaCheckout.toLowerCase()))) {
-        var valorShopCart = $("#shopCart_TotalPedido").attr('data-valor').toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    } else{
-        var valorShopCart = $("#totalLiquido").val().toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    }
-    var valorTotalFormasPagamento = 0;
-    var valorTotalProdutos = 0;
-
-    // PERCORRE LINHAS DE PAGAMENTO COLETANDO VALORES
-    $(".linhaFormaPagamento").each(function() {
-        var currentElement 	        = $(this);
-        var currentValue  	        = $(".C_valor",currentElement).maskMoney('unmasked')[0];
-        valorTotalFormasPagamento   = parseFloat(valorTotalFormasPagamento) + parseFloat(currentValue);
-    });	
-
-    // PAGINA EDICAO DA VENDA
-    if((paginaAtual.toLowerCase().includes(paginaEditar.toLowerCase()))) {
-
-        // PERCORRE LINHAS DE DE PRODUTOS COLETANDO VALORES
-        $(".linhaProdutos").each(function() {
-            var currentElement 	= $(this);
-            var currentValue  	= $(".prodPreco",currentElement).val();
-            var currentQTD  	= $(".prodQTD",currentElement).val();
-            valorTotalProdutos  = parseFloat(valorTotalProdutos) + (parseFloat(currentValue) * parseInt(currentQTD));
-        });	  
-
-        // CONSIDERA DESCONTO
-        var valorTotalProdutos_Descontado = parseFloat(valorTotalProdutos) - parseFloat(valorDesconto);
-        
-        // ATUALIZA TOTALIZADORES
-        $("#totalBruto").val(valorTotalProdutos);
-        $("#totalLiquido").val(valorTotalProdutos_Descontado);
-        
-        // ATUALIZA INDICADORES
-        $("#recebeTotalLiquido").html("R$ " + parseFloat(valorTotalProdutos_Descontado).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
-        $("#recebeTotalBruto").html("R$ " + parseFloat(valorTotalProdutos).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));  
-        
-        // CHECAGEM
-        if(valorShopCart != valorTotalFormasPagamento || valorTotalProdutos != valorTotalFormasPagamento) {
-
-            // ORDENANDO VALORES DO MAIOR PARA MENOR PARA SUBSTRACAO
-            var lista_A = [parseFloat(valorShopCart), parseFloat(valorTotalFormasPagamento)];
-            var lista_B = [parseFloat(valorTotalProdutos), parseFloat(valorTotalFormasPagamento)];
-            lista_A.sort(function(a, b) { return b - a; });  
-            lista_B.sort(function(a, b) { return b - a; }); 
-            var diferenca_lista_A = parseFloat((lista_A[0] - lista_A[1]));
-            var diferenca_lista_B = parseFloat((lista_B[0] - lista_B[1]));
-
-            // CHECANDO SE DIFERENCA ESTA DENTRO DO ACEITAVEL
-            if( (diferenca_lista_A <= diferencaCentavos) || (diferenca_lista_B <= diferencaCentavos) ) {
-                $("#alertaFormasPagamento").addClass('d-none');
-                return true;                
-            } else {
-                $("#alertaFormasPagamento").removeClass('d-none');
-                return false;
-            }
-
-        } else {
-            $("#alertaFormasPagamento").addClass('d-none');
-            return true;
-        }        
-
-    } else {
-
-        /*console.log("Valor Total ShopCart: " + valorShopCart);
-        console.log("Formas de Pagamento: " + valorTotalFormasPagamento.toFixed(2)); 
-        console.log("Total Produtos: " + valorTotalProdutos);  
-        console.log("Desconto: " + valorDesconto);*/   
-
-        // CHECAGEM
-        if(valorShopCart != valorTotalFormasPagamento) {
-            $("#alertaFormasPagamento").removeClass('d-none');
-            return false;
-        } else {
-            $("#alertaFormasPagamento").addClass('d-none');
-            return true;
-        }        
-        
-    }
-
-}
-
-// VERIFICANDO SHOPCART
-function carregarShopCart() {
-
-    var retornoResultado;
-    var retornoMensagem;
-    var retornoConteudo;
-
-    // BARRA PROGRESSO
-    var barraProgresso = '<div class="row" id="barraProgresso"><div class="col-12 py-2 text-center">'+
-    '<div class="spinner-border text-dark" role="status">'+
-    '<span class="sr-only">Carregando...</span>'+
-    '</div></div></div>';
-
-    // BARRA PROGRESSO - APLICA
-    $("#shopCart_RecebeItens").html(barraProgresso);
-
-    // REQUISICAO AJAX
-   						
-
-};
-
-// REMOVER ITEM DO CARRINHO
-function removerItemCarrinho(idItem) {
-
-    var retornoResultado;
-    var retornoMensagem;
-
-    // BARRA PROGRESSO
-    var barraProgresso = '<div class="row" id="barraProgresso"><div class="col-12 py-2 text-center">'+
-    '<div class="spinner-border text-dark" role="status">'+
-    '<span class="sr-only">Carregando...</span>'+
-    '</div></div></div>';
-
-    // BARRA PROGRESSO - APLICA
-    $("#shopCart_RecebeItens").html(barraProgresso);
-
-    // REQUISICAO AJAX
-    $.ajax({
-        type: 'POST',
-        dataType : "json",
-        data: 	'acao=remover-item-shopcart&P_idItem='+idItem+'&qv_url_path='+qv_url_path,
-        url: '/app/controllers/franquia/vendas/ajax.php',
-        success: function(retorno){
-            retornoResultado = retorno.resultado;
-            retornoMensagem  = retorno.mensagem;
-        }, // SUCCESS
-        complete: function() {
-            if(retornoResultado === true) {
-
-                // RECARREGA SHOPCART
-                carregarShopCart();
-
-            } else {
-
-                // ALERT
-                swal.fire({
-                    title: "Oops...",
-                    allowEscapeKey: false,
-                    allowOutsideClick: false,                    
-                    text: retornoMensagem,
-                    icon: "warning"
-                });
-
-            }						
-
-        }
-
-    });						
-
-};
-
-// ESVAZIAR CARRINHO
-function esvaziarCarrinho() {
-
-    var retornoResultado;
-    var retornoMensagem;
-
-    // BARRA PROGRESSO
-    var barraProgresso = '<div class="row" id="barraProgresso"><div class="col-12 py-2 text-center">'+
-    '<div class="spinner-border text-dark" role="status">'+
-    '<span class="sr-only">Carregando...</span>'+
-    '</div></div></div>';
-
-    // BARRA PROGRESSO - APLICA
-    $("#shopCart_RecebeItens").html(barraProgresso);
-
-    // REQUISICAO AJAX
-    $.ajax({
-        type: 'POST',
-        dataType : "json",
-        data: 	'acao=esvaziar-shopcart&qv_url_path='+qv_url_path,
-        url: '/app/controllers/franquia/vendas/ajax.php',
-        success: function(retorno){
-            retornoResultado = retorno.resultado;
-            retornoMensagem  = retorno.mensagem;
-        }, // SUCCESS
-        complete: function() {
-            if(retornoResultado === true) {
-
-                // APLICA HTML
-                $("#shopCart_RecebeItens").html('<li class="list-group-item d-flex justify-content-between align-items-center" data-valor="0">Carrinho Vazio.</li>');
-
-                // ATUALIZA TOTAL SHOPCART
-                atualizarTotalShopCart();
-
-            } else {
-
-                // ALERT
-                swal.fire({
-                    title: "Oops...",
-                    allowEscapeKey: false,
-                    allowOutsideClick: false,                    
-                    text: retornoMensagem,
-                    icon: "warning"
-                });
-
-            }						
-
-        }
-
-    });						
-
-};
-
-// ALTERAR QTD DO ITEM PELO CARRINHO
-function alterarQuantidade(operacao,idItem) {
-
-    // VARIAVEIS
-    var produto             = $("#shopCart_RecebeItens li[data-item="+idItem+"]");
-    var produtoValorAtual   = $("input.number-spinner",produto).val();
-    var produtoQTDMin       = $("input.number-spinner",produto).attr('min');
-    var produtoQTDMax       = $("input.number-spinner",produto).attr('max');
-    var produtoStep         = 1;
-    var checkFinal          = false;
-
-    var retornoResultado;
-    var retornoMensagem;    
-
-    // OPERACAO DE INCREMENTO
-    if(operacao == 'plus') {
-        var produtoNovoValor = parseInt(produtoValorAtual) + parseInt(produtoStep);
-    } else {
-        var produtoNovoValor = parseInt(produtoValorAtual) - parseInt(produtoStep);
-    }
-
-    // VALIDACAO DA OPERACAO
-    if(parseInt(produtoNovoValor) <=  parseInt(produtoQTDMax) && parseInt(produtoNovoValor) >=  parseInt(produtoQTDMin)) { checkFinal = true; }
-
-    // CONFERINDO O VALIDADOR
-    if(checkFinal) {
-
-        // REQUISICAO AJAX
         $.ajax({
-            type: 'POST',
-            dataType : "json",
-            data: 	'acao=alterar-quantidade-item-shopcart&P_idItem='+idItem+'&nova_quantidade='+produtoNovoValor+'&qv_url_path='+qv_url_path,
-            url: '/app/controllers/franquia/vendas/ajax.php',
-            success: function(retorno){
-                retornoResultado = retorno.resultado;
-                retornoMensagem  = retorno.mensagem;
-            }, // SUCCESS
-            complete: function() {
-                if(retornoResultado === true) {
+            url: 'http://localhost:8000/product-only?id=' + id,
+            type: 'GET',
+            dataType: "JSON",
+            data: {},
+            success: function (retorno) {
+                if (retorno.id) {
+                    const decimal = retorno.price.replace(',', '.');
+                    const price = decimal.replace('R$', '');
+                    const imposto = (parseFloat(price) * retorno.percentage / 100);
 
-                    // RECARREGA SHOPCART
-                    carregarShopCart();
+                    const cart_memory = localStorage.getItem('cart');
+
+                    if (cart_memory) {
+                        const cart_memory_json = JSON.parse(cart_memory);
+                        const product_exist = cart_memory_json.find(product => product.id === retorno.id);
+
+                        if (product_exist) {
+
+                            const quantity = product_exist.quantity - 1;
+
+                            if (quantity == 0) {
+
+                                const productIndex = cart_memory_json.filter(product => product.id !== retorno.id);
+
+                                localStorage.setItem('cart', JSON.stringify(productIndex));
+
+                                const total_price_cart = parseFloat($('#shopCartSales').text());
+                                const total = total_price_cart - parseFloat(price);
+                                $('#shopCartSales').html(total.toFixed(2));
+                                $('.list_item_grid_' + retorno.id).remove();
+                            } else {
+
+                                const total_price = parseFloat(price) * quantity;
+
+                                const productIndex = cart_memory_json.filter(product => product.id !== retorno.id);
+
+                                productIndex.push({
+                                    id: retorno.id,
+                                    name: retorno.name,
+                                    price: total_price,
+                                    quantity: quantity,
+                                    tax: imposto * quantity
+                                });
+
+                                localStorage.setItem('cart', JSON.stringify(productIndex));
+
+                                const total_price_cart = parseFloat($('#shopCartSales').text());
+                                const total = total_price_cart - parseFloat(price);
+                                $('#shopCartSales').html(total.toFixed(2));
+
+                                $('.input_qtd_' + retorno.id).val(quantity);
+                                $('.price_input_' + retorno.id).val(total_price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+
+                            }
+                        }
+                    }
 
                 } else {
-
-                    // ALERT
-                    swal.fire({
-                        title: "Oops...",
+                    Swal.fire({
+                        title: 'Algo deu Errado!',
+                        text: "Produto não encontrado.",
+                        icon: 'error',
                         allowEscapeKey: false,
-                        allowOutsideClick: false,                        
-                        text: retornoMensagem,
-                        icon: "warning"
+                        allowOutsideClick: false,
+                        showCancelButton: false,
+                        confirmButtonText: 'Continuar'
+                    }).then(function (result) {
                     });
+                }
+            },
 
-                }						
+        });
 
-            }
+    });
 
-        });	        
+    // ADD CART
+    $('body').on('click', '.add_cart', function () {
+        const id = $(this).attr('data-id');
 
-    }				
+        $.ajax({
+            url: 'http://localhost:8000/product-only?id=' + id,
+            type: 'GET',
+            dataType: "JSON",
+            data: {},
+            success: function (retorno) {
+                if (retorno.id) {
+                    const decimal = retorno.price.replace(',', '.');
+                    const price = decimal.replace('R$', '');
+                    const imposto = (parseFloat(price) * retorno.percentage / 100);
 
-};
+                    const cart_memory = localStorage.getItem('cart');
 
-// ADD ITEM POR BIPE SKU
-function sku_bipe(sku) {
+                    if (cart_memory) {
+                        const cart_memory_json = JSON.parse(cart_memory);
+                        const product_exist = cart_memory_json.find(product => product.id === retorno.id);
 
-    var retornoResultado;
-    var retornoMensagem;
+                        if (product_exist) {
+                            const quantity = product_exist.quantity + 1;
+                            const total_price = parseFloat(price) * quantity;
 
-    // TOASTR - MENSAGEM INFORMATIVA                
-    toastr.options =  Toastr_default_options;
-    
-    // CARREGA O TOASTR
-    toastr["success"]("Consultando SKU", "Carrinho de Compras");	    
+                            const productIndex = cart_memory_json.filter(product => product.id !== retorno.id);
 
-    // REQUISICAO AJAX
-    $.ajax({
-        type: 'POST',
-        dataType : "json",
-        data: 	'acao=sku_bipe&sku='+sku+'&qv_url_path='+qv_url_path,
-        url: '/app/controllers/franquia/vendas/ajax.php',
-        success: function(retorno){
-            retornoResultado = retorno.resultado;
-            retornoMensagem  = retorno.mensagem;
-        }, // SUCCESS
-        complete: function() {
-            if(retornoResultado === false) {
+                            productIndex.push({
+                                id: retorno.id,
+                                name: retorno.name,
+                                price: total_price,
+                                quantity: quantity,
+                                tax: imposto * quantity
+                            });
 
-                // ALERT
-                swal.fire({
-                    title: "Oops...",
-                    allowEscapeKey: false,
-                    allowOutsideClick: false,                    
-                    text: retornoMensagem,
-                    icon: "warning"
-                });  
-                
-                $("#sku_bipe").val('').focus();
+                            localStorage.setItem('cart', JSON.stringify(productIndex));
 
-            } else {
-                // RECARREGA SHOPCART
-                carregarShopCart();
-                $("#sku_bipe").val('').focus();                
-            } 
+                            const total_price_cart = parseFloat($('#shopCartSales').text());
+                            const total = total_price_cart + parseFloat(price);
+                            $('#shopCartSales').html(total.toFixed(2));
 
-            // REMOVE TOASTR
-            toastr.clear();	            
+                            $('.input_qtd_' + retorno.id).val(quantity);
+                            $('.price_input_' + retorno.id).val(total_price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
 
-        }
+                            $('#btnCartButton').trigger('click');
 
-    });						
+                        } else {
+                            const total_price_cart = parseFloat($('#shopCartSales').text());
+                            const total = total_price_cart + parseFloat(price);
+                            $('#shopCartSales').html(total.toFixed(2));
 
-};
+                            const new_product_array = {
+                                id: retorno.id,
+                                name: retorno.name,
+                                price: price,
+                                quantity: 1,
+                                tax: imposto
+                            }
+                            cart_memory_json.push(new_product_array);
+                            localStorage.setItem('cart', JSON.stringify(cart_memory_json));
+
+                            $('#shopCart_Sales').append(
+                                '<li class="list-group-item list_item_grid_' + retorno.id + '" data-id="' + retorno.id + '">' +
+                                '<div class="row p-0 align-items-center">' +
+                                '<div class="col-2 p-0 mb-1">' +
+                                '<img class="icon me-1 img-fluid rounded-circle" src="https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis1.jpg" alt="">' +
+                                '</div>' +
+                                '<div class="col-8 px-1 py-0 mb-1">' +
+                                '<p class="fs-12px mb-0">' + retorno.name + '</p>' +
+                                '</div>' +
+                                '<div class="col-2 p-0 mb-1">' +
+                                '<a href="javascript:void(0);" class="btn btn-sm btn-outline-danger btnRemoverCart" data-id="' + retorno.id + '" ><i class="fas fa-trash"></i></a>' +
+                                '</div>' +
+                                '<div class="col-6">' +
+                                '<h5 class="display-11 text-center">Quantidade</h5>' +
+                                '<div class="form-control-wrap number-spinner-wrap">' +
+                                '<button class="btn btn-icon btn-outline-light number-spinner-btn number-minus remove_cart_item" data-id="' + retorno.id + '" data-number="minus-qv"><em class="icon ni ni-minus"></em></button>' +
+                                '<input type="number" class="form-control number-spinner input_qtd_' + retorno.id + '" value="1" min="1" readonly="">' +
+                                '<button class="btn btn-icon btn-outline-light number-spinner-btn number-plus add_cart_item" data-id="' + retorno.id + '" data-number="plus-qv"><em class="icon ni ni-plus"></em></button>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="col-6">' +
+                                '<h5 class="display-11 text-center">Preço</h5>' +
+                                '<div class="form-control-wrap">' +
+                                '<input type="text" class="form-control price_input_' + retorno.id + '" value="' + retorno.price + '" readonly="">' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</li>'
+                            );
+
+                            $('#btnCartButton').trigger('click');
+                        }
+
+                    } else {
+                        const total_price_cart = parseFloat($('#shopCartSales').text());
+                        const total = total_price_cart + parseFloat(price);
+                        $('#shopCartSales').html(total.toFixed(2));
+
+                        localStorage.setItem('cart', JSON.stringify([{
+                            id: retorno.id,
+                            name: retorno.name,
+                            price: parseFloat(price),
+                            quantity: 1,
+                            tax: imposto
+                        }]));
+
+                        $('#shopCart_Sales').append(
+                            '<li class="list-group-item list_item_grid_' + retorno.id + '" data-id="' + retorno.id + '">' +
+                            '<div class="row p-0 align-items-center">' +
+                            '<div class="col-2 p-0 mb-1">' +
+                            '<img class="icon me-1 img-fluid rounded-circle" src="https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis1.jpg" alt="">' +
+                            '</div>' +
+                            '<div class="col-8 px-1 py-0 mb-1">' +
+                            '<p class="fs-12px mb-0">' + retorno.name + '</p>' +
+                            '</div>' +
+                            '<div class="col-2 p-0 mb-1">' +
+                            '<a href="javascript:void(0);" class="btn btn-sm btn-outline-danger btnRemoverCart" data-id="' + retorno.id + '" ><i class="fas fa-trash"></i></a>' +
+                            '</div>' +
+                            '<div class="col-6">' +
+                            '<h5 class="display-11 text-center">Quantidade</h5>' +
+                            '<div class="form-control-wrap number-spinner-wrap">' +
+                            '<button class="btn btn-icon btn-outline-light number-spinner-btn number-minus remove_cart_item" data-id="' + retorno.id + '" data-number="minus-qv"><em class="icon ni ni-minus"></em></button>' +
+                            '<input type="number" class="form-control number-spinner input_qtd_' + retorno.id + '" value="1" min="1" readonly="">' +
+                            '<button class="btn btn-icon btn-outline-light number-spinner-btn number-plus add_cart_item" data-id="' + retorno.id + '" data-number="plus-qv"><em class="icon ni ni-plus"></em></button>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="col-6">' +
+                            '<h5 class="display-11 text-center">Preço</h5>' +
+                            '<div class="form-control-wrap">' +
+                            '<input type="text" class="form-control price_input_' + retorno.id + '" value="' + retorno.price + '" readonly="">' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '</li>'
+                        );
+
+                        $('#btnCartButton').trigger('click');
+                    }
+
+                } else {
+                    Swal.fire({
+                        title: 'Algo deu Errado!',
+                        text: "Produto não encontrado.",
+                        icon: 'error',
+                        allowEscapeKey: false,
+                        allowOutsideClick: false,
+                        showCancelButton: false,
+                        confirmButtonText: 'Continuar'
+                    }).then(function (result) {
+                    });
+                }
+            },
+
+        });
+
+    });
+
+    // ADD CART ITEM
+    $('body').on('click', '.add_cart_item', function () {
+        const id = $(this).attr('data-id');
+
+        $.ajax({
+            url: 'http://localhost:8000/product-only?id=' + id,
+            type: 'GET',
+            dataType: "JSON",
+            data: {},
+            success: function (retorno) {
+                if (retorno.id) {
+                    const decimal = retorno.price.replace(',', '.');
+                    const price = decimal.replace('R$', '');
+                    const imposto = (parseFloat(price) * retorno.percentage / 100);
+
+                    const cart_memory = localStorage.getItem('cart');
+
+                    if (cart_memory) {
+                        const cart_memory_json = JSON.parse(cart_memory);
+                        const product_exist = cart_memory_json.find(product => product.id === retorno.id);
+
+                        if (product_exist) {
+                            const quantity = product_exist.quantity + 1;
+                            const total_price = parseFloat(price) * quantity;
+
+                            const productIndex = cart_memory_json.filter(product => product.id !== retorno.id);
+
+                            productIndex.push({
+                                id: retorno.id,
+                                name: retorno.name,
+                                price: total_price,
+                                quantity: quantity,
+                                tax: imposto * quantity
+                            });
+
+                            localStorage.setItem('cart', JSON.stringify(productIndex));
+
+                            const total_price_cart = parseFloat($('#shopCartSales').text());
+                            const total = total_price_cart + parseFloat(price);
+                            $('#shopCartSales').html(total.toFixed(2));
+
+                            $('.input_qtd_' + retorno.id).val(quantity);
+                            $('.price_input_' + retorno.id).val(total_price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+
+                        } else {
+                            const total_price_cart = parseFloat($('#shopCartSales').text());
+                            const total = total_price_cart + parseFloat(price);
+                            $('#shopCartSales').html(total.toFixed(2));
+
+                            const new_product_array = {
+                                id: retorno.id,
+                                name: retorno.name,
+                                price: price,
+                                quantity: 1,
+                                tax: imposto
+                            }
+                            cart_memory_json.push(new_product_array);
+                            localStorage.setItem('cart', JSON.stringify(cart_memory_json));
+
+                            $('#shopCart_Sales').append(
+                                '<li class="list-group-item list_item_grid_' + retorno.id + '" data-id="' + retorno.id + '">' +
+                                '<div class="row p-0 align-items-center">' +
+                                '<div class="col-2 p-0 mb-1">' +
+                                '<img class="icon me-1 img-fluid rounded-circle" src="https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis1.jpg" alt="">' +
+                                '</div>' +
+                                '<div class="col-8 px-1 py-0 mb-1">' +
+                                '<p class="fs-12px mb-0">' + retorno.name + '</p>' +
+                                '</div>' +
+                                '<div class="col-2 p-0 mb-1">' +
+                                '<a href="javascript:void(0);" class="btn btn-sm btn-outline-danger btnRemoverCart" data-id="' + retorno.id + '" ><i class="fas fa-trash"></i></a>' +
+                                '</div>' +
+                                '<div class="col-6">' +
+                                '<h5 class="display-11 text-center">Quantidade</h5>' +
+                                '<div class="form-control-wrap number-spinner-wrap">' +
+                                '<button class="btn btn-icon btn-outline-light number-spinner-btn number-minus remove_cart_item" data-id="' + retorno.id + '" data-number="minus-qv"><em class="icon ni ni-minus"></em></button>' +
+                                '<input type="number" class="form-control number-spinner input_qtd_' + retorno.id + '" value="1" min="1" readonly="">' +
+                                '<button class="btn btn-icon btn-outline-light number-spinner-btn number-plus add_cart_item" data-id="' + retorno.id + '" data-number="plus-qv"><em class="icon ni ni-plus"></em></button>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="col-6">' +
+                                '<h5 class="display-11 text-center">Preço</h5>' +
+                                '<div class="form-control-wrap">' +
+                                '<input type="text" class="form-control price_input_' + retorno.id + '" value="' + retorno.price + '" readonly="">' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</li>'
+                            );
+
+                        }
+
+                    } else {
+                        const total_price_cart = parseFloat($('#shopCartSales').text());
+                        const total = total_price_cart + parseFloat(price);
+                        $('#shopCartSales').html(total.toFixed(2));
+
+                        localStorage.setItem('cart', JSON.stringify([{
+                            id: retorno.id,
+                            name: retorno.name,
+                            price: parseFloat(price),
+                            quantity: 1,
+                            tax: imposto
+                        }]));
+
+                        $('#shopCart_Sales').append(
+                            '<li class="list-group-item list_item_grid_' + retorno.id + '" data-id="' + retorno.id + '">' +
+                            '<div class="row p-0 align-items-center">' +
+                            '<div class="col-2 p-0 mb-1">' +
+                            '<img class="icon me-1 img-fluid rounded-circle" src="https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis1.jpg" alt="">' +
+                            '</div>' +
+                            '<div class="col-8 px-1 py-0 mb-1">' +
+                            '<p class="fs-12px mb-0">' + retorno.name + '</p>' +
+                            '</div>' +
+                            '<div class="col-2 p-0 mb-1">' +
+                            '<a href="javascript:void(0);" class="btn btn-sm btn-outline-danger btnRemoverCart" data-id="' + retorno.id + '" ><i class="fas fa-trash"></i></a>' +
+                            '</div>' +
+                            '<div class="col-6">' +
+                            '<h5 class="display-11 text-center">Quantidade</h5>' +
+                            '<div class="form-control-wrap number-spinner-wrap">' +
+                            '<button class="btn btn-icon btn-outline-light number-spinner-btn number-minus remove_cart_item" data-id="' + retorno.id + '" data-number="minus-qv"><em class="icon ni ni-minus"></em></button>' +
+                            '<input type="number" class="form-control number-spinner input_qtd_' + retorno.id + '" value="1" min="1" readonly="">' +
+                            '<button class="btn btn-icon btn-outline-light number-spinner-btn number-plus add_cart_item" data-id="' + retorno.id + '" data-number="plus-qv"><em class="icon ni ni-plus"></em></button>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="col-6">' +
+                            '<h5 class="display-11 text-center">Preço</h5>' +
+                            '<div class="form-control-wrap">' +
+                            '<input type="text" class="form-control price_input_' + retorno.id + '" value="' + retorno.price + '" readonly="">' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '</li>'
+                        );
+                    }
+
+                } else {
+                    Swal.fire({
+                        title: 'Algo deu Errado!',
+                        text: "Produto não encontrado.",
+                        icon: 'error',
+                        allowEscapeKey: false,
+                        allowOutsideClick: false,
+                        showCancelButton: false,
+                        confirmButtonText: 'Continuar'
+                    }).then(function (result) {
+                    });
+                }
+            },
+
+        });
+
+    });
+
+    // REMOVE CART TOTAL
+    $('body').on('click', '.btnRemoverCart', function () {
+        const id = $(this).attr('data-id');
+        $.ajax({
+            url: 'http://localhost:8000/product-only?id=' + id,
+            type: 'GET',
+            dataType: "JSON",
+            data: {},
+            success: function (retorno) {
+                if (retorno.id) {
+                    const decimal = retorno.price.replace(',', '.');
+                    const price = decimal.replace('R$', '');
+
+                    const cart_memory = localStorage.getItem('cart');
+
+                    if (cart_memory) {
+                        const cart_memory_json = JSON.parse(cart_memory);
+                        const product_exist = cart_memory_json.find(product => product.id === retorno.id);
+
+                        if (product_exist) {
+                            const productIndex = cart_memory_json.filter(product => product.id !== retorno.id);
+                            localStorage.setItem('cart', JSON.stringify(productIndex));
+
+                            const total_price_cart = parseFloat($('#shopCartSales').text());
+                            const total = total_price_cart - parseFloat(price);
+                            $('#shopCartSales').html(total.toFixed(2));
+                            $('.list_item_grid_' + retorno.id).remove();
+                        }
+                    }
+
+                } else {
+                    Swal.fire({
+                        title: 'Algo deu Errado!',
+                        text: "Produto não encontrado.",
+                        icon: 'error',
+                        allowEscapeKey: false,
+                        allowOutsideClick: false,
+                        showCancelButton: false,
+                        confirmButtonText: 'Continuar'
+                    }).then(function (result) {
+                    });
+                }
+            },
+
+        });
+
+    });
+
+});

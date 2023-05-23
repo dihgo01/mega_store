@@ -303,6 +303,11 @@ table tr.row-vertical-align td, table tr.row-vertical-align th {
     float: right;
 }
 
+#responsive-datatable_paginate {
+    float: right !important;
+}
+
+
 /***********************************************/
 /******************** PLUGINS ******************/
 /***********************************************/

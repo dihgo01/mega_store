@@ -51,7 +51,14 @@ class __TwigTemplate_6748419131bfa78281083bf47ae1b555 extends Template
         // line 5
         echo twig_escape_filter($this->env, twig_random($this->env, 100000, 999999), "html", null, true);
         echo "\"></script>
-";
+<script src=\"/assets/js/views/login/login.js?ts=";
+        // line 6
+        echo twig_escape_filter($this->env, twig_random($this->env, 100000, 999999), "html", null, true);
+        echo "\"></script>
+<script src=\"/assets/js/views/pedidos/vendas/shopcart.js?ts=";
+        // line 7
+        echo twig_escape_filter($this->env, twig_random($this->env, 100000, 999999), "html", null, true);
+        echo "\"></script>";
     }
 
     public function getTemplateName()
@@ -66,7 +73,7 @@ class __TwigTemplate_6748419131bfa78281083bf47ae1b555 extends Template
 
     public function getDebugInfo()
     {
-        return array (  52 => 5,  48 => 4,  44 => 3,  40 => 2,  37 => 1,);
+        return array (  60 => 7,  56 => 6,  52 => 5,  48 => 4,  44 => 3,  40 => 2,  37 => 1,);
     }
 
     public function getSourceContext()

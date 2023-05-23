@@ -23,8 +23,13 @@ class SalesGetController
             $sales = $this->getSales->execute($request['user_id']);
 
             http_response_code(201);
-            $response = $sales;
+            $total = count($sales);
 
+            $response['result'] = true;
+            $response['daw'] = (int)$total;
+            $response["recordsTotal"] = (int)$total;
+            $response["recordsFiltered"] = (int)$total;
+            $response['data'] = $sales;
             echo json_encode($response);
         } catch (Exception $e) {
 

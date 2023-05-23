@@ -5,10 +5,8 @@ class QV_Produto
 
     public function consulta()
     {
-
         $url = "http://localhost:8000/products";
 
-        // CURL - START
         ponto_CURL_START:
         $curl = curl_init();
         curl_setopt_array($curl, array(
@@ -33,10 +31,8 @@ class QV_Produto
 
     public function consulta_categoria()
     {
-
         $url = "http://localhost:8000/product-categorys";
 
-        // CURL - START
         ponto_CURL_START:
         $curl = curl_init();
         curl_setopt_array($curl, array(
@@ -56,7 +52,6 @@ class QV_Produto
 
         $resultadoFinal = array('resultado' => true, 'mensagem' => 'Consulta Realizada com Sucesso', 'conteudo' => $resposta);
 
-        // RETORNO
         return $resultadoFinal;
     }
 
@@ -65,7 +60,6 @@ class QV_Produto
 
         $url = "http://localhost:8000/product-only?id=" . $id;
 
-        // CURL - START
         ponto_CURL_START:
         $curl = curl_init();
         curl_setopt_array($curl, array(
@@ -85,7 +79,6 @@ class QV_Produto
 
         $url_categoria = "http://localhost:8000/product-categorys";
 
-        // CURL - START
         ponto_CURL_START_CATEGORIA:
         $curl = curl_init();
         curl_setopt_array($curl, array(
@@ -105,7 +98,6 @@ class QV_Produto
 
         $resultadoFinal = array('resultado' => true, 'mensagem' => 'Consulta Realizada com Sucesso', 'conteudo' => $resposta, 'categoria' =>  $resposta_categoria);
 
-        // RETORNO
         return $resultadoFinal;
     }
 }
